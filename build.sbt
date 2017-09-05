@@ -15,3 +15,14 @@ scalacOptions ++= Seq(
   "-feature",
   "-unchecked"
 )
+libraryDependencies ++= Seq(
+  "com.mohiva" %% "play-silhouette" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-password-bcrypt" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-persistence" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-crypto-jca" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-testkit" % "5.0.0" % "test",
+  specs2 % Test,
+  ehcache,
+  guice,
+  filters
+)
