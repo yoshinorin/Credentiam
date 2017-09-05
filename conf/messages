@@ -1,0 +1,11 @@
+invalid.credentials = Invalid credentials
+access.denied = Access denied
+
+home.title = Credentiam - Home
+sign.in.title = Credentiam - Sign In
+
+sign.in.credentials = Sign in with your credentials
+
+error = Error
+info = Info
+success = Success
