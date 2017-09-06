@@ -25,10 +25,12 @@ class LDAP @Inject() (
     cache.set(loginInfo.providerKey, PersistentAuthInfo(loginInfo, authInfo), expiryDuration).map(_ => authInfo)
   }
 
+  //TODO: Is this method work well ?
   override def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
     add(loginInfo, authInfo)
   }
 
+  //TODO: Is this method work well ?
   override def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
     add(loginInfo, authInfo)
   }
