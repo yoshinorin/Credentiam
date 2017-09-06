@@ -25,6 +25,5 @@ libraryDependencies ++= Seq(
   specs2 % Test,
   ehcache,
   guice,
-  cache,
   filters
 )
