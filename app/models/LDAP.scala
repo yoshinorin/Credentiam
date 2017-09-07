@@ -14,7 +14,7 @@ import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
 
 import models.UserIdentify
 
-class LDAP @Inject() (
+class LDAPAuth @Inject() (
   cache: AsyncCacheApi,
   configuration: Configuration
 ) extends DelegableAuthInfoDAO[PasswordInfo] {
