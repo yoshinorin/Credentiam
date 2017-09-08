@@ -15,7 +15,10 @@ scalacOptions ++= Seq(
   "-feature",
   "-unchecked"
 )
+
 libraryDependencies ++= Seq(
+  "net.codingwell" %% "scala-guice" % "4.1.0",
+  "com.iheart" %% "ficus" % "1.4.1",
   "com.mohiva" %% "play-silhouette" % "5.0.0",
   "com.mohiva" %% "play-silhouette-password-bcrypt" % "5.0.0",
   "com.mohiva" %% "play-silhouette-persistence" % "5.0.0",
