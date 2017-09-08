@@ -1,4 +1,4 @@
-package models
+package app.models
 
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 

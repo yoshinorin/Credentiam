@@ -1,4 +1,4 @@
-package models
+package app.models
 
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
 
-import models.UserIdentify
+import app.models.UserIdentify
 
 class LDAPAuth @Inject() (
   cache: AsyncCacheApi,

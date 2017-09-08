@@ -1,8 +1,8 @@
-package models.daos
+package app.models.daos
 
 import com.mohiva.play.silhouette.api.LoginInfo
-import models.UserIdentify
-import models.daos.UserDAOImpl._
+import app.models.UserIdentify
+import app.models.daos.UserDAOImpl._
 
 import scala.collection.mutable
 import scala.concurrent.Future
