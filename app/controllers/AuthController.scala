@@ -77,7 +77,7 @@ class AuthController @Inject() (
             result
           }
         } else {
-          Future.failed(new IdentityNotFoundException("Authenticate error!!"))
+          Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("invalid.credentials")))
         }
       }
     )
