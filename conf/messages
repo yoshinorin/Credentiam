@@ -4,7 +4,10 @@ access.denied = Access denied
 home.title = Credentiam - Home
 sign.in.title = Credentiam - Sign In
 
+sign.in = Sign in
 sign.in.credentials = Sign in with your credentials
+
+sign.out = Sign out
 
 error = Error
 info = Info
