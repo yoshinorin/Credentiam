@@ -1,8 +1,12 @@
 header {
   background: url('../images/background.jpg') center / cover;
-}}
+}
 
 .mdl-layout__header,
 .mdl-layout__drawer-button {
   color: white;
+}
+
+.title {
+  color: white !important;
 }
