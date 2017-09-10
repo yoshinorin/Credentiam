@@ -2,6 +2,19 @@ header {
   background: url('../images/background.jpg') center / cover;
 }
 
+footer {
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  background: white !important;
+}
+
+.footer-link {
+  text-align: center !important;
+  margin-right: auto;
+  margin-left : auto;
+}
+
 .mdl-layout__header,
 .mdl-layout__drawer-button {
   color: white;
@@ -9,6 +22,8 @@ header {
 
 .title {
   color: white !important;
+}
+
 .signin-form {
   text-align: center;
 }

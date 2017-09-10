@@ -74,7 +74,24 @@
               @content
             </div>
           </div>
+
         </main>
       </div>
+      @user.map { u =>
+        <!-- Nothig -->
+      }.getOrElse {
+        <footer class="mdl-mini-footer">
+          <div class="footer-link">
+          <ul class="mdl-mini-footer__link-list">
+            <li>
+              <a href="">About</a>
+            </li>
+            <li>
+              <a href="https://github.com/YoshinoriN/Credentiam" target="_blank">GitHub</a>
+            </li>
+          </ul>
+          </div>
+        </footer>
+      }
     </body>
 </html>
