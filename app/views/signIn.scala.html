@@ -7,32 +7,34 @@
 @(signInForm: Form[app.controllers.AuthController.SignInFormData])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 @implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("sign.in.title")) {
-  <div class="mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__supporting-text">
-    <fieldset>
-      <legend>@messages("sign.in.credentials")</legend>
-        @form(CSRF(app.controllers.routes.AuthController.signIn)) {
-          <div class="mdl-textfield mdl-js-textfield">
-            @inputText(
-              signInForm("uid"),
-              'class -> "mdl-textfield__input"
-            )
-            <label class="mdl-textfield__label">UserName</label>
-          </div>
-          <br/>
-          <div class="mdl-textfield mdl-js-textfield">
-            @inputPassword(
-              signInForm("password"),
-              'class -> "mdl-textfield__input"
-            )
-            <label class="mdl-textfield__label">Password</label>
-          </div>
-          <br/>
-          <button class="mdl-button mdl-js-button mdl-button--primary">
-            @messages("sign.in")
-          </button>
-        }
-    </fieldset>
+  <div class="mdl-grid">
+    <div class="mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__supporting-text signin-form">
+        <fieldset>
+          <legend>@messages("sign.in.credentials")</legend>
+            @form(CSRF(app.controllers.routes.AuthController.signIn)) {
+              <div class="mdl-textfield mdl-js-textfield">
+                @inputText(
+                  signInForm("uid"),
+                  'class -> "mdl-textfield__input"
+                )
+                <label class="mdl-textfield__label">UserName</label>
+              </div>
+              <br/>
+              <div class="mdl-textfield mdl-js-textfield">
+                @inputPassword(
+                  signInForm("password"),
+                  'class -> "mdl-textfield__input"
+                )
+                <label class="mdl-textfield__label">Password</label>
+              </div>
+              <br/>
+              <button class="mdl-button mdl-js-button mdl-button--primary">
+                @messages("sign.in")
+              </button>
+            }
+        </fieldset>
+      </div>
     </div>
-  <div>
+  </div>
 }

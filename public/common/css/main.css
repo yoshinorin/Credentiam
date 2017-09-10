@@ -9,4 +9,6 @@ header {
 
 .title {
   color: white !important;
+.signin-form {
+  text-align: center;
 }
