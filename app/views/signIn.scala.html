@@ -8,10 +8,13 @@
 @implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("sign.in.title")) {
   <div class="mdl-grid">
-    <div class="mdl-card mdl-shadow--2dp">
+    <div class="mdl-card mdl-shadow--1dp">
       <div class="mdl-card__supporting-text signin-form">
         <fieldset>
-          <legend>@messages("sign.in.credentials")</legend>
+          <legend>
+            <h5>@messages("sign.in.credentials")</h5>
+          </legend>
+            </br>
             @form(CSRF(app.controllers.routes.AuthController.signIn)) {
               <div class="mdl-textfield mdl-js-textfield">
                 @inputText(
