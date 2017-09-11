@@ -19,6 +19,7 @@ import com.mohiva.play.silhouette.api.util.{ Credentials, PasswordHasherRegistry
 import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
 import com.mohiva.play.silhouette.impl.providers._
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
+import com.mohiva.play.silhouette.api.util.PasswordInfo
 import net.ceedubs.ficus.Ficus._
 
 import controllers.AssetsFinder
@@ -84,7 +85,7 @@ class AuthController @Inject() (
   }
 
   def signOut = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
-    //TODO : Remove play cache
+    authInfoRepository.remove[PasswordInfo](request.identity.loginInfo)
     val result = Redirect(app.controllers.routes.ApplicationController.index())
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))
     silhouette.env.authenticatorService.discard(request.authenticator, result)
