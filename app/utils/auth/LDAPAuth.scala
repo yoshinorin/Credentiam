@@ -44,6 +44,7 @@ class LDAPAuth @Inject() (
   def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = {
     cache.get(loginInfo.providerKey)
   }
+
 }
 
 case class PersistentAuthInfo(

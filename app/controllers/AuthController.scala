@@ -90,5 +90,6 @@ class AuthController @Inject() (
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))
     silhouette.env.authenticatorService.discard(request.authenticator, result)
   }
+
 }
 

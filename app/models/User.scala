@@ -16,6 +16,7 @@ object UserDAOImpl {
     * The list of users.
     */
   val users: mutable.HashMap[String, UserIdentify] = mutable.HashMap()
+
 }
 
 /**
@@ -33,6 +34,7 @@ class UserDAOImpl extends UserDAO {
     users += (user.userID -> user)
     Future.successful(user)
   }
+
 }
 
 trait UserDAO {
@@ -42,6 +44,7 @@ trait UserDAO {
   def find(userID: String): Future[Option[UserIdentify]]
 
   def save(user: UserIdentify): Future[UserIdentify]
+
 }
 
 case class UserIdentify(
