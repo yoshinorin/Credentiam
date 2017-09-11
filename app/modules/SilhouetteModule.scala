@@ -28,8 +28,8 @@ import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import net.codingwell.scalaguice.ScalaModule
 
-import utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv }
-import app.models.{ UserDAO, UserDAOImpl, LDAPAuth }
+import utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv, LDAPAuth }
+import app.models.{ UserDAO, UserDAOImpl }
 import app.services.{ UserService, UserServiceImpl }
 
 /**

@@ -1,4 +1,4 @@
-package app.models
+package utils.auth
 
 import javax.inject.Inject
 
@@ -21,25 +21,27 @@ class LDAPAuth @Inject() (
 
   val expiryDuration = configuration.get[FiniteDuration]("ldap.expiryDuration")
 
-  override def add(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
+  def add(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
     cache.set(loginInfo.providerKey, PersistentAuthInfo(loginInfo, authInfo), expiryDuration).map(_ => authInfo)
   }
 
   //TODO: Is this method work well ?
-  override def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
+  def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
     add(loginInfo, authInfo)
   }
 
   //TODO: Is this method work well ?
-  override def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
+  def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
     add(loginInfo, authInfo)
   }
 
-  override def remove(loginInfo: LoginInfo): Future[Unit] = {
-    cache.remove(loginInfo.providerKey).map(_ => ())
+  def remove(loginInfo: LoginInfo): Future[Unit] = {
+    Future.successful(cache.remove(loginInfo.providerKey).map(_ => loginInfo))
+
   }
 
-  override def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = {
+  //FIXME : Exception occur
+  def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = {
     cache.get(loginInfo.providerKey)
   }
 }
