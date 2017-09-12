@@ -13,6 +13,6 @@ trait LDAPService {
   val ldaps = configuration.getBoolean("ldap.ldaps")
   val bindDN = configuration.getString("ldap.bindDN")
   val baseDN = configuration.getString("ldap.baseDN")
-  val uid = configuration.getString("ldap.uid")}  //def bind(uid: String, password: String) = TODO
+  val uidAttributeName = configuration.getString("ldap.uidAttributeName")
 
 }
