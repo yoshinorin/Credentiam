@@ -1,8 +1,6 @@
 package app.services
 
-import scala.collection.mutable
 import com.typesafe.config.ConfigFactory
-
 import com.unboundid.ldap.sdk._
 
 trait LDAPService {
@@ -27,7 +25,5 @@ trait LDAPService {
       new LDAPConnectionPool(connection, initialConnextions, maxConnections)
     }
   }
-
-}
 
 }
