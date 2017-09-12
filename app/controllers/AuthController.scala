@@ -24,7 +24,7 @@ import net.ceedubs.ficus.Ficus._
 
 import controllers.AssetsFinder
 import app.models.UserIdentify
-import app.services.UserService
+import app.services.{ UserService, ActiveDirectoryService }
 import utils.auth.DefaultEnv
 import AuthController._
 
@@ -61,24 +61,28 @@ class AuthController @Inject() (
     signInForm.bindFromRequest.fold(
       form => Future.successful(BadRequest(views.html.signIn(signInForm))),
       data => {
-        //TODO : Auth with Active Directory
-        if (true) {
-          val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
-          val authInfo = passwordHasherRegistry.current.hash(data.password)
-          val user = UserIdentify(data.uid, loginInfo)
+        try {
+          //TODO : Fix magic number. zero means success LDAP authorization.
+          if (ActiveDirectoryService.bind(data.uid, data.password) == 0) {
+            val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
+            val authInfo = passwordHasherRegistry.current.hash(data.password)
+            val user = UserIdentify(data.uid, loginInfo)
 
-          for {
-            user <- userService.save(user)
-            authInfo <- authInfoRepository.add(loginInfo, authInfo)
-            authenticator <- silhouette.env.authenticatorService.create(loginInfo)
-            value <- silhouette.env.authenticatorService.init(authenticator)
-            result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.ApplicationController.index()))
-          } yield {
-            silhouette.env.eventBus.publish(LoginEvent(user, request))
-            result
+            for {
+              user <- userService.save(user)
+              authInfo <- authInfoRepository.add(loginInfo, authInfo)
+              authenticator <- silhouette.env.authenticatorService.create(loginInfo)
+              value <- silhouette.env.authenticatorService.init(authenticator)
+              result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.ApplicationController.index()))
+            } yield {
+              silhouette.env.eventBus.publish(LoginEvent(user, request))
+              result
+            }
+          } else {
+            Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("invalid.credentials")))
           }
-        } else {
-          Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("invalid.credentials")))
+        } catch {
+          case e: Exception => Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages(e.getMessage)))
         }
       }
     )
