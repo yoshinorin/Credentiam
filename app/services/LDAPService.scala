@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory
 
 import com.unboundid.ldap.sdk._
 
-object LDAPService {
+trait LDAPService {
 
   val configuration = ConfigFactory.load
   val host = configuration.getString("ldap.host")
