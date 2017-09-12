@@ -27,3 +27,8 @@ footer {
 .signin-form {
   text-align: center;
 }
+
+.centering {
+  width: 100%;
+  text-align: center;
+}
