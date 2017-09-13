@@ -3,6 +3,7 @@
 # ~~~~
 
 GET         /                                app.controllers.ApplicationController.index
+GET         /about                           app.controllers.ApplicationController.about
 
 GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn

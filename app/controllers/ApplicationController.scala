@@ -22,4 +22,8 @@ class ApplicationController @Inject() (
     Future.successful(Ok(views.html.home(request.identity)))
   }
 
+  def about = Action { implicit request =>
+    Ok(views.html.about())
+  }
+
 }
