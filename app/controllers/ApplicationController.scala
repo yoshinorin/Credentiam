@@ -8,7 +8,9 @@ import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents }
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
+
 import utils.auth.DefaultEnv
+import app.services.ActiveDirectoryService
 
 class ApplicationController @Inject() (
   components: ControllerComponents,
@@ -24,6 +26,11 @@ class ApplicationController @Inject() (
 
   def about = Action { implicit request =>
     Ok(views.html.about())
+  }
+
+  def profile = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    //TODO: Exception handling
+    Future.successful(Ok(views.html.profile(request.identity, (ActiveDirectoryService.getUser(request.identity.userID)))))
   }
 
 }

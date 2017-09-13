@@ -1,6 +1,8 @@
 package app.services
 
+import scala.collection.JavaConverters._
 import com.unboundid.ldap.sdk._
+import app.models.ActiveDirectoryUser
 
 object ActiveDirectoryService extends LDAPService {
 
@@ -26,6 +28,30 @@ object ActiveDirectoryService extends LDAPService {
     searchResult.size match {
       case _ => Some(searchResult.get(0).getDN)
       case 0 => None
+    }
+  }
+
+  /**
+   * Get user information by uid.
+   */
+  def getUser(uid: String): Option[List[com.unboundid.ldap.sdk.Attribute]] = {
+    getConnectionByUser(uid) match {
+      case Some(uc) => {
+        val searchResult = {
+          uc.connection.search(
+            baseDN,
+            SearchScope.SUB,
+            Filter.createEqualityFilter(uidAttributeName, uid)
+          ).getSearchEntries
+        }
+        searchResult.size match {
+          case _ => {
+            Some(searchResult.get(0).getAttributes.asScala.toList)
+          }
+          case 0 => None
+        }
+      }
+      case None => None
     }
   }
 

@@ -12,6 +12,9 @@ sign.in.credentials = Sign in with your credentials
 invalid.credentials = Invalid credentials
 access.denied = Access denied
 
+profile = Profile
+profile.title = Your Profile
+
 sign.out = Sign out
 
 error = Error

@@ -4,6 +4,7 @@
 
 GET         /                                app.controllers.ApplicationController.index
 GET         /about                           app.controllers.ApplicationController.about
+GET         /profile                         app.controllers.ApplicationController.profile
 
 GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn

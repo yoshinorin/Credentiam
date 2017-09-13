@@ -31,7 +31,12 @@
                 <i class="material-icons">more_vert</i>
               </button>
               <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="top-right-menu">
-                <li class="mdl-menu__item mdl-js-ripple-effect"><a href="@app.controllers.routes.AuthController.signOut">@messages("sign.out")</a></li>
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                  <a href="@app.controllers.routes.AuthController.signOut">@messages("sign.out")</a>
+                </li>
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                  <a href="@app.controllers.routes.ApplicationController.profile">@messages("profile")</a>
+                </li>
               </ul>
             }
           </div>
