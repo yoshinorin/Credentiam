@@ -1,17 +1,16 @@
-invalid.credentials = Invalid credentials
-access.denied = Access denied
-
 home.title = Credentiam - Home
-description = Credentiam is a elegant ActiveDirectory management web application. Powerd by Scala and Play Framework.
-copyright = Copyrights 2017 YoshinoriN
 
+about.description = Credentiam is a elegant ActiveDirectory management web application. Powerd by Scala and Play Framework.
+about.copyright = © 2017 YoshinoriN
 about.title = About Credentiam
 about.components = Components
 
 sign.in.title = Credentiam - Sign In
-
 sign.in = Sign in
 sign.in.credentials = Sign in with your credentials
+
+invalid.credentials = Invalid credentials
+access.denied = Access denied
 
 sign.out = Sign out
 
