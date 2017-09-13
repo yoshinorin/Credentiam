@@ -13,6 +13,7 @@ trait UserService extends IdentityService[UserIdentify] {
   def retrieve(id: String): Future[Option[UserIdentify]]
 
   def save(user: UserIdentify): Future[UserIdentify]
+
 }
 
 /**
@@ -25,5 +26,6 @@ class UserServiceImpl @Inject() (userDAO: UserDAO)(implicit ex: ExecutionContext
   def retrieve(loginInfo: LoginInfo): Future[Option[UserIdentify]] = userDAO.find(loginInfo)
 
   def save(user: UserIdentify) = userDAO.save(user)
+
 }
 
