@@ -7,13 +7,13 @@ object ActiveDirectoryService extends LDAPService {
   /**
    * User bind with ActiveDirectory
    */
-  def bind(uid: String, password: String): Int = {
+  def bind(uid: String, password: String): ResultCode = {
     getDN(uid) match {
       case Some(dn) => {
         createConnectionByUser(uid: String, dn: String, password: String)
-        0
+        ResultCode.SUCCESS
       }
-      case None => 1
+      case None => ResultCode.OPERATIONS_ERROR
     }
   }
 

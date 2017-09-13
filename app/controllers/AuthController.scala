@@ -21,6 +21,7 @@ import com.mohiva.play.silhouette.impl.providers._
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import net.ceedubs.ficus.Ficus._
+import com.unboundid.ldap.sdk._
 
 import controllers.AssetsFinder
 import app.models.UserIdentify
@@ -62,8 +63,7 @@ class AuthController @Inject() (
       form => Future.successful(BadRequest(views.html.signIn(signInForm))),
       data => {
         try {
-          //TODO : Fix magic number. zero means success LDAP authorization.
-          if (ActiveDirectoryService.bind(data.uid, data.password) == 0) {
+          if (ActiveDirectoryService.bind(data.uid, data.password) == ResultCode.SUCCESS) {
             val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
             val authInfo = passwordHasherRegistry.current.hash(data.password)
             val user = UserIdentify(data.uid, loginInfo)
