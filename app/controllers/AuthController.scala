@@ -89,6 +89,7 @@ class AuthController @Inject() (
   }
 
   def signOut = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    ActiveDirectoryService.removeConnectionByUser(request.identity.userID)
     authInfoRepository.remove[PasswordInfo](request.identity.loginInfo)
     val result = Redirect(app.controllers.routes.ApplicationController.index())
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))
