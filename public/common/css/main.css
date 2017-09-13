@@ -1,4 +1,5 @@
 header {
+  height: 150px;
   width: auto;
   background: url('../images/background.jpg') center / cover;
   background-repeat: no-repeat;
