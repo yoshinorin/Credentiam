@@ -29,12 +29,12 @@ trait LDAPService {
   /**
    * Create connection using by config user.
    */
-  val defaultConnection = new LDAPConnection(host, port, bindDN, password)
+  protected val defaultConnection = new LDAPConnection(host, port, bindDN, password)
 
   /**
    * The connections store by user.
    */
-  val connections: mutable.HashMap[String, UserConnection] = mutable.HashMap()
+  protected val connections: mutable.HashMap[String, UserConnection] = mutable.HashMap()
 
   /**
    * Create connection by users and store it.
