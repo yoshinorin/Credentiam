@@ -28,6 +28,7 @@ trait LDAPService {
 
   /**
    * Create connection using by config user.
+   * TODO: Support LDAPS
    */
   protected val defaultConnection = new LDAPConnection(host, port, bindDN, password)
 
@@ -38,6 +39,7 @@ trait LDAPService {
 
   /**
    * Create connection by users and store it.
+   * TODO: Support LDAPS
    */
   def createConnectionByUser(uid: String, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(host, port, dn, password))
