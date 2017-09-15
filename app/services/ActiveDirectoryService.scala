@@ -25,9 +25,9 @@ object ActiveDirectoryService extends LDAPService {
   def getDN(uid: String): Option[String] = {
     val searchResult = defaultConnection.search(new SearchRequest(baseDN, SearchScope.SUB, Filter.createEqualityFilter(uidAttributeName, uid))).getSearchEntries
 
-    searchResult.size match {
-      case _ => Some(searchResult.get(0).getDN)
-      case 0 => None
+    searchResult.isEmpty match {
+      case false => Some(searchResult.get(0).getDN)
+      case true => None
     }
   }
 
@@ -44,11 +44,11 @@ object ActiveDirectoryService extends LDAPService {
             Filter.createEqualityFilter(uidAttributeName, uid)
           ).getSearchEntries
         }
-        searchResult.size match {
-          case _ => {
+        searchResult.isEmpty match {
+          case false => {
             Some(searchResult.get(0).getAttributes.asScala.toList)
           }
-          case 0 => None
+          case true => None
         }
       }
       case None => None
