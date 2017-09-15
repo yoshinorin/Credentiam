@@ -34,7 +34,8 @@ object ActiveDirectoryService extends LDAPService {
   /**
    * Get user information by uid.
    */
-  def getUser(uid: String): Option[List[com.unboundid.ldap.sdk.Attribute]] = {
+  def getUser(uid: String): Option[String] = {
+
     getConnectionByUser(uid) match {
       case Some(uc) => {
         val searchResult = {
@@ -46,7 +47,7 @@ object ActiveDirectoryService extends LDAPService {
         }
         searchResult.isEmpty match {
           case false => {
-            Some(searchResult.get(0).getAttributes.asScala.toList)
+            Some(searchResult.get(0).toLDIFString)
           }
           case true => None
         }
