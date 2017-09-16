@@ -39,10 +39,12 @@ object ActiveDirectoryService extends LDAPService {
     getConnectionByUser(uid) match {
       case Some(uc) => {
         val searchResult = {
-          uc.connection.search(
+          uc.connection.search(new SearchRequest(
             baseDN,
             SearchScope.SUB,
-            Filter.createEqualityFilter(uidAttributeName, uid)
+            Filter.createEqualityFilter(uidAttributeName, uid),
+            ClassUtil.getFields[ActiveDirectoryUser]: _*
+          )
           ).getSearchEntries
         }
         searchResult.isEmpty match {
