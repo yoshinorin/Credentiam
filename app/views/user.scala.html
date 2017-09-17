@@ -2,9 +2,9 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 
-@(user: app.models.UserIdentify, ldapAttributes: Option[app.models.ActiveDirectoryUser])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(title: String, user: app.models.UserIdentify, ldapAttributes: Option[app.models.ActiveDirectoryUser])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
-@main(messages("profile.title"), Some(user)) {
+@main(messages(title), Some(user)) {
   @ldapAttributes match {
     case None => { @messages("notfound") }
     case Some(ldapAttributes) => {
