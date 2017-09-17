@@ -20,3 +20,4 @@ sign.out = Sign out
 error = Error
 info = Info
 success = Success
+notfound = Not Found

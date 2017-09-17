@@ -6,7 +6,7 @@
 
 @main(messages("profile.title"), Some(user)) {
   @ldapAttributes match {
-    case None => {"Notfound"}
+    case None => { @messages("notfound") }
     case Some(ldapAttributes) => {
       @ldapAttributes.dn
       </br>
