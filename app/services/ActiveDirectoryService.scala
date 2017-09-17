@@ -3,6 +3,7 @@ package app.services
 import scala.collection.JavaConverters._
 import com.unboundid.ldap.sdk._
 import app.models.ActiveDirectoryUser
+import utils.ClassUtil
 
 object ActiveDirectoryService extends LDAPService {
 
