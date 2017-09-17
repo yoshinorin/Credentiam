@@ -21,6 +21,26 @@ object ActiveDirectoryService extends LDAPService {
   }
 
   /**
+   * Mapping com.unboundid.ldap.sdk.SearchResultEntry to ActiveDirectoryUser
+   *
+   * @param com.unboundid.ldap.sdk.SearchResultEntry
+   * @return ActiveDirectoryUser
+   * TODO: More Abstractly
+   */
+  def mapActiveDirectoryUser(srEntry: com.unboundid.ldap.sdk.SearchResultEntry): ActiveDirectoryUser = {
+    ActiveDirectoryUser(
+      srEntry.getAttributeValue("dn"),
+      srEntry.getAttributeValue("cn"),
+      srEntry.getAttributeValue("displayName"),
+      srEntry.getAttributeValue("distinguishedName"),
+      srEntry.getAttributeValue("name"),
+      srEntry.getAttributeValue("sAMAccountName"),
+      srEntry.getAttributeValue("sn"),
+      srEntry.getAttributeValue("userPrincipalNames")
+    )
+  }
+
+  /**
    * Get DN by uid.
    */
   def getDN(uid: String): Option[String] = {
