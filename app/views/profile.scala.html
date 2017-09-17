@@ -2,8 +2,25 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 
-@(user: app.models.UserIdentify, ldapAttributes: Option[String])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(user: app.models.UserIdentify, ldapAttributes: Option[app.models.ActiveDirectoryUser])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("profile.title"), Some(user)) {
-  @ldapAttributes
+  @ldapAttributes match {
+    case None => {"Notfound"}
+    case Some(ldapAttributes) => {
+      @ldapAttributes.dn
+      </br>
+      @ldapAttributes.cn
+      </br>
+      @ldapAttributes.displayName
+      </br>
+      @ldapAttributes.distinguishedName
+      </br>
+      @ldapAttributes.sAMAccountName
+      </br>
+      @ldapAttributes.sn
+      </br>
+      @ldapAttributes.userPrincipalName
+    }
+  }
 }

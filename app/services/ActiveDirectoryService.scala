@@ -55,7 +55,7 @@ object ActiveDirectoryService extends LDAPService {
   /**
    * Get user information by uid.
    */
-  def getUser(uid: String): Option[String] = {
+  def getUser(uid: String): Option[ActiveDirectoryUser] = {
 
     getConnectionByUser(uid) match {
       case Some(uc) => {
@@ -70,7 +70,7 @@ object ActiveDirectoryService extends LDAPService {
         }
         searchResult.isEmpty match {
           case false => {
-            Some(searchResult.get(0).toLDIFString)
+            Some(mapActiveDirectoryUser(searchResult.get(0)))
           }
           case true => None
         }
