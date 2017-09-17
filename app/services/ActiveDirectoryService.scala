@@ -54,16 +54,19 @@ object ActiveDirectoryService extends LDAPService {
 
   /**
    * Get user information by uid.
+   * @param Uid for connection user.
+   * @param Serach user's uid
+   * @return ActiveDirectoryUser
    */
-  def getUser(uid: String): Option[ActiveDirectoryUser] = {
+  def getUser(connectionUser: String, targetUid: String): Option[ActiveDirectoryUser] = {
 
-    getConnectionByUser(uid) match {
+    getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
           uc.connection.search(new SearchRequest(
             baseDN,
             SearchScope.SUB,
-            Filter.createEqualityFilter(uidAttributeName, uid),
+            Filter.createEqualityFilter(uidAttributeName, targetUid),
             ClassUtil.getFields[ActiveDirectoryUser]: _*
           )
           ).getSearchEntries
