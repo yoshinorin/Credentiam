@@ -4,7 +4,7 @@ home.title = Credentiam - Home
 about.description = Credentiam is a graceful web application for manage ActiveDirectory. Powerd by Scala and Play Framework.
 about.copyright = © 2017 YoshinoriN
 about.title = About Credentiam
-about.components = Components
+about.components = Open Source Components / Libraries
 
 # Sign In page messages
 sign.in.title = Credentiam - Sign In
