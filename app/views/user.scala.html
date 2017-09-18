@@ -8,19 +8,40 @@
   @ldapAttributes match {
     case None => { @messages("notfound") }
     case Some(ldapAttributes) => {
-      @ldapAttributes.dn
-      </br>
-      @ldapAttributes.cn
-      </br>
-      @ldapAttributes.displayName
-      </br>
-      @ldapAttributes.distinguishedName
-      </br>
-      @ldapAttributes.sAMAccountName
-      </br>
-      @ldapAttributes.sn
-      </br>
-      @ldapAttributes.userPrincipalName
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+          <tr>
+            <th><h6>@messages("property")</h6></th>
+            <th><h6>@messages("value")</h6></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@messages(ldapAttributes.cn.name)</td>
+            <td>@ldapAttributes.cn.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.displayName.name)</td>
+            <td>@ldapAttributes.displayName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.distinguishedName.name)</td>
+            <td>@ldapAttributes.distinguishedName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.sAMAccountName.name)</td>
+            <td>@ldapAttributes.sAMAccountName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.sn.name)</td>
+            <td>@ldapAttributes.sn.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.userPrincipalName.name)</td>
+            <td>@ldapAttributes.userPrincipalName.value</td>
+          </tr>
+        </tbody>
+      </table>
     }
   }
 }
