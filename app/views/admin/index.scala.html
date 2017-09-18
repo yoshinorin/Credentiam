@@ -4,6 +4,6 @@
 
 @(user: app.models.UserIdentify)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
-@main(messages("admin.area"), Some(user)) {
-
+@header(user) {
+  
 }
