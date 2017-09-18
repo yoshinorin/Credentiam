@@ -29,7 +29,6 @@ object ActiveDirectoryService extends LDAPService {
    */
   def mapActiveDirectoryUser(srEntry: com.unboundid.ldap.sdk.SearchResultEntry): ActiveDirectoryUser = {
     ActiveDirectoryUser(
-      srEntry.getAttributeValue("dn"),
       srEntry.getAttributeValue("cn"),
       srEntry.getAttributeValue("displayName"),
       srEntry.getAttributeValue("distinguishedName"),
