@@ -2,7 +2,7 @@ package app.services
 
 import scala.collection.JavaConverters._
 import com.unboundid.ldap.sdk._
-import app.models.ActiveDirectoryUser
+import app.models.{ LDAPAttribute, ActiveDirectoryUser }
 import utils.ClassUtil
 
 object ActiveDirectoryService extends LDAPService {
@@ -29,13 +29,13 @@ object ActiveDirectoryService extends LDAPService {
    */
   def mapActiveDirectoryUser(srEntry: com.unboundid.ldap.sdk.SearchResultEntry): ActiveDirectoryUser = {
     ActiveDirectoryUser(
-      srEntry.getAttributeValue("cn"),
-      srEntry.getAttributeValue("displayName"),
-      srEntry.getAttributeValue("distinguishedName"),
-      srEntry.getAttributeValue("name"),
-      srEntry.getAttributeValue("sAMAccountName"),
-      srEntry.getAttributeValue("sn"),
-      srEntry.getAttributeValue("userPrincipalNames")
+      LDAPAttribute("ldap.attribute.cn", srEntry.getAttributeValue("cn")),
+      LDAPAttribute("ldap.attribute.displayName", srEntry.getAttributeValue("displayName")),
+      LDAPAttribute("ldap.attribute.distinguishedName", srEntry.getAttributeValue("distinguishedName")),
+      LDAPAttribute("ldap.attribute.name", srEntry.getAttributeValue("name")),
+      LDAPAttribute("ldap.attribute.sAMAccountName", srEntry.getAttributeValue("sAMAccountName")),
+      LDAPAttribute("ldap.attribute.sn", srEntry.getAttributeValue("sn")),
+      LDAPAttribute("ldap.attribute.userPrincipalNames", srEntry.getAttributeValue("userPrincipalNames"))
     )
   }
 

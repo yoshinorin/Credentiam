@@ -8,11 +8,11 @@ case class LDAPAttribute(
 
 //TODO: Add attributeses
 case class ActiveDirectoryUser(
-  cn: String,
-  displayName: String,
-  distinguishedName: String,
-  name: String,
-  sAMAccountName: String,
-  sn: String,
-  userPrincipalName: String
+  cn: LDAPAttribute,
+  displayName: LDAPAttribute,
+  distinguishedName: LDAPAttribute,
+  name: LDAPAttribute,
+  sAMAccountName: LDAPAttribute,
+  sn: LDAPAttribute,
+  userPrincipalName: LDAPAttribute
 )
