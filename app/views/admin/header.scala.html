@@ -5,4 +5,14 @@
 @(user: app.models.UserIdentify)(content: Html)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("admin.area"), Some(user)) {
+  <div class="padding-50 centering">
+    <!--TODO: Create each page -->
+    <button class="mdl-button mdl-js-button mdl-button--primary">
+      @messages("admin.system")
+    </button>
+    <button class="mdl-button mdl-js-button mdl-button--primary">
+      @messages("admin.ldap")
+    </button>
+    <hr>
+  </div>
 }

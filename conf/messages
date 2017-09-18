@@ -20,6 +20,8 @@ sign.out = Sign out
 
 # Administration area
 admin.area = Admin Area
+admin.system = System
+admin.ldap = LDAP
 
 # Common messages
 error = Error
