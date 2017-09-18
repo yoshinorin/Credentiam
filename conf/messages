@@ -18,6 +18,9 @@ profile.title = Your Profile
 # Sign Out messages
 sign.out = Sign out
 
+# Administration area
+admin.area = Admin Area
+
 # Common messages
 error = Error
 info = Info

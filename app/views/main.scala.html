@@ -37,6 +37,10 @@
                 <li class="mdl-menu__item mdl-js-ripple-effect">
                   <a href="@app.controllers.routes.ApplicationController.profile">@messages("profile")</a>
                 </li>
+                <!--TODO: Display only administrators -->
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                  <a href="@app.controllers.routes.AdminAreaController.index">@messages("admin.area")</a>
+                </li>
               </ul>
             }
           </div>
