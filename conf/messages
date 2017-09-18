@@ -1,26 +1,29 @@
 home.title = Credentiam - Home
 
+# About page messages
 about.description = Credentiam is a graceful web application for ActiveDirectory management. Powerd by Scala and Play Framework.
 about.copyright = © 2017 YoshinoriN
 about.title = About Credentiam
 about.components = Components
 
+# Sign In page messages
 sign.in.title = Credentiam - Sign In
 sign.in = Sign in
 sign.in.credentials = Sign in with your credentials
 
-invalid.credentials = Invalid credentials
-access.denied = Access denied
-
+# Profile page messages
 profile = Profile
 profile.title = Your Profile
 
-property = Property
-value = Value
-
+# Sign Out messages
 sign.out = Sign out
 
+# Common messages
 error = Error
 info = Info
 success = Success
 notfound = Not Found
+invalid.credentials = Invalid credentials
+access.denied = Access denied
+property = Property
+value = Value
