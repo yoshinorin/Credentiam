@@ -27,3 +27,18 @@ invalid.credentials = Invalid credentials
 access.denied = Access denied
 property = Property
 value = Value
+
+# LDAP attributes
+ldap.attribute.c = Country
+ldap.attribute.cn = Common Name
+ldap.attribute.displayName = Display Name
+ldap.attribute.distinguishedName = Distinguished Name
+ldap.attribute.gn = Given Name
+ldap.attribute.mail = Mail
+ldap.attribute.o = Organization
+ldap.attribute.postalCode = Postal Code
+ldap.attribute.sAMAccountNamesn = SAM AccountName
+ldap.attribute.sn = Sur Name
+ldap.attribute.st = Street Address
+ldap.attribute.uid = User ID
+ldap.attribute.userPrincipalName = User Principal Name
