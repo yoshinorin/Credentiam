@@ -15,6 +15,9 @@ access.denied = Access denied
 profile = Profile
 profile.title = Your Profile
 
+property = Property
+value = Value
+
 sign.out = Sign out
 
 error = Error
