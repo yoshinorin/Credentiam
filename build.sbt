@@ -35,9 +35,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 routesGenerator := InjectedRoutesGenerator
 
-// https://github.com/playframework/twirl/issues/105
-TwirlKeys.templateImports := Seq()
-
 //********************************************************
 // Scalariform settings
 //********************************************************
