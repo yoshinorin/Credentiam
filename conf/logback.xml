@@ -20,10 +20,10 @@
       <OnMismatch>DENY</OnMismatch>
       <OnMatch>ACCEPT</OnMatch>
     </filter>
-      <file>${application.home:-.}/logs/security.log</file>
-      <encoder>
-        <pattern>%date [%level] [%marker] from %logger in %thread - %message%n%xException</pattern>
-      </encoder>
+    <file>${application.home:-.}/logs/security.log</file>
+    <encoder>
+      <pattern>%date [%level] [%marker] from %logger in %thread - %message%n%xException</pattern>
+    </encoder>
   </appender>
 
   <appender name="ACCESS_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
