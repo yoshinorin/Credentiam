@@ -1,3 +1,6 @@
+/*
+  TODO: Should be used Sass and something...
+*/
 header {
   height: 150px;
   width: auto;
@@ -41,6 +44,16 @@ td {
   vertical-align: middle !important;
   border: 0px !important;
   font-size: 14px !important;
+}
+
+input {
+  font-family:"Roboto","Helvetica","Arial",sans-serif !important;
+  font-size: 16px !important;
+}
+
+button {
+  font-family:"Roboto","Helvetica","Arial",sans-serif !important;
+  font-size: 16px !important;
 }
 
 .padding-30 {
@@ -88,6 +101,7 @@ td {
   margin: 0 auto;
 }
 
+}
 .centering {
   width: 100%;
   text-align: center;
