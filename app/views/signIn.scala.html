@@ -7,37 +7,33 @@
 @(signInForm: Form[app.controllers.AuthController.SignInFormData])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 @implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("sign.in.title")) {
-  <div class="mdl-grid">
-    <div class="mdl-card mdl-shadow--1dp centering">
-      <div class="mdl-card__supporting-text centering">
-        <fieldset>
-          <legend>
-            <h5>@messages("sign.in.credentials")</h5>
-          </legend>
-            </br>
-            @form(CSRF(app.controllers.routes.AuthController.signIn)) {
-              <div class="mdl-textfield mdl-js-textfield">
-                @inputText(
-                  signInForm("uid"),
-                  'class -> "mdl-textfield__input"
-                )
-                <label class="mdl-textfield__label">UserName</label>
-              </div>
-              <br/>
-              <div class="mdl-textfield mdl-js-textfield">
-                @inputPassword(
-                  signInForm("password"),
-                  'class -> "mdl-textfield__input"
-                )
-                <label class="mdl-textfield__label">Password</label>
-              </div>
-              <br/>
-              <button class="mdl-button mdl-js-button mdl-button--primary">
-                @messages("sign.in")
-              </button>
-            }
-        </fieldset>
-      </div>
-    </div>
-  </div>
+<div class="centering padding-50">
+  <fieldset>
+    <legend>
+      <h5>@messages("sign.in.credentials")</h5>
+    </legend>
+      </br></br>
+      @form(CSRF(app.controllers.routes.AuthController.signIn)) {
+        <div class="mdc-textfield">
+          @inputText(
+            signInForm("uid"),
+            'class -> "mdc-textfield__input",
+            'placeholder -> "UserName"
+          )
+        </div>
+        <br/>
+        <label class="mdc-textfield">
+          @inputPassword(
+            signInForm("password"),
+            'class -> "mdc-textfield__input",
+            'placeholder -> "Password"
+          )
+        </label>
+        <br/><br/>
+        <button class="mdc-button">
+          @messages("sign.in")
+        </button>
+      }
+  </fieldset>
+</div>
 }
