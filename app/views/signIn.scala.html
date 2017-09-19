@@ -14,23 +14,23 @@
     </legend>
       </br></br>
       @form(CSRF(app.controllers.routes.AuthController.signIn)) {
-        <div class="mdc-textfield">
+        <div class="mdl-textfield mdl-js-textfield">
           @inputText(
             signInForm("uid"),
-            'class -> "mdc-textfield__input",
-            'placeholder -> "UserName"
+            'class -> "mdl-textfield__input"
           )
+          <label class="mdl-textfield__label">UserName</label>
         </div>
         <br/>
-        <label class="mdc-textfield">
+        <div class="mdl-textfield mdl-js-textfield">
           @inputPassword(
             signInForm("password"),
-            'class -> "mdc-textfield__input",
-            'placeholder -> "Password"
+            'class -> "mdl-textfield__input"
           )
-        </label>
+          <label class="mdl-textfield__label">Password</label>
+        </div>
         <br/><br/>
-        <button class="mdc-button">
+        <button class="mdl-button mdl-js-button mdl-button--primary">
           @messages("sign.in")
         </button>
       }
