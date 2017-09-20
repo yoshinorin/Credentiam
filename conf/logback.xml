@@ -8,6 +8,7 @@
         <maxHistory>30</maxHistory>
       </rollingPolicy>
       <encoder>
+        <charset>UTF-8</charset>
         <pattern>%date{yyyy-MM-dd HH:mm:ss ZZZZ} [%level] from %logger - %message%n%xException</pattern>
       </encoder>
   </appender>
@@ -22,6 +23,7 @@
     </filter>
     <file>${application.home:-.}/logs/security.log</file>
     <encoder>
+      <charset>UTF-8</charset>
       <pattern>%date [%level] [%marker] from %logger - %message%n%xException</pattern>
     </encoder>
   </appender>
@@ -35,6 +37,7 @@
       <maxHistory>7</maxHistory>
     </rollingPolicy>
     <encoder>
+      <charset>UTF-8</charset>
       <pattern>%date{yyyy-MM-dd HH:mm:ss ZZZZ} %message%n</pattern>
       <!-- this quadruples logging throughput -->
       <immediateFlush>false</immediateFlush>
