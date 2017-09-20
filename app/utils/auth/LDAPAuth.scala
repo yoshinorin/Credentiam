@@ -37,7 +37,6 @@ class LDAPAuth @Inject() (
 
   def remove(loginInfo: LoginInfo): Future[Unit] = {
     Future.successful(cache.remove(loginInfo.providerKey).map(_ => loginInfo))
-
   }
 
   //FIXME : Exception occur
