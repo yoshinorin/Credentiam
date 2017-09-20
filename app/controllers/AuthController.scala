@@ -27,6 +27,7 @@ import controllers.AssetsFinder
 import app.models.UserIdentify
 import app.services.{ UserService, ActiveDirectoryService }
 import utils.auth.DefaultEnv
+import utils.Logger
 import AuthController._
 
 object AuthController {
@@ -52,7 +53,7 @@ class AuthController @Inject() (
   implicit
   assets: AssetsFinder,
   ex: ExecutionContext
-) extends AbstractController(components) with I18nSupport {
+) extends AbstractController(components) with I18nSupport with Logger {
 
   def view = silhouette.UnsecuredAction.async { implicit request: Request[AnyContent] =>
     Future.successful(Ok(views.html.signIn(signInForm)))
@@ -76,13 +77,17 @@ class AuthController @Inject() (
               result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.ApplicationController.index()))
             } yield {
               silhouette.env.eventBus.publish(LoginEvent(user, request))
+              logger.info(securityMaker, s"Authentication Succeeded: ${data.uid}")
               result
             }
           } else {
+            logger.warn(securityMaker, s"Authentication Failed: ${data.uid}")
             Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("invalid.credentials")))
           }
         } catch {
-          case e: Exception => Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages(e.getMessage)))
+          case e: Exception => 
+            logger.error(securityMaker, s"${e.getMessage}")
+            Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("exception")))
         }
       }
     )
@@ -93,6 +98,7 @@ class AuthController @Inject() (
     authInfoRepository.remove[PasswordInfo](request.identity.loginInfo)
     val result = Redirect(app.controllers.routes.ApplicationController.index())
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))
+    logger.info(securityMaker, s"Sign Out: ${request.identity.userID}")
     silhouette.env.authenticatorService.discard(request.authenticator, result)
   }
 
