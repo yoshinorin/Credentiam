@@ -6,6 +6,10 @@ about.copyright = © 2017 YoshinoriN
 about.title = About Credentiam
 about.components = Open Source Components / Libraries
 
+# Header messages
+application.name = Credentiam
+application.description = A simple & graceful ActiveDirectory management system.
+
 # Sign In page messages
 sign.in.title = Credentiam - Sign In
 sign.in = Sign in
