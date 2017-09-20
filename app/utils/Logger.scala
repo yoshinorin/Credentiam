@@ -1,9 +1,6 @@
 package utils
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
+import org.slf4j.{ Logger, LoggerFactory, Marker, MarkerFactory }
 
 /**
  * Implement this to get a named logger in scope.
