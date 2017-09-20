@@ -27,6 +27,7 @@ admin.ldap = LDAP
 error = Error
 info = Info
 success = Success
+exception = Internal Server Error
 notfound = Not Found
 invalid.credentials = Invalid credentials
 access.denied = Access denied
