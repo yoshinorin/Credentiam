@@ -25,7 +25,8 @@ import com.unboundid.ldap.sdk._
 
 import controllers.AssetsFinder
 import app.models.UserIdentify
-import app.services.{ UserService, ActiveDirectoryService }
+import app.services.UserService
+import app.services.ldap.LDAPServiceProvider
 import utils.auth.DefaultEnv
 import utils.Logger
 import AuthController._
@@ -64,7 +65,7 @@ class AuthController @Inject() (
       form => Future.successful(BadRequest(views.html.signIn(signInForm))),
       data => {
         try {
-          if (ActiveDirectoryService.bind(data.uid, data.password) == ResultCode.SUCCESS) {
+          if (LDAPServiceProvider.server.bind(data.uid, data.password) == ResultCode.SUCCESS) {
             val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
             val authInfo = passwordHasherRegistry.current.hash(data.password)
             val user = UserIdentify(data.uid, loginInfo)
@@ -94,7 +95,7 @@ class AuthController @Inject() (
   }
 
   def signOut = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
-    ActiveDirectoryService.removeConnectionByUser(request.identity.userID)
+    LDAPServiceProvider.server.removeConnectionByUser(request.identity.userID)
     authInfoRepository.remove[PasswordInfo](request.identity.loginInfo)
     val result = Redirect(app.controllers.routes.ApplicationController.index())
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))

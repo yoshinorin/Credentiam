@@ -9,8 +9,8 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
 
+import app.services.ldap.LDAPServiceProvider
 import utils.auth.DefaultEnv
-import app.services.ActiveDirectoryService
 
 class AdminAreaController @Inject() (
   components: ControllerComponents,

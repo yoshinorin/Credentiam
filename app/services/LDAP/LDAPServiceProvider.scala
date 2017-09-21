@@ -1,11 +1,29 @@
-package app.services
+package app.services.ldap
 
 import scala.collection.mutable
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 
-trait LDAPService {
+import app.models.{ LDAPAttribute, ActiveDirectoryUser }
+
+object LDAPServiceProvider {
+
+  val configuration = ConfigFactory.load
+  val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")
+
+  val server: LDAPServiceProvider = {
+    if (isActiveDirectory) {
+      new ActiveDirectoryService()
+    } else {
+      //TODO: OpenLDAP support
+      new ActiveDirectoryService
+    }
+  }
+
+}
+
+trait LDAPServiceProvider {
 
   val configuration = ConfigFactory.load
   val host = configuration.getString("ldap.host")
@@ -67,15 +85,37 @@ trait LDAPService {
     connections.get(uid)
   }
 
-  /*
-  val connectionPool: LDAPConnectionPool = {
-    if (ldaps) {
-      //TODO: Have to change create over TLS connection.
-      new LDAPConnectionPool(connection, initialConnextions, maxConnections)
-    } else {
-      new LDAPConnectionPool(connection, initialConnextions, maxConnections)
+  /**
+   * User bind with LDAP server.
+   */
+  def bind(uid: String, password: String): ResultCode = {
+    getDN(uid) match {
+      case Some(dn) => {
+        createConnectionByUser(uid: String, dn: String, password: String)
+        ResultCode.SUCCESS
+      }
+      case None => ResultCode.OPERATIONS_ERROR
     }
   }
-  */
+
+  /**
+   * Get DN by uid.
+   */
+  def getDN(uid: String): Option[String] = {
+    val searchResult = defaultConnection.search(new SearchRequest(baseDN, SearchScope.SUB, Filter.createEqualityFilter(uidAttributeName, uid))).getSearchEntries
+
+    searchResult.isEmpty match {
+      case false => Some(searchResult.get(0).getDN)
+      case true => None
+    }
+  }
+
+  /**
+   * Get user information by uid.
+   * @param Uid for connection user.
+   * @param Serach user's uid
+   * @return ActiveDirectoryUser
+   */
+  def getUser(connectionUser: String, targetUid: String): Option[ActiveDirectoryUser]
 
 }
