@@ -102,8 +102,13 @@ trait LDAPServiceProvider {
    * Get DN by uid.
    */
   def getDN(uid: String): Option[String] = {
-    val searchResult = defaultConnection.search(new SearchRequest(baseDN, SearchScope.SUB, Filter.createEqualityFilter(uidAttributeName, uid))).getSearchEntries
-
+    val searchResult = {
+      defaultConnection.search(new SearchRequest(
+        baseDN, SearchScope.SUB,
+        Filter.createEqualityFilter(uidAttributeName, uid)
+      )
+      ).getSearchEntries
+    }
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)
       case true => None
