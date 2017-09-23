@@ -7,6 +7,13 @@ case class LDAPAttribute(
 )
 
 //TODO: Add attributeses
+case class OrganizationUnit(
+  distinguishedName: LDAPAttribute,
+  name: LDAPAttribute,
+  ou: LDAPAttribute
+)
+
+//TODO: Add attributeses
 case class ActiveDirectoryUser(
   cn: LDAPAttribute,
   displayName: LDAPAttribute,
