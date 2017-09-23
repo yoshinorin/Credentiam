@@ -22,6 +22,10 @@ profile.title = Your Profile
 # Sign Out messages
 sign.out = Sign out
 
+# Menus
+menu.home = Home
+menu.organization = Organizations
+
 # Administration area
 admin.area = Admin Area
 admin.system = System
