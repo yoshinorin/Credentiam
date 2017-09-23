@@ -1,6 +1,7 @@
 package app.services.ldap
 
 import scala.collection.mutable
+import scala.collection.JavaConverters._
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
@@ -112,6 +113,32 @@ trait LDAPServiceProvider {
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)
       case true => None
+    }
+  }
+
+  /**
+   * Get Organizations
+   */
+  def getOrganizations(connectionUser: String): Option[List[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+    getConnectionByUser(connectionUser) match {
+      case Some(uc) => {
+        val searchResult = {
+          uc.connection.search(new SearchRequest(
+            baseDN,
+            SearchScope.SUB,
+            "(ou=*)",
+            "name"
+          )
+          ).getSearchEntries
+        }
+        searchResult.isEmpty match {
+          case false => {
+            Some(searchResult.asScala.toList)
+          }
+          case true => None
+        }
+      }
+      case None => None
     }
   }
 

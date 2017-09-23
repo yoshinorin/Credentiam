@@ -11,6 +11,9 @@ POST        /signIn                          app.controllers.AuthController.sign
 GET         /signOut                         app.controllers.AuthController.signOut
 
 # For administrator page
+GET         /organizations                   app.controllers.LDAPController.organizations
+
+# For administrator page
 GET         /admin                           app.controllers.AdminAreaController.index
 
 # Map static resources from the /public folder to the /assets URL path
