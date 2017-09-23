@@ -5,5 +5,24 @@
 @(user: app.models.UserIdentify)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("home.title"), Some(user)) {
-
+  <div class="mdl-grid">
+    <div class="mdl-grid">
+      <div class="home-card mdl-shadow--2dp">
+        <div class="mdl-card__supporting-text centering">
+          <a class="mdl-navigation__link" href="@app.controllers.routes.ApplicationController.index">
+            <h5><i class="mdl-color-text material-icons" role="presentation">home</i></h5>
+            <h6>@messages("menu.home")</h6>
+          </a>
+        </div>
+      </div>
+      <div class="home-card mdl-shadow--2dp">
+          <div class="mdl-card__supporting-text centering">
+            <a class="mdl-navigation__link" href="@app.controllers.routes.LDAPController.organizations">
+              <h5><i class="mdl-color-text material-icons" role="presentation">account_balance</i></h5>
+              <h6>@messages("menu.organization")</h6>
+            </a>
+          </div>
+        </div>
+    </div>
+  </div>
 }

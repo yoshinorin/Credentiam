@@ -100,3 +100,9 @@ td {
 .table-row {
   display: table-row;
 }
+
+.home-card {
+  margin: 20px;
+  width: 160px;
+  height: 160px;
+}
