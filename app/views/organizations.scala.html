@@ -1,0 +1,27 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(title: String, user: app.models.UserIdentify, ldapAttributes: Option[List[com.unboundid.ldap.sdk.SearchResultEntry]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@main(messages(title), Some(user)) {
+  @ldapAttributes match {
+    case None => { @messages("notfound") }
+    case Some(ldapAttributes) => {
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+          <tr>
+            <th><h6>@messages("property")</h6></th>
+            <th><h6>@messages("value")</h6></th>
+          </tr>
+        </thead>
+        <tbody>
+          @ldapAttributes.foreach({v =>
+            v
+            <!--TODO: do something... -->
+          })
+        </tbody>
+      </table>
+    }
+  }
+}
