@@ -6,7 +6,8 @@ import scala.collection.JavaConverters._
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 
-import app.models.{ LDAPAttribute, ActiveDirectoryUser }
+import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser }
+import utils.ClassUtil
 
 object LDAPServiceProvider {
 
@@ -114,6 +115,25 @@ trait LDAPServiceProvider {
       case false => Some(searchResult.get(0).getDN)
       case true => None
     }
+  }
+
+  /**
+   * Mapping com.unboundid.ldap.sdk.SearchResultEntry to OrganizationUnit
+   *
+   * @param List[com.unboundid.ldap.sdk.SearchResultEntry]
+   * @return List[OrganizationUnit]
+   * TODO: More Abstractly
+   */
+  def mapOrganizationUnit(srEntry: List[com.unboundid.ldap.sdk.SearchResultEntry]): List[OrganizationUnit] = {
+    var ou = mutable.ListBuffer.empty[OrganizationUnit]
+    srEntry.foreach(v =>
+      ou += OrganizationUnit(
+        LDAPAttribute("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
+        LDAPAttribute("ldap.attribute.name", v.getAttributeValue("name")),
+        LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou"))
+      )
+    )
+    ou.toList
   }
 
   /**
