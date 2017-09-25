@@ -22,7 +22,7 @@ class LDAPController @Inject() (
 
   def organizations = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.organizations("profile.title", request.identity, (LDAPServiceProvider.server.getOrganizations(request.identity.userID)))))
+    Future.successful(Ok(views.html.organizations("menu.organization", request.identity, (LDAPServiceProvider.server.getOrganizations(request.identity.userID)))))
   }
 
 }
