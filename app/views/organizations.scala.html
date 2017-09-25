@@ -11,15 +11,19 @@
       <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
         <thead>
           <tr>
-            <th><h6>@messages("property")</h6></th>
-            <th><h6>@messages("value")</h6></th>
+            <th><h6>@messages("ldap.attribute.name")</h6></th>
+            <th><h6>@messages("ldap.attribute.ou")</h6></th>
+            <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
           </tr>
         </thead>
         <tbody>
-          @ldapAttributes.foreach({v =>
-            v
-            <!--TODO: do something... -->
-          })
+          @for(ou <- ldapAttributes) {
+            <tr>
+              <td>@ou.name.value</td>
+              <td>@ou.ou.value</td>
+              <td>@ou.distinguishedName.value</td>
+            </tr>
+          }
         </tbody>
       </table>
     }
