@@ -2,7 +2,7 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 
-@(title: String, user: app.models.UserIdentify, ldapAttributes: Option[List[com.unboundid.ldap.sdk.SearchResultEntry]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(title: String, user: app.models.UserIdentify, ldapAttributes: Option[List[app.models.OrganizationUnit]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages(title), Some(user)) {
   @ldapAttributes match {

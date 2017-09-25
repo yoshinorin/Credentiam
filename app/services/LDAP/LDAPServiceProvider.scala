@@ -139,7 +139,7 @@ trait LDAPServiceProvider {
   /**
    * Get Organizations
    */
-  def getOrganizations(connectionUser: String): Option[List[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+  def getOrganizations(connectionUser: String): Option[List[app.models.OrganizationUnit]] = {
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
@@ -153,7 +153,7 @@ trait LDAPServiceProvider {
         }
         searchResult.isEmpty match {
           case false => {
-            Some(searchResult.asScala.toList)
+            Some(mapOrganizationUnit(searchResult.asScala.toList))
           }
           case true => None
         }
