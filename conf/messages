@@ -49,6 +49,7 @@ ldap.attribute.displayName = Display Name
 ldap.attribute.distinguishedName = Distinguished Name
 ldap.attribute.gn = Given Name
 ldap.attribute.mail = Mail
+ldap.attribute.name = Name
 ldap.attribute.o = Organization
 ldap.attribute.ou = Organization Unit
 ldap.attribute.postalCode = Postal Code
