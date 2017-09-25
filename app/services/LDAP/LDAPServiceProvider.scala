@@ -147,7 +147,7 @@ trait LDAPServiceProvider {
             baseDN,
             SearchScope.SUB,
             "(ou=*)",
-            "name"
+            ClassUtil.getFields[OrganizationUnit]: _*
           )
           ).getSearchEntries
         }
