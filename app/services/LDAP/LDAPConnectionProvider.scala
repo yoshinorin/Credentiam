@@ -7,18 +7,18 @@ import com.unboundid.ldap.sdk._
 
 trait LDAPConnectionProvider {
 
-  val configuration = ConfigFactory.load
-  val host = configuration.getString("ldap.host")
-  val port = configuration.getInt("ldap.port")
-  val ldaps = configuration.getBoolean("ldap.ldaps")
-  val baseDN = configuration.getString("ldap.baseDN")
-  val bindDN = configuration.getString("ldap.bindDN")
-  val password = configuration.getString("ldap.password")
-  val uidAttributeName = configuration.getString("ldap.uidAttributeName")
-  val initialConnextions = configuration.getInt("ldap.initialConnextions")
-  val maxConnections = configuration.getInt("ldap.maxConnections")
+  private val configuration = ConfigFactory.load
+  private val host = configuration.getString("ldap.host")
+  private val port = configuration.getInt("ldap.port")
+  private val ldaps = configuration.getBoolean("ldap.ldaps")
+  private val bindDN = configuration.getString("ldap.bindDN")
+  private val password = configuration.getString("ldap.password")
+  private val initialConnextions = configuration.getInt("ldap.initialConnextions")
+  private val maxConnections = configuration.getInt("ldap.maxConnections")
+  protected val baseDN = configuration.getString("ldap.baseDN")
+  protected val uidAttributeName = configuration.getString("ldap.uidAttributeName")
 
-  def getConnectionOptions: LDAPConnectionOptions = {
+  private def getConnectionOptions: LDAPConnectionOptions = {
     val connectionOption = new LDAPConnectionOptions
     connectionOption.setConnectTimeoutMillis(configuration.getInt("ldap.connectTimeout"))
     connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
