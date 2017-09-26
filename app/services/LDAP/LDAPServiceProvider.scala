@@ -109,26 +109,13 @@ trait LDAPServiceProvider extends LDAPConnectionProvider {
 
   /**
    * Get Organizations
+   *
+   * @param connectionUser The current user id.
+   * @return Option[Seq[app.models.OrganizationUnit]]
    */
-  def getOrganizations(connectionUser: String): Option[List[app.models.OrganizationUnit]] = {
-    getConnectionByUser(connectionUser) match {
-      case Some(uc) => {
-        val searchResult = {
-          uc.connection.search(new SearchRequest(
-            baseDN,
-            SearchScope.SUB,
-            "(ou=*)",
-            ClassUtil.getFields[OrganizationUnit]: _*
-          )
-          ).getSearchEntries
-        }
-        searchResult.isEmpty match {
-          case false => {
-            Some(mapOrganizationUnit(searchResult.asScala.toList))
-          }
-          case true => None
-        }
-      }
+  def getOrganizations(connectionUser: String): Option[Seq[app.models.OrganizationUnit]] = {
+    search(connectionUser, "(ou=*)", ClassUtil.getFields[OrganizationUnit]) match {
+      case Some(sr) => Some(mapOrganizationUnit(sr))
       case None => None
     }
   }
