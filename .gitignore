@@ -2,6 +2,7 @@
 *.log
 *.g8
 *.gz
+*.tar
 
 # sbt specific
 dist/*
