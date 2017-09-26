@@ -91,11 +91,11 @@ trait LDAPServiceProvider extends LDAPConnectionProvider {
   /**
    * Mapping com.unboundid.ldap.sdk.SearchResultEntry to OrganizationUnit
    *
-   * @param List[com.unboundid.ldap.sdk.SearchResultEntry]
-   * @return List[OrganizationUnit]
+   * @param Seq[com.unboundid.ldap.sdk.SearchResultEntry]
+   * @return Seq[OrganizationUnit]
    * TODO: More Abstractly
    */
-  def mapOrganizationUnit(srEntry: List[com.unboundid.ldap.sdk.SearchResultEntry]): List[OrganizationUnit] = {
+  def mapOrganizationUnit(srEntry: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
     var ou = mutable.ListBuffer.empty[OrganizationUnit]
     srEntry.foreach(v =>
       ou += OrganizationUnit(
@@ -104,7 +104,7 @@ trait LDAPServiceProvider extends LDAPConnectionProvider {
         LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou"))
       )
     )
-    ou.toList
+    ou.toSeq
   }
 
   /**
