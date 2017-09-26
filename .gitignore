@@ -1,6 +1,7 @@
 *.class
 *.log
 *.g8
+*.gz
 
 # sbt specific
 dist/*
