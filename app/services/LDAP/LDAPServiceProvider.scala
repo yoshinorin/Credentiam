@@ -41,6 +41,37 @@ trait LDAPServiceProvider extends LDAPConnectionProvider {
   }
 
   /**
+   * Search LDAP Object using by current user's connection & filter condition.
+   *
+   * @param connectionUser The current user id.
+   * @param filter Filter condition.
+   * @param attributes Get attributes.
+   * @return Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]]
+   */
+  def search(connectionUser: String, filter: String, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+    getConnectionByUser(connectionUser) match {
+      case Some(uc) => {
+        val searchResult = {
+          uc.connection.search(new SearchRequest(
+            baseDN,
+            SearchScope.SUB,
+            filter,
+            attributes: _*
+          )
+          ).getSearchEntries
+        }
+        searchResult.isEmpty match {
+          case false => {
+            Some(searchResult.asScala.toSeq)
+          }
+          case true => None
+        }
+      }
+      case None => None
+    }
+  }
+
+  /**
    * Get DN by uid.
    */
   def getDN(uid: String): Option[String] = {
