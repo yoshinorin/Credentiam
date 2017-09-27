@@ -9,7 +9,7 @@ import app.models.{ LDAPAttribute, ActiveDirectoryUser }
 import utils.ClassUtil
 
 @Singleton
-class ActiveDirectoryService extends LDAPServiceProvider {
+class ActiveDirectoryService extends LDAPService {
 
   /**
    * Mapping com.unboundid.ldap.sdk.SearchResultEntry to ActiveDirectoryUser

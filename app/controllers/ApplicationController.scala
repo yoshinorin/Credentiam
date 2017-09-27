@@ -9,7 +9,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
 
-import app.services.ldap.LDAPServiceProvider
+import app.services.ldap.LDAPService
 import utils.auth.DefaultEnv
 
 class ApplicationController @Inject() (
@@ -30,7 +30,7 @@ class ApplicationController @Inject() (
 
   def profile = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.user("profile.title", request.identity, (LDAPServiceProvider.server.getUser(request.identity.userID, request.identity.userID)))))
+    Future.successful(Ok(views.html.user("profile.title", request.identity, (LDAPService.server.getUser(request.identity.userID, request.identity.userID)))))
   }
 
 }

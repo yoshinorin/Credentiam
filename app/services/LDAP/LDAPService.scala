@@ -9,12 +9,12 @@ import com.unboundid.ldap.sdk._
 import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser }
 import utils.ClassUtil
 
-object LDAPServiceProvider {
+object LDAPService {
 
   val configuration = ConfigFactory.load
   val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")
 
-  val server: LDAPServiceProvider = {
+  val server: LDAPService = {
     if (isActiveDirectory) {
       new ActiveDirectoryService()
     } else {
@@ -25,7 +25,7 @@ object LDAPServiceProvider {
 
 }
 
-trait LDAPServiceProvider extends LDAPConnectionProvider {
+trait LDAPService extends LDAPConnectionProvider {
 
   /**
    * User bind with LDAP server.
