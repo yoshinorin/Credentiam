@@ -27,7 +27,7 @@ class ActiveDirectoryService extends LDAPService {
       LDAPAttribute("ldap.attribute.name", srEntry.getAttributeValue("name")),
       LDAPAttribute("ldap.attribute.sAMAccountName", srEntry.getAttributeValue("sAMAccountName")),
       LDAPAttribute("ldap.attribute.sn", srEntry.getAttributeValue("sn")),
-      LDAPAttribute("ldap.attribute.userPrincipalNames", srEntry.getAttributeValue("userPrincipalNames"))
+      LDAPAttribute("ldap.attribute.userPrincipalName", srEntry.getAttributeValue("userPrincipalNames"))
     )
   }
 
