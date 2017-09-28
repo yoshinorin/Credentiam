@@ -30,6 +30,10 @@ trait LDAPService extends LDAPConnectionProvider {
 
   /**
    * User bind with LDAP server.
+   *
+   * @param uid The user id for bind LDAP server.
+   * @param uid The user password.
+   * @return LDAP result code.
    */
   def bind(uid: UserId, password: String): ResultCode = {
     getDN(uid) match {
@@ -46,8 +50,8 @@ trait LDAPService extends LDAPConnectionProvider {
    *
    * @param connectionUser The current user id.
    * @param filter Filter condition.
-   * @param attributes Get attributes.
-   * @return Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]]
+   * @param attributes Attributes to be acquired.
+   * @return SearchResultEntries
    */
   def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
     getConnectionByUser(connectionUser) match {
@@ -74,11 +78,14 @@ trait LDAPService extends LDAPConnectionProvider {
 
   /**
    * Get DN by uid.
+   *
+   * @param connectionUser The current user id.
    */
   def getDN(uid: UserId): Option[String] = {
     val searchResult = {
       defaultConnection.search(new SearchRequest(
-        baseDN, SearchScope.SUB,
+        baseDN,
+        SearchScope.SUB,
         Filter.createEqualityFilter(uidAttributeName, uid.value.toString)
       )
       ).getSearchEntries
@@ -90,29 +97,29 @@ trait LDAPService extends LDAPConnectionProvider {
   }
 
   /**
-   * Mapping com.unboundid.ldap.sdk.SearchResultEntry to OrganizationUnit
+   * Mapping SearchResultEntries to OrganizationUnits
    *
-   * @param Seq[com.unboundid.ldap.sdk.SearchResultEntry]
-   * @return Seq[OrganizationUnit]
+   * @param SearchResultEntries
+   * @return OrganizationUnits.
    * TODO: More Abstractly
    */
-  def mapOrganizationUnit(srEntry: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
-    var ou = mutable.ListBuffer.empty[OrganizationUnit]
-    srEntry.foreach(v =>
-      ou += OrganizationUnit(
+  def mapOrganizationUnit(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
+    var ous = mutable.ListBuffer.empty[OrganizationUnit]
+    sr.foreach(v =>
+      ous += OrganizationUnit(
         LDAPAttribute("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
         LDAPAttribute("ldap.attribute.name", v.getAttributeValue("name")),
         LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou"))
       )
     )
-    ou.toSeq
+    ous.toSeq
   }
 
   /**
    * Get Organizations
    *
    * @param connectionUser The current user id.
-   * @return Option[Seq[app.models.OrganizationUnit]]
+   * @return OrganizationUnits.
    */
   def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
     search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getFields[OrganizationUnit]) match {
@@ -123,9 +130,10 @@ trait LDAPService extends LDAPConnectionProvider {
 
   /**
    * Get user information by uid.
-   * @param Uid for connection user.
-   * @param Serach user's uid
-   * @return ActiveDirectoryUser
+   *
+   * @param connectionUser The current user id.
+   * @param targetUid The target user's uid.
+   * @return ActiveDirectoryUser //TODO: Change abstractly.
    */
   def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser]
 

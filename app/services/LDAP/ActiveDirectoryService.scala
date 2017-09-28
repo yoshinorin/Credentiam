@@ -14,9 +14,9 @@ import utils.types.UserId
 class ActiveDirectoryService extends LDAPService {
 
   /**
-   * Mapping com.unboundid.ldap.sdk.SearchResultEntry to ActiveDirectoryUser
+   * Mapping SearchResultEntries to ActiveDirectoryUsers
    *
-   * @param com.unboundid.ldap.sdk.SearchResultEntry
+   * @param SearchResultEntries
    * @return ActiveDirectoryUsers
    * TODO: More Abstractly
    */
@@ -38,8 +38,9 @@ class ActiveDirectoryService extends LDAPService {
 
   /**
    * Get user information by uid.
-   * @param Uid for connection user.
-   * @param Serach user's uid
+   *
+   * @param connectionUser The current user id.
+   * @param targetUid The target user's uid.
    * @return ActiveDirectoryUser
    */
   override def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser] = {
