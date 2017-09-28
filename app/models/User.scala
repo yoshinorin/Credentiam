@@ -6,7 +6,7 @@ import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.UserIdentify
 import app.models.UserDAOImpl._
-
+import utils.types.UserId
 /**
   * The companion object.
   */
@@ -15,7 +15,7 @@ object UserDAOImpl {
   /**
     * The list of users.
     */
-  val users: mutable.HashMap[String, UserIdentify] = mutable.HashMap()
+  val users: mutable.HashMap[UserId, UserIdentify] = mutable.HashMap()
 
 }
 
@@ -28,7 +28,7 @@ class UserDAOImpl extends UserDAO {
     users.find { case (_, user) => user.loginInfo == loginInfo }.map(_._2)
   )
 
-  def find(userID: String) = Future.successful(users.get(userID))
+  def find(userID: UserId) = Future.successful(users.get(userID))
 
   def save(user: UserIdentify) = {
     users += (user.userID -> user)
@@ -41,13 +41,13 @@ trait UserDAO {
 
   def find(loginInfo: LoginInfo): Future[Option[UserIdentify]]
 
-  def find(userID: String): Future[Option[UserIdentify]]
+  def find(userID: UserId): Future[Option[UserIdentify]]
 
   def save(user: UserIdentify): Future[UserIdentify]
 
 }
 
 case class UserIdentify(
-  userID: String,
+  userID: UserId,
   loginInfo: LoginInfo,
 ) extends Identity

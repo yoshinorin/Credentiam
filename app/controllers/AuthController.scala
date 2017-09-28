@@ -29,6 +29,8 @@ import app.services.UserService
 import app.services.ldap.LDAPService
 import utils.auth.DefaultEnv
 import utils.Logger
+import utils.types.UserId
+
 import AuthController._
 
 object AuthController {
@@ -65,10 +67,12 @@ class AuthController @Inject() (
       form => Future.successful(BadRequest(views.html.signIn(signInForm))),
       data => {
         try {
-          if (LDAPService.server.bind(data.uid, data.password) == ResultCode.SUCCESS) {
+
+          val userId: UserId = UserId(data.uid)
+          if (LDAPService.server.bind(userId, data.password) == ResultCode.SUCCESS) {
             val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
             val authInfo = passwordHasherRegistry.current.hash(data.password)
-            val user = UserIdentify(data.uid, loginInfo)
+            val user = UserIdentify(userId, loginInfo)
 
             for {
               user <- userService.save(user)

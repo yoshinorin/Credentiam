@@ -8,6 +8,7 @@ import com.unboundid.ldap.sdk._
 
 import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser }
 import utils.ClassUtil
+import utils.types.UserId
 
 object LDAPService {
 
@@ -30,10 +31,10 @@ trait LDAPService extends LDAPConnectionProvider {
   /**
    * User bind with LDAP server.
    */
-  def bind(uid: String, password: String): ResultCode = {
+  def bind(uid: UserId, password: String): ResultCode = {
     getDN(uid) match {
       case Some(dn) => {
-        createConnectionByUser(uid: String, dn: String, password: String)
+        createConnectionByUser(uid: UserId, dn: String, password: String)
         ResultCode.SUCCESS
       }
       case None => ResultCode.OPERATIONS_ERROR
@@ -48,7 +49,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @param attributes Get attributes.
    * @return Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]]
    */
-  def search(connectionUser: String, filter: String, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+  def search(connectionUser: UserId, filter: String, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
@@ -74,11 +75,11 @@ trait LDAPService extends LDAPConnectionProvider {
   /**
    * Get DN by uid.
    */
-  def getDN(uid: String): Option[String] = {
+  def getDN(uid: UserId): Option[String] = {
     val searchResult = {
       defaultConnection.search(new SearchRequest(
         baseDN, SearchScope.SUB,
-        Filter.createEqualityFilter(uidAttributeName, uid)
+        Filter.createEqualityFilter(uidAttributeName, uid.value.toString)
       )
       ).getSearchEntries
     }
@@ -113,7 +114,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @param connectionUser The current user id.
    * @return Option[Seq[app.models.OrganizationUnit]]
    */
-  def getOrganizations(connectionUser: String): Option[Seq[app.models.OrganizationUnit]] = {
+  def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
     search(connectionUser, "(ou=*)", ClassUtil.getFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapOrganizationUnit(sr))
       case None => None
@@ -126,6 +127,6 @@ trait LDAPService extends LDAPConnectionProvider {
    * @param Serach user's uid
    * @return ActiveDirectoryUser
    */
-  def getUser(connectionUser: String, targetUid: String): Option[ActiveDirectoryUser]
+  def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser]
 
 }

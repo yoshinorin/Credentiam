@@ -7,6 +7,7 @@ import com.unboundid.ldap.sdk._
 
 import app.models.{ LDAPAttribute, ActiveDirectoryUser }
 import utils.ClassUtil
+import utils.types.UserId
 
 @Singleton
 class ActiveDirectoryService extends LDAPService {
@@ -36,7 +37,7 @@ class ActiveDirectoryService extends LDAPService {
    * @param Serach user's uid
    * @return ActiveDirectoryUser
    */
-  override def getUser(connectionUser: String, targetUid: String): Option[ActiveDirectoryUser] = {
+  override def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser] = {
 
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {

@@ -5,6 +5,8 @@ import scala.collection.mutable
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 
+import utils.types.UserId
+
 trait LDAPConnectionProvider {
 
   private val configuration = ConfigFactory.load
@@ -41,13 +43,13 @@ trait LDAPConnectionProvider {
   /**
    * The connections store by user.
    */
-  protected val connections: mutable.HashMap[String, UserConnection] = mutable.HashMap()
+  protected val connections: mutable.HashMap[UserId, UserConnection] = mutable.HashMap()
 
   /**
    * Create connection by users and store it.
    * TODO: Support LDAPS
    */
-  def createConnectionByUser(uid: String, dn: String, password: String): Unit = {
+  def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(getConnectionOptions, host, port, dn, password))
     connections += (uid -> connection)
   }
@@ -55,7 +57,7 @@ trait LDAPConnectionProvider {
   /**
    * Remove & close connection from connections store by User.
    */
-  def removeConnectionByUser(uid: String): Unit = {
+  def removeConnectionByUser(uid: UserId): Unit = {
     //TODO: Release connection certainly.
     connections.get(uid) match {
       case Some(uc) => {
@@ -69,7 +71,7 @@ trait LDAPConnectionProvider {
   /**
    * Get Connection by uid.
    */
-  def getConnectionByUser(uid: String): Option[UserConnection] = {
+  def getConnectionByUser(uid: UserId): Option[UserConnection] = {
     connections.get(uid)
   }
 
