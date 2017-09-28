@@ -49,6 +49,10 @@ i {
   vertical-align: middle !important;
 }
 
+.accent-color-blue {
+  color: #2196F3;
+}
+
 .padding-30 {
   width: 30%;
 }
