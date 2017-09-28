@@ -20,8 +20,8 @@ trait LDAPConnectionProvider {
   protected val baseDN = configuration.getString("ldap.baseDN")
   protected val uidAttributeName = configuration.getString("ldap.uidAttributeName")
 
+  private val connectionOption = new LDAPConnectionOptions
   private def getConnectionOptions: LDAPConnectionOptions = {
-    val connectionOption = new LDAPConnectionOptions
     connectionOption.setConnectTimeoutMillis(configuration.getInt("ldap.connectTimeout"))
     connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
     connectionOption.setAbandonOnTimeout(configuration.getBoolean("ldap.abandonOnTimeOut"))
