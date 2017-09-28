@@ -49,7 +49,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @param attributes Get attributes.
    * @return Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]]
    */
-  def search(connectionUser: UserId, filter: String, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+  def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
@@ -115,7 +115,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @return Option[Seq[app.models.OrganizationUnit]]
    */
   def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
-    search(connectionUser, "(ou=*)", ClassUtil.getFields[OrganizationUnit]) match {
+    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapOrganizationUnit(sr))
       case None => None
     }
