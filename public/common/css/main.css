@@ -45,6 +45,10 @@ td {
   font-size: 14px !important;
 }
 
+i {
+  vertical-align: middle !important;
+}
+
 .padding-30 {
   width: 30%;
 }
