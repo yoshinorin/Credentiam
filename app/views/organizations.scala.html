@@ -5,6 +5,9 @@
 @(title: String, user: app.models.UserIdentify, ldapAttributes: Option[Seq[app.models.OrganizationUnit]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages(title), Some(user)) {
+  <div class="centering vertical-middle">
+    <h5><i class="mdl-color-text material-icons" role="presentation">account_balance</i> @messages("menu.organization")</h5>
+  </div>
   @ldapAttributes match {
     case None => { @messages("notfound") }
     case Some(ldapAttributes) => {
