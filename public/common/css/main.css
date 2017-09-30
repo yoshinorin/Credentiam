@@ -85,6 +85,27 @@ i.icon-small {
   color: #b71c1c;
 }
 
+.alert {
+  margin 10px;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.alert.alert-info {
+  color: #2196F3;
+  background: #B3E5FC;
+}
+
+.alert.alert-success {
+  color: #4CAF50;
+  background: #C8E6C9;
+}
+
+.alert.alert-error {
+  color: #b71c1c;
+  background: #ef9a9a;
+}
+
 .footer-link {
   text-align: center !important;
   margin-right: auto;
