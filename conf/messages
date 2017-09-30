@@ -39,6 +39,7 @@ success = Success
 exception = Internal Server Error
 notfound = Not Found
 invalid.credentials = Invalid credentials
+valid.credentials = Authentication succeeded
 access.denied = Access denied
 property = Property
 value = Value
