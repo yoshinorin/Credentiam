@@ -113,6 +113,12 @@ i.icon-small {
   margin-left : auto;
 }
 
+.header-messages {
+  margin-top: 30px;
+  padding-left: 30%;
+  color: #EEEEEE;
+}
+
 .mdl-layout__header,
 .mdl-layout__drawer-button {
   color: white;
