@@ -1,0 +1,66 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(user: app.models.UserIdentify, ou: Option[app.models.OrganizationUnit])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@main(messages("organization"), Some(user)) {
+  @ou match {
+    case None => {
+      <div class="centering vertical-middle">
+        <h5>@messages("notfound")</h5>
+      </div>
+    }
+    case Some(ou) => {
+      <div class="centering vertical-middle">
+        <h5><i class="mdl-color-text material-icons" role="presentation">account_balance</i>  @ou.name.value</h5>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+        <tr>
+          <th><h6>@messages("property")</h6></th>
+          <th><h6>@messages("value")</h6></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@messages(ou.name.name)</td>
+            <td>@ou.name.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.description.name)</td>
+            <td>@ou.description.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.distinguishedName.name)</td>
+            <td>@ou.distinguishedName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.postalCode.name)</td>
+            <td>@ou.postalCode.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.st.name)</td>
+            <td>@ou.st.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.l.name)</td>
+            <td>@ou.l.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.street.name)</td>
+            <td>@ou.street.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.whenCreated.name)</td>
+            <td>@ou.whenCreated.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ou.whenChanged.name)</td>
+            <td>@ou.whenChanged.value</td>
+          </tr>
+        </tbody>
+      </table>
+    }
+  }
+}

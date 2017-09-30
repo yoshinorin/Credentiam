@@ -20,6 +20,11 @@ class LDAPController @Inject() (
   assets: AssetsFinder
 ) extends AbstractController(components) with I18nSupport {
 
+  def organization(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    //TODO: Exception handling
+    Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.getOrganization(request.identity.userID, dn)))))
+  }
+
   def organizations = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
     Future.successful(Ok(views.html.organizations("menu.organization", request.identity, (LDAPService.server.getOrganizations(request.identity.userID)))))

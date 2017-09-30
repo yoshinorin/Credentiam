@@ -11,6 +11,7 @@ POST        /signIn                          app.controllers.AuthController.sign
 GET         /signOut                         app.controllers.AuthController.signOut
 
 # For Organization
+GET         /organization/:dn                app.controllers.LDAPController.organization(dn: String)
 GET         /organizations                   app.controllers.LDAPController.organizations
 
 # For administrator page

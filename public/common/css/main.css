@@ -49,6 +49,10 @@ i {
   vertical-align: middle !important;
 }
 
+i.icon-small {
+  font-size: 18px;
+}
+
 .accent-color-blue {
   color: #2196F3;
 }

@@ -6,7 +6,7 @@
 
 @main(messages(title), Some(user)) {
   <div class="centering vertical-middle">
-    <h5><i class="mdl-color-text material-icons" role="presentation">account_balance</i> @messages("menu.organization")</h5>
+    <h5>@messages("menu.organization")</h5>
   </div>
   @ldapAttributes match {
     case None => { @messages("notfound") }
@@ -19,10 +19,13 @@
             <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
           </tr>
         </thead>
-        <tbody>
           @for(ou <- ldapAttributes) {
             <tr>
-              <td>@ou.name.value</td>
+              <td>
+                <a href="@app.controllers.routes.LDAPController.organization(ou.distinguishedName.value)">
+                  <i class="mdl-color-text material-icons icon-small" role="presentation">account_balance</i>   @ou.name.value
+                </a>
+              </td>
               <td>@ou.description.value</td>
               <td>@ou.distinguishedName.value</td>
             </tr>
