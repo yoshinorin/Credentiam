@@ -61,6 +61,7 @@
             </div>
           }
         <main>
+          @headerBottomNav(user)
           @request.flash.get("error").map { msg =>
             <div>@alert.error(msg)</div>
           }

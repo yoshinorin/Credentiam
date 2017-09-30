@@ -147,3 +147,10 @@ i.icon-small {
   width: 160px;
   height: 160px;
 }
+
+.header-bottom-nav{
+  width: 100%;
+  padding-top: 8px;
+  text-align: center;
+  background: #F5F5F5;
+}

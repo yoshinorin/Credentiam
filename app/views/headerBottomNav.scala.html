@@ -1,0 +1,28 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(user: Option[app.models.UserIdentify])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@if(request.uri == "/" || request.uri == "/signIn") {
+  <!-- do nothing  -->
+} else {
+  @user match {
+    case None => {
+      <div class="header-bottom-nav">
+        <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.home")</a>
+      <hr>
+      </div>
+    }
+    case Some(user) => {
+      <div class="header-bottom-nav">
+        @if(request.uri contains "/organization/") {
+          <a href="@app.controllers.routes.LDAPController.organizations" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.organizations")</a>
+        } else {
+          <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.home")</a>
+        }
+      <hr>
+      </div>
+    }
+  }
+}
