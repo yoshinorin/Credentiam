@@ -15,7 +15,7 @@
         <thead>
           <tr>
             <th><h6>@messages("ldap.attribute.name")</h6></th>
-            <th><h6>@messages("ldap.attribute.ou")</h6></th>
+            <th><h6>@messages("ldap.attribute.description")</h6></th>
             <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
           </tr>
         </thead>
@@ -23,7 +23,7 @@
           @for(ou <- ldapAttributes) {
             <tr>
               <td>@ou.name.value</td>
-              <td>@ou.ou.value</td>
+              <td>@ou.description.value</td>
               <td>@ou.distinguishedName.value</td>
             </tr>
           }
