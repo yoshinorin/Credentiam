@@ -10,7 +10,7 @@ GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn
 GET         /signOut                         app.controllers.AuthController.signOut
 
-# For administrator page
+# For Organization
 GET         /organizations                   app.controllers.LDAPController.organizations
 
 # For administrator page
