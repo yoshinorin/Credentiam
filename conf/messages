@@ -45,9 +45,11 @@ value = Value
 # LDAP attributes
 ldap.attribute.c = Country
 ldap.attribute.cn = Common Name
+ldap.attribute.description = Description
 ldap.attribute.displayName = Display Name
 ldap.attribute.distinguishedName = Distinguished Name
 ldap.attribute.gn = Given Name
+ldap.attribute.l = Locality Name
 ldap.attribute.mail = Mail
 ldap.attribute.name = Name
 ldap.attribute.o = Organization
@@ -58,3 +60,5 @@ ldap.attribute.sn = Sur Name
 ldap.attribute.st = Street Address
 ldap.attribute.uid = User ID
 ldap.attribute.userPrincipalName = User Principal Name
+ldap.attribute.whenChanged = Updated
+ldap.attribute.whenCreated = Created
