@@ -104,6 +104,10 @@ i {
   margin: 0 auto;
 }
 
+.vertical-middle {
+  vertical-align: middle !important;
+}
+
 .table-row {
   display: table-row;
 }
