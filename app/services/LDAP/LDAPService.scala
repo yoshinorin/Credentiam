@@ -107,9 +107,16 @@ trait LDAPService extends LDAPConnectionProvider {
     var ous = mutable.ListBuffer.empty[OrganizationUnit]
     sr.foreach(v =>
       ous += OrganizationUnit(
+        LDAPAttribute("ldap.attribute.description", v.getAttributeValue("description")),
         LDAPAttribute("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
+        LDAPAttribute("ldap.attribute.l", v.getAttributeValue("l")),
         LDAPAttribute("ldap.attribute.name", v.getAttributeValue("name")),
-        LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou"))
+        LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou")),
+        LDAPAttribute("ldap.attribute.postalCode", v.getAttributeValue("postalCode")),
+        LDAPAttribute("ldap.attribute.st", v.getAttributeValue("st")),
+        LDAPAttribute("ldap.attribute.street", v.getAttributeValue("street")),
+        LDAPAttribute("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
+        LDAPAttribute("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
       )
     )
     ous.toSeq
