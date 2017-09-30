@@ -22,9 +22,10 @@ profile.title = Your Profile
 # Sign Out messages
 sign.out = Sign out
 
-# Menus
-menu.home = Home
-menu.organization = Organizations
+# View Commons
+view.common.home = Home
+view.common.organization = Organization
+view.common.organizations = Organizations
 
 # Administration area
 admin.area = Admin Area
@@ -41,8 +42,6 @@ invalid.credentials = Invalid credentials
 access.denied = Access denied
 property = Property
 value = Value
-
-organization = Organization
 
 # LDAP attributes
 ldap.attribute.c = Country
