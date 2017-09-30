@@ -123,6 +123,20 @@ trait LDAPService extends LDAPConnectionProvider {
   }
 
   /**
+   * Get Organization
+   *
+   * @param connectionUser The current user id.
+   * @param dn The current user id.
+   * @return OrganizationUnits.
+   */
+  def getOrganization(connectionUser: UserId, dn: String): Option[app.models.OrganizationUnit] = {
+    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getFields[OrganizationUnit]) match {
+      case Some(sr) => Some(mapOrganizationUnit(sr).head)
+      case None => None
+    }
+  }
+
+  /**
    * Get Organizations
    *
    * @param connectionUser The current user id.
