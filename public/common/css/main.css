@@ -53,10 +53,6 @@ i.icon-small {
   font-size: 18px;
 }
 
-.accent-color-blue {
-  color: #2196F3;
-}
-
 .padding-30 {
   width: 30%;
 }
@@ -79,6 +75,14 @@ i.icon-small {
 
 .padding-80 {
   width: 80%;
+}
+
+.accent-color-blue {
+  color: #2196F3;
+}
+
+.accent-color-red {
+  color: #b71c1c;
 }
 
 .footer-link {
