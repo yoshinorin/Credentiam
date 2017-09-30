@@ -4,7 +4,7 @@ case class LDAPAttribute(
   name: String,
   //TODO: Should another type. ex) byte
   //TODO: value have to change array or list.
-  value: String
+  value: String = "-"
 )
 
 //TODO: Add attributeses
