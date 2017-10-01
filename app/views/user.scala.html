@@ -6,7 +6,11 @@
 
 @main(messages(title), Some(user)) {
   @ldapAttributes match {
-    case None => { @messages("notfound") }
+    case None => {
+      <div class="centering vertical-middle">
+        <h5>@messages("notfound")</h5>
+      </div>
+    }
     case Some(ldapAttributes) => {
       <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
         <thead>
