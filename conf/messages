@@ -23,6 +23,8 @@ profile.title = Your Profile
 sign.out = Sign out
 
 # View Commons
+view.common.computer = Computer
+view.common.computers = Computers
 view.common.home = Home
 view.common.organization = Organization
 view.common.organizations = Organizations
@@ -55,6 +57,7 @@ ldap.attribute.distinguishedName = Distinguished Name
 ldap.attribute.gn = Given Name
 ldap.attribute.l = Locality Name
 ldap.attribute.mail = Mail
+ldap.attribute.managedBy = Managed User
 ldap.attribute.name = Name
 ldap.attribute.o = Organization
 ldap.attribute.ou = Organization Unit

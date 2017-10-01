@@ -6,7 +6,7 @@ import scala.collection.mutable
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 
-import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser }
+import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser, Computer }
 import utils.ClassUtil
 import utils.types.UserId
 
@@ -145,6 +145,56 @@ trait LDAPService extends LDAPConnectionProvider {
   def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
     search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapOrganizationUnit(sr))
+      case None => None
+    }
+  }
+
+  /**
+   * Mapping SearchResultEntries to Computers
+   *
+   * @param SearchResultEntries
+   * @return Computers.
+   * TODO: More Abstractly
+   */
+  def mapComputer(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[Computer] = {
+    var computers = mutable.ListBuffer.empty[Computer]
+    sr.foreach(v =>
+      computers += Computer(
+        LDAPAttribute.store("ldap.attribute.cn", v.getAttributeValue("cn")),
+        LDAPAttribute.store("ldap.attribute.description", v.getAttributeValue("description")),
+        LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
+        LDAPAttribute.store("ldap.attribute.managedBy", v.getAttributeValue("managedBy")),
+        LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
+        LDAPAttribute.store("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
+        LDAPAttribute.store("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
+      )
+    )
+    computers.toSeq
+  }
+
+  /**
+   * Get Computer.
+   *
+   * @param connectionUser The current user id.
+   * @param dn The current user id.
+   * @return Computer.
+   */
+  def getComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
+    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getFields[Computer]) match {
+      case Some(sr) => Some(mapComputer(sr).head)
+      case None => None
+    }
+  }
+
+  /**
+   * Get Computers.
+   *
+   * @param connectionUser The current user id.
+   * @return Computers.
+   */
+  def getComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
+    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getFields[Computer]) match {
+      case Some(sr) => Some(mapComputer(sr))
       case None => None
     }
   }

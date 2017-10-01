@@ -45,3 +45,14 @@ case class ActiveDirectoryUser(
   whenChanged: LDAPAttribute,
   whenCreated: LDAPAttribute
 )
+
+//TODO: Clean up & Add attributeses
+case class Computer(
+  cn: LDAPAttribute,
+  description: LDAPAttribute,
+  distinguishedName: LDAPAttribute,
+  managedBy: LDAPAttribute,
+  name: LDAPAttribute,
+  whenChanged: LDAPAttribute,
+  whenCreated: LDAPAttribute
+)
