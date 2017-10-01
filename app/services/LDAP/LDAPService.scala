@@ -107,16 +107,16 @@ trait LDAPService extends LDAPConnectionProvider {
     var ous = mutable.ListBuffer.empty[OrganizationUnit]
     sr.foreach(v =>
       ous += OrganizationUnit(
-        LDAPAttribute("ldap.attribute.description", v.getAttributeValue("description")),
-        LDAPAttribute("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
-        LDAPAttribute("ldap.attribute.l", v.getAttributeValue("l")),
-        LDAPAttribute("ldap.attribute.name", v.getAttributeValue("name")),
-        LDAPAttribute("ldap.attribute.ou", v.getAttributeValue("ou")),
-        LDAPAttribute("ldap.attribute.postalCode", v.getAttributeValue("postalCode")),
-        LDAPAttribute("ldap.attribute.st", v.getAttributeValue("st")),
-        LDAPAttribute("ldap.attribute.street", v.getAttributeValue("street")),
-        LDAPAttribute("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
-        LDAPAttribute("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
+        LDAPAttribute.store("ldap.attribute.description", v.getAttributeValue("description")),
+        LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
+        LDAPAttribute.store("ldap.attribute.l", v.getAttributeValue("l")),
+        LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
+        LDAPAttribute.store("ldap.attribute.ou", v.getAttributeValue("ou")),
+        LDAPAttribute.store("ldap.attribute.postalCode", v.getAttributeValue("postalCode")),
+        LDAPAttribute.store("ldap.attribute.st", v.getAttributeValue("st")),
+        LDAPAttribute.store("ldap.attribute.street", v.getAttributeValue("street")),
+        LDAPAttribute.store("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
+        LDAPAttribute.store("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
       )
     )
     ous.toSeq

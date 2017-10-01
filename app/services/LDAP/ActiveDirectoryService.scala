@@ -24,13 +24,13 @@ class ActiveDirectoryService extends LDAPService {
     var users = mutable.ListBuffer.empty[ActiveDirectoryUser]
     sr.foreach(v =>
       users += ActiveDirectoryUser(
-        LDAPAttribute("ldap.attribute.cn", v.getAttributeValue("cn")),
-        LDAPAttribute("ldap.attribute.displayName", v.getAttributeValue("displayName")),
-        LDAPAttribute("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
-        LDAPAttribute("ldap.attribute.name", v.getAttributeValue("name")),
-        LDAPAttribute("ldap.attribute.sAMAccountName", v.getAttributeValue("sAMAccountName")),
-        LDAPAttribute("ldap.attribute.sn", v.getAttributeValue("sn")),
-        LDAPAttribute("ldap.attribute.userPrincipalName", v.getAttributeValue("userPrincipalNames"))
+        LDAPAttribute.store("ldap.attribute.cn", v.getAttributeValue("cn")),
+        LDAPAttribute.store("ldap.attribute.displayName", v.getAttributeValue("displayName")),
+        LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
+        LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
+        LDAPAttribute.store("ldap.attribute.sAMAccountName", v.getAttributeValue("sAMAccountName")),
+        LDAPAttribute.store("ldap.attribute.sn", v.getAttributeValue("sn")),
+        LDAPAttribute.store("ldap.attribute.userPrincipalName", v.getAttributeValue("userPrincipalNames"))
       )
     )
     users.toSeq

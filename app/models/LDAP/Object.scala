@@ -7,6 +7,15 @@ case class LDAPAttribute(
   value: String = "-"
 )
 
+object LDAPAttribute {
+  def store(name: String, value: String): LDAPAttribute = {
+    if (value == null || value.isEmpty) {
+      return new LDAPAttribute(name, "-")
+    }
+    new LDAPAttribute(name, value)
+  }
+}
+
 //TODO: Add attributeses
 case class OrganizationUnit(
   description: LDAPAttribute,
