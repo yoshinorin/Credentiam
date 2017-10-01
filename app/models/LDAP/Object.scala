@@ -16,7 +16,7 @@ object LDAPAttribute {
   }
 }
 
-//TODO: Add attributeses
+//TODO: Clean up & Add attributeses
 case class OrganizationUnit(
   description: LDAPAttribute,
   distinguishedName: LDAPAttribute,
@@ -30,7 +30,7 @@ case class OrganizationUnit(
   whenCreated: LDAPAttribute
 )
 
-//TODO: Add attributeses
+//TODO: Clean up & Add attributeses
 case class ActiveDirectoryUser(
   cn: LDAPAttribute,
   company: LDAPAttribute,
