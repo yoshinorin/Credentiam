@@ -47,6 +47,8 @@ value = Value
 # LDAP attributes
 ldap.attribute.c = Country
 ldap.attribute.cn = Common Name
+ldap.attribute.company = Company
+ldap.attribute.department = Department
 ldap.attribute.description = Description
 ldap.attribute.displayName = Display Name
 ldap.attribute.distinguishedName = Distinguished Name

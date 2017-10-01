@@ -25,12 +25,17 @@ class ActiveDirectoryService extends LDAPService {
     sr.foreach(v =>
       users += ActiveDirectoryUser(
         LDAPAttribute.store("ldap.attribute.cn", v.getAttributeValue("cn")),
+        LDAPAttribute.store("ldap.attribute.company", v.getAttributeValue("company")),
+        LDAPAttribute.store("ldap.attribute.department", v.getAttributeValue("department")),
+        LDAPAttribute.store("ldap.attribute.description", v.getAttributeValue("description")),
         LDAPAttribute.store("ldap.attribute.displayName", v.getAttributeValue("displayName")),
         LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
         LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
         LDAPAttribute.store("ldap.attribute.sAMAccountName", v.getAttributeValue("sAMAccountName")),
         LDAPAttribute.store("ldap.attribute.sn", v.getAttributeValue("sn")),
-        LDAPAttribute.store("ldap.attribute.userPrincipalName", v.getAttributeValue("userPrincipalNames"))
+        LDAPAttribute.store("ldap.attribute.userPrincipalName", v.getAttributeValue("userPrincipalNames")),
+        LDAPAttribute.store("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
+        LDAPAttribute.store("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
       )
     )
     users.toSeq

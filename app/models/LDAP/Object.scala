@@ -33,10 +33,15 @@ case class OrganizationUnit(
 //TODO: Add attributeses
 case class ActiveDirectoryUser(
   cn: LDAPAttribute,
+  company: LDAPAttribute,
+  department: LDAPAttribute,
+  description: LDAPAttribute,
   displayName: LDAPAttribute,
   distinguishedName: LDAPAttribute,
   name: LDAPAttribute,
   sAMAccountName: LDAPAttribute,
   sn: LDAPAttribute,
-  userPrincipalName: LDAPAttribute
+  userPrincipalName: LDAPAttribute,
+  whenChanged: LDAPAttribute,
+  whenCreated: LDAPAttribute
 )
