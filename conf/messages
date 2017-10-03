@@ -28,6 +28,16 @@ view.common.computers = Computers
 view.common.home = Home
 view.common.organization = Organization
 view.common.organizations = Organizations
+view.common.search = Search
+
+# Search relations
+search.any = Any
+search.contains = Contains
+search.excludes = Excludes
+search.startswith = StartsWith
+search.endswith = EndsWith
+search.equal = Equal
+search.notequal = NotEqual
 
 # Administration area
 admin.area = Admin Area
