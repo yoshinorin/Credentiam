@@ -106,18 +106,7 @@ trait LDAPService extends LDAPConnectionProvider {
   def mapOrganizationUnit(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
     var ous = mutable.ListBuffer.empty[OrganizationUnit]
     sr.foreach(v =>
-      ous += OrganizationUnit(
-        LDAPAttribute.store("ldap.attribute.description", v.getAttributeValue("description")),
-        LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
-        LDAPAttribute.store("ldap.attribute.l", v.getAttributeValue("l")),
-        LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
-        LDAPAttribute.store("ldap.attribute.ou", v.getAttributeValue("ou")),
-        LDAPAttribute.store("ldap.attribute.postalCode", v.getAttributeValue("postalCode")),
-        LDAPAttribute.store("ldap.attribute.st", v.getAttributeValue("st")),
-        LDAPAttribute.store("ldap.attribute.street", v.getAttributeValue("street")),
-        LDAPAttribute.store("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
-        LDAPAttribute.store("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
-      )
+      ous += OrganizationUnit.store(v)
     )
     ous.toSeq
   }
@@ -159,15 +148,7 @@ trait LDAPService extends LDAPConnectionProvider {
   def mapComputer(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[Computer] = {
     var computers = mutable.ListBuffer.empty[Computer]
     sr.foreach(v =>
-      computers += Computer(
-        LDAPAttribute.store("ldap.attribute.cn", v.getAttributeValue("cn")),
-        LDAPAttribute.store("ldap.attribute.description", v.getAttributeValue("description")),
-        LDAPAttribute.store("ldap.attribute.distinguishedName", v.getAttributeValue("distinguishedName")),
-        LDAPAttribute.store("ldap.attribute.managedBy", v.getAttributeValue("managedBy")),
-        LDAPAttribute.store("ldap.attribute.name", v.getAttributeValue("name")),
-        LDAPAttribute.store("ldap.attribute.whenChanged", v.getAttributeValue("whenChanged")),
-        LDAPAttribute.store("ldap.attribute.whenCreated", v.getAttributeValue("whenCreated"))
-      )
+      computers += Computer.store(v)
     )
     computers.toSeq
   }

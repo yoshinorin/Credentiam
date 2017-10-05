@@ -1,5 +1,7 @@
 package app.models
 
+import com.unboundid.ldap.sdk.SearchResultEntry
+
 case class LDAPAttribute(
   name: String,
   //TODO: Should another type. ex) byte
@@ -30,6 +32,23 @@ case class OrganizationUnit(
   whenCreated: LDAPAttribute
 )
 
+object OrganizationUnit {
+  def store(sr: SearchResultEntry): OrganizationUnit = {
+    new OrganizationUnit(
+      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
+      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
+      LDAPAttribute.store("ldap.attribute.l", sr.getAttributeValue("l")),
+      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
+      LDAPAttribute.store("ldap.attribute.ou", sr.getAttributeValue("ou")),
+      LDAPAttribute.store("ldap.attribute.postalCode", sr.getAttributeValue("postalCode")),
+      LDAPAttribute.store("ldap.attribute.st", sr.getAttributeValue("st")),
+      LDAPAttribute.store("ldap.attribute.street", sr.getAttributeValue("street")),
+      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
+      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+    )
+  }
+}
+
 //TODO: Clean up & Add attributeses
 case class ActiveDirectoryUser(
   cn: LDAPAttribute,
@@ -46,6 +65,25 @@ case class ActiveDirectoryUser(
   whenCreated: LDAPAttribute
 )
 
+object ActiveDirectoryUser {
+  def store(sr: SearchResultEntry): ActiveDirectoryUser = {
+    new ActiveDirectoryUser(
+      LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn")),
+      LDAPAttribute.store("ldap.attribute.company", sr.getAttributeValue("company")),
+      LDAPAttribute.store("ldap.attribute.department", sr.getAttributeValue("department")),
+      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
+      LDAPAttribute.store("ldap.attribute.displayName", sr.getAttributeValue("displayName")),
+      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
+      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
+      LDAPAttribute.store("ldap.attribute.sAMAccountName", sr.getAttributeValue("sAMAccountName")),
+      LDAPAttribute.store("ldap.attribute.sn", sr.getAttributeValue("sn")),
+      LDAPAttribute.store("ldap.attribute.userPrincipalName", sr.getAttributeValue("userPrincipalNames")),
+      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
+      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+    )
+  }
+}
+
 //TODO: Clean up & Add attributeses
 case class Computer(
   cn: LDAPAttribute,
@@ -56,3 +94,17 @@ case class Computer(
   whenChanged: LDAPAttribute,
   whenCreated: LDAPAttribute
 )
+
+object Computer {
+  def store(sr: SearchResultEntry): Computer = {
+    new Computer(
+      LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn")),
+      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
+      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
+      LDAPAttribute.store("ldap.attribute.managedBy", sr.getAttributeValue("managedBy")),
+      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
+      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
+      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+    )
+  }
+}
