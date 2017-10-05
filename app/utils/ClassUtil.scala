@@ -10,7 +10,7 @@ object ClassUtil {
    * @param Class[T]
    * @return Array[String] of class fields
    */
-  def getFields[T](implicit tag: ClassTag[T]): Array[String] = {
+  def getFields[T](implicit tag: ClassTag[T]): Seq[String] = {
     tag.runtimeClass.getDeclaredFields.map(_.getName)
   }
 

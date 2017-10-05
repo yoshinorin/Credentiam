@@ -53,7 +53,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @param attributes Attributes to be acquired.
    * @return SearchResultEntries
    */
-  def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Array[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+  def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Seq[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
