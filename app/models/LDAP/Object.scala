@@ -19,92 +19,48 @@ object LDAPAttribute {
 }
 
 //TODO: Clean up & Add attributeses
-case class OrganizationUnit(
-  description: LDAPAttribute,
-  distinguishedName: LDAPAttribute,
-  l: LDAPAttribute,
-  name: LDAPAttribute,
-  ou: LDAPAttribute,
-  postalCode: LDAPAttribute,
-  st: LDAPAttribute,
-  street: LDAPAttribute,
-  whenChanged: LDAPAttribute,
-  whenCreated: LDAPAttribute
-)
+class OrganizationUnit(sr: SearchResultEntry) {
 
-object OrganizationUnit {
-  def store(sr: SearchResultEntry): OrganizationUnit = {
-    new OrganizationUnit(
-      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
-      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
-      LDAPAttribute.store("ldap.attribute.l", sr.getAttributeValue("l")),
-      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
-      LDAPAttribute.store("ldap.attribute.ou", sr.getAttributeValue("ou")),
-      LDAPAttribute.store("ldap.attribute.postalCode", sr.getAttributeValue("postalCode")),
-      LDAPAttribute.store("ldap.attribute.st", sr.getAttributeValue("st")),
-      LDAPAttribute.store("ldap.attribute.street", sr.getAttributeValue("street")),
-      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
-      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
-    )
-  }
+  val description: LDAPAttribute = LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description"))
+  val distinguishedName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val l: LDAPAttribute = LDAPAttribute.store("ldap.attribute.l", sr.getAttributeValue("l"))
+  val name: LDAPAttribute = LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
+  val ou: LDAPAttribute = LDAPAttribute.store("ldap.attribute.ou", sr.getAttributeValue("ou"))
+  val postalCode: LDAPAttribute = LDAPAttribute.store("ldap.attribute.postalCode", sr.getAttributeValue("postalCode"))
+  val st: LDAPAttribute = LDAPAttribute.store("ldap.attribute.st", sr.getAttributeValue("st"))
+  val street: LDAPAttribute = LDAPAttribute.store("ldap.attribute.street", sr.getAttributeValue("street"))
+  val whenChanged: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged"))
+  val whenCreated: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+
 }
 
 //TODO: Clean up & Add attributeses
-case class ActiveDirectoryUser(
-  cn: LDAPAttribute,
-  company: LDAPAttribute,
-  department: LDAPAttribute,
-  description: LDAPAttribute,
-  displayName: LDAPAttribute,
-  distinguishedName: LDAPAttribute,
-  name: LDAPAttribute,
-  sAMAccountName: LDAPAttribute,
-  sn: LDAPAttribute,
-  userPrincipalName: LDAPAttribute,
-  whenChanged: LDAPAttribute,
-  whenCreated: LDAPAttribute
-)
+class ActiveDirectoryUser(sr: SearchResultEntry) {
 
-object ActiveDirectoryUser {
-  def store(sr: SearchResultEntry): ActiveDirectoryUser = {
-    new ActiveDirectoryUser(
-      LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn")),
-      LDAPAttribute.store("ldap.attribute.company", sr.getAttributeValue("company")),
-      LDAPAttribute.store("ldap.attribute.department", sr.getAttributeValue("department")),
-      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
-      LDAPAttribute.store("ldap.attribute.displayName", sr.getAttributeValue("displayName")),
-      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
-      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
-      LDAPAttribute.store("ldap.attribute.sAMAccountName", sr.getAttributeValue("sAMAccountName")),
-      LDAPAttribute.store("ldap.attribute.sn", sr.getAttributeValue("sn")),
-      LDAPAttribute.store("ldap.attribute.userPrincipalName", sr.getAttributeValue("userPrincipalNames")),
-      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
-      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
-    )
-  }
+  val cn: LDAPAttribute = LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn"))
+  val company: LDAPAttribute = LDAPAttribute.store("ldap.attribute.company", sr.getAttributeValue("company"))
+  val department: LDAPAttribute = LDAPAttribute.store("ldap.attribute.department", sr.getAttributeValue("department"))
+  val description: LDAPAttribute = LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description"))
+  val displayName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.displayName", sr.getAttributeValue("displayName"))
+  val distinguishedName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val name: LDAPAttribute = LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
+  val sAMAccountName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.sAMAccountName", sr.getAttributeValue("sAMAccountName"))
+  val sn: LDAPAttribute = LDAPAttribute.store("ldap.attribute.sn", sr.getAttributeValue("sn"))
+  val userPrincipalName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.userPrincipalName", sr.getAttributeValue("userPrincipalNames"))
+  val whenChanged: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged"))
+  val whenCreated: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+
 }
 
 //TODO: Clean up & Add attributeses
-case class Computer(
-  cn: LDAPAttribute,
-  description: LDAPAttribute,
-  distinguishedName: LDAPAttribute,
-  managedBy: LDAPAttribute,
-  name: LDAPAttribute,
-  whenChanged: LDAPAttribute,
-  whenCreated: LDAPAttribute
-)
+class Computer(sr: SearchResultEntry) {
 
-object Computer {
-  def store(sr: SearchResultEntry): Computer = {
-    new Computer(
-      LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn")),
-      LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description")),
-      LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName")),
-      LDAPAttribute.store("ldap.attribute.managedBy", sr.getAttributeValue("managedBy")),
-      LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name")),
-      LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged")),
-      LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
-    )
-  }
+  val cn: LDAPAttribute = LDAPAttribute.store("ldap.attribute.cn", sr.getAttributeValue("cn"))
+  val description: LDAPAttribute = LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description"))
+  val distinguishedName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val managedBy: LDAPAttribute = LDAPAttribute.store("ldap.attribute.managedBy", sr.getAttributeValue("managedBy"))
+  val name: LDAPAttribute = LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
+  val whenChanged: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged"))
+  val whenCreated: LDAPAttribute = LDAPAttribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+
 }

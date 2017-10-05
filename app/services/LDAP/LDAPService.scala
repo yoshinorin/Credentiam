@@ -106,7 +106,7 @@ trait LDAPService extends LDAPConnectionProvider {
   def mapOrganizationUnit(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
     var ous = mutable.ListBuffer.empty[OrganizationUnit]
     sr.foreach(v =>
-      ous += OrganizationUnit.store(v)
+      ous += new OrganizationUnit(v)
     )
     ous.toSeq
   }
@@ -148,7 +148,7 @@ trait LDAPService extends LDAPConnectionProvider {
   def mapComputer(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[Computer] = {
     var computers = mutable.ListBuffer.empty[Computer]
     sr.foreach(v =>
-      computers += Computer.store(v)
+      computers += new Computer(v)
     )
     computers.toSeq
   }

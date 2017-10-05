@@ -23,7 +23,7 @@ class ActiveDirectoryService extends LDAPService {
   def mapActiveDirectoryUser(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[ActiveDirectoryUser] = {
     var users = mutable.ListBuffer.empty[ActiveDirectoryUser]
     sr.foreach(v =>
-      users += ActiveDirectoryUser.store(v)
+      users += new ActiveDirectoryUser(v)
     )
     users.toSeq
   }
