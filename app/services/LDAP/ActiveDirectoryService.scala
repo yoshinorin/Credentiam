@@ -37,6 +37,7 @@ class ActiveDirectoryService extends LDAPService {
    */
   override def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser] = {
     search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getFields[ActiveDirectoryUser]) match {
+    search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ActiveDirectoryUser]) match {
       case Some(sr) => Some(mapActiveDirectoryUser(sr).head)
       case None => None
     }

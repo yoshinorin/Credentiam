@@ -1,17 +1,22 @@
 package utils
 
-import scala.reflect._
+import scala.reflect.runtime.{ universe => runtimeUniverse }
+import scala.reflect.runtime.universe._
+import scala.reflect.ClassTag
+import app.models.LDAPAttribute
 
 object ClassUtil {
 
   /**
-   * Get all fields of Class.
+   * Get LDAPAttribute type fields name from class.
    *
    * @param Class[T]
-   * @return Array[String] of class fields
+   * @return Seq[String] of class fields
    */
-  def getFields[T](implicit tag: ClassTag[T]): Seq[String] = {
-    tag.runtimeClass.getDeclaredFields.map(_.getName)
+  def getLDAPAttributeFields[T](implicit tag: TypeTag[T]): Seq[String] = {
+    runtimeUniverse.typeOf[T].members.collect {
+      case member: LDAPAttribute => member.toString
+    }.toSeq
   }
 
 }

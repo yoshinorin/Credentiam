@@ -5,8 +5,7 @@ import scala.collection.mutable
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
-
-import app.models.{ LDAPAttribute, OrganizationUnit, ActiveDirectoryUser, Computer }
+import app.models.{ ActiveDirectoryUser, Computer, LDAPAttribute, OrganizationUnit }
 import utils.ClassUtil
 import utils.types.UserId
 
@@ -119,7 +118,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @return OrganizationUnits.
    */
   def getOrganization(connectionUser: UserId, dn: String): Option[app.models.OrganizationUnit] = {
-    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getFields[OrganizationUnit]) match {
+    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapOrganizationUnit(sr).head)
       case None => None
     }
@@ -132,7 +131,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @return OrganizationUnits.
    */
   def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
-    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getFields[OrganizationUnit]) match {
+    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapOrganizationUnit(sr))
       case None => None
     }
@@ -161,7 +160,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @return Computer.
    */
   def getComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
-    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getFields[Computer]) match {
+    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[Computer]) match {
       case Some(sr) => Some(mapComputer(sr).head)
       case None => None
     }
@@ -174,7 +173,7 @@ trait LDAPService extends LDAPConnectionProvider {
    * @return Computers.
    */
   def getComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
-    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getFields[Computer]) match {
+    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[Computer]) match {
       case Some(sr) => Some(mapComputer(sr))
       case None => None
     }
