@@ -2,7 +2,6 @@ package utils
 
 import scala.reflect.runtime.{ universe => runtimeUniverse }
 import scala.reflect.runtime.universe._
-import scala.reflect.ClassTag
 import app.models.LDAPAttribute
 
 object ClassUtil {
