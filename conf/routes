@@ -17,6 +17,9 @@ GET         /organizations                   app.controllers.LDAPController.orga
 # For Computer
 GET         /computers                       app.controllers.LDAPController.computers
 
+# For Search
+GET         /search                          app.controllers.LDAPController.search
+
 # For administrator page
 GET         /admin                           app.controllers.AdminAreaController.index
 
