@@ -8,20 +8,20 @@ import app.models.UserIdentify
 import app.models.UserDAOImpl._
 import utils.types.UserId
 /**
-  * The companion object.
-  */
+ * The companion object.
+ */
 object UserDAOImpl {
 
   /**
-    * The list of users.
-    */
+   * The list of users.
+   */
   val users: mutable.HashMap[UserId, UserIdentify] = mutable.HashMap()
 
 }
 
 /**
-  * Give access to the user object.
-  */
+ * Give access to the user object.
+ */
 class UserDAOImpl extends UserDAO {
 
   def find(loginInfo: LoginInfo) = Future.successful(
