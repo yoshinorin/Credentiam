@@ -37,7 +37,10 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return Boolean
    */
   def isAdmin(uid: UserId): Boolean = {
-    if (uid == administratorDN) true else false
+    getDN(uid) match {
+      case Some(dn) => if (dn == administratorDN) true else false
+      case None => false
+    }
   }
 
   /**
