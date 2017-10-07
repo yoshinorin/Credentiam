@@ -14,7 +14,7 @@ object LDAPService {
   val configuration = ConfigFactory.load
   val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")
 
-  val server: LDAPService = {
+  val server = {
     if (isActiveDirectory) {
       new ActiveDirectoryService()
     } else {
@@ -25,7 +25,7 @@ object LDAPService {
 
 }
 
-trait LDAPService extends LDAPConnectionProvider {
+trait LDAPService[T] extends LDAPConnectionProvider {
 
   /**
    * User bind with LDAP server.
@@ -184,8 +184,8 @@ trait LDAPService extends LDAPConnectionProvider {
    *
    * @param connectionUser The current user id.
    * @param targetUid The target user's uid.
-   * @return ActiveDirectoryUser //TODO: Change abstractly.
+   * @return T
    */
-  def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser]
+  def getUser(connectionUser: UserId, targetUid: String): Option[T]
 
 }

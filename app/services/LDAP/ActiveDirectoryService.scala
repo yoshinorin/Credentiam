@@ -11,7 +11,7 @@ import utils.ClassUtil
 import utils.types.UserId
 
 @Singleton
-class ActiveDirectoryService extends LDAPService {
+class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
 
   /**
    * Mapping SearchResultEntries to ActiveDirectoryUsers
@@ -35,8 +35,7 @@ class ActiveDirectoryService extends LDAPService {
    * @param targetUid The target user's uid.
    * @return ActiveDirectoryUser
    */
-  override def getUser(connectionUser: UserId, targetUid: String): Option[ActiveDirectoryUser] = {
-    search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getFields[ActiveDirectoryUser]) match {
+  override def getUser(connectionUser: UserId, targetUid: String): Option[app.models.ActiveDirectoryUser] = {
     search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ActiveDirectoryUser]) match {
       case Some(sr) => Some(mapActiveDirectoryUser(sr).head)
       case None => None
