@@ -27,6 +27,19 @@ object LDAPService {
 
 trait LDAPService[T] extends LDAPConnectionProvider {
 
+  val configuration = ConfigFactory.load
+  val administratorDN = configuration.getString("ldap.administratorDN")
+
+  /**
+   * Check the user is ldap server's administrator or not.
+   *
+   * @param uid
+   * @return Boolean
+   */
+  def isAdmin(uid: UserId): Boolean = {
+    if (uid == administratorDN) true else false
+  }
+
   /**
    * User bind with LDAP server.
    *

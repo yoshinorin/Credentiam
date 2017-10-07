@@ -72,7 +72,7 @@ class AuthController @Inject() (
           if (LDAPService.server.bind(userId, data.password) == ResultCode.SUCCESS) {
             val loginInfo = LoginInfo(CredentialsProvider.ID, data.uid)
             val authInfo = passwordHasherRegistry.current.hash(data.password)
-            val user = UserIdentify(userId, loginInfo)
+            val user = UserIdentify(userId, loginInfo, LDAPService.server.isAdmin(userId))
 
             for {
               user <- userService.save(user)
