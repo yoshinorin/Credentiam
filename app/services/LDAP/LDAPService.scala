@@ -16,7 +16,7 @@ object LDAPService {
 
   val server = {
     if (isActiveDirectory) {
-      new ActiveDirectoryService()
+      new ActiveDirectoryService
     } else {
       //TODO: OpenLDAP support
       new ActiveDirectoryService
