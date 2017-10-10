@@ -14,21 +14,6 @@ import utils.types.UserId
 class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
 
   /**
-   * Mapping SearchResultEntries to ActiveDirectoryUsers
-   *
-   * @param SearchResultEntries
-   * @return ActiveDirectoryUsers
-   * TODO: More Abstractly
-   */
-  def mapActiveDirectoryUser(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[ActiveDirectoryUser] = {
-    var users = mutable.ListBuffer.empty[ActiveDirectoryUser]
-    sr.foreach(v =>
-      users += new ActiveDirectoryUser(v)
-    )
-    users.toSeq
-  }
-
-  /**
    * Get user information by uid.
    *
    * @param connectionUser The current user id.
