@@ -2,6 +2,7 @@ package app.services.ldap
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
+import scala.reflect._
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
@@ -89,6 +90,20 @@ trait LDAPService[T] extends LDAPConnectionProvider {
       }
       case None => None
     }
+  }
+
+  /**
+    * Map SearchResultEntries to specify LDAP classes.
+    *
+    * @param SearchResultEntries
+    * @return Specify LDAP classes.
+    */
+  def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
+    var t = mutable.ListBuffer.empty[T]
+    sr.foreach(v =>
+      t += cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T]
+    )
+    t.toSeq
   }
 
   /**
