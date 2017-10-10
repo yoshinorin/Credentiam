@@ -93,11 +93,11 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-    * Map SearchResultEntries to specify LDAP classes.
-    *
-    * @param SearchResultEntries
-    * @return Specify LDAP classes.
-    */
+   * Map SearchResultEntries to specify LDAP classes.
+   *
+   * @param SearchResultEntries
+   * @return Specify LDAP classes.
+   */
   def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
     var t = mutable.ListBuffer.empty[T]
     sr.foreach(v =>
@@ -127,21 +127,6 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Mapping SearchResultEntries to OrganizationUnits
-   *
-   * @param SearchResultEntries
-   * @return OrganizationUnits.
-   * TODO: More Abstractly
-   */
-  def mapOrganizationUnit(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[OrganizationUnit] = {
-    var ous = mutable.ListBuffer.empty[OrganizationUnit]
-    sr.foreach(v =>
-      ous += new OrganizationUnit(v)
-    )
-    ous.toSeq
-  }
-
-  /**
    * Get Organization
    *
    * @param connectionUser The current user id.
@@ -150,7 +135,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def getOrganization(connectionUser: UserId, dn: String): Option[app.models.OrganizationUnit] = {
     search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
-      case Some(sr) => Some(mapOrganizationUnit(sr).head)
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[OrganizationUnit](sr).head)
       case None => None
     }
   }
@@ -163,24 +148,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
     search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
-      case Some(sr) => Some(mapOrganizationUnit(sr))
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[OrganizationUnit](sr))
       case None => None
     }
-  }
-
-  /**
-   * Mapping SearchResultEntries to Computers
-   *
-   * @param SearchResultEntries
-   * @return Computers.
-   * TODO: More Abstractly
-   */
-  def mapComputer(sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry]): Seq[Computer] = {
-    var computers = mutable.ListBuffer.empty[Computer]
-    sr.foreach(v =>
-      computers += new Computer(v)
-    )
-    computers.toSeq
   }
 
   /**
@@ -192,7 +162,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def getComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
     search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[Computer]) match {
-      case Some(sr) => Some(mapComputer(sr).head)
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr).head)
       case None => None
     }
   }
@@ -205,7 +175,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def getComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
     search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[Computer]) match {
-      case Some(sr) => Some(mapComputer(sr))
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr))
       case None => None
     }
   }
