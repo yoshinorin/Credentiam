@@ -39,7 +39,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return Boolean
    */
   def isAdmin(uid: UserId): Boolean = {
-    getDN(uid) match {
+    findDN(uid) match {
       case Some(dn) => if (dn == administratorDN) true else false
       case None => false
     }
@@ -53,7 +53,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return LDAP result code.
    */
   def bind(uid: UserId, password: String): ResultCode = {
-    getDN(uid) match {
+    findDN(uid) match {
       case Some(dn) => {
         createConnectionByUser(uid: UserId, dn: String, password: String)
         ResultCode.SUCCESS
@@ -71,7 +71,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return SearchResultEntries
    */
   protected def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Seq[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
-    getConnectionByUser(connectionUser) match {
+    findConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
           uc.connection.search(new SearchRequest(
@@ -108,11 +108,12 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get DN by uid.
+   * Find dn by uid.
    *
    * @param connectionUser The current user id.
+   * @return dn or none.
    */
-  def getDN(uid: UserId): Option[String] = {
+  def findDN(uid: UserId): Option[String] = {
     val searchResult = {
       defaultConnection.search(new SearchRequest(
         baseDN,
@@ -128,12 +129,12 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get specific mapped LDAP object class.
+   * Find specific mapped LDAP object class.
    *
    * @param connectionUser The current user id.
    * @return Specify LDAP object class or none.
    */
-  def getByDN[T](connectionUser: UserId, dn: String)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[T] = {
+  def findByDN[T](connectionUser: UserId, dn: String)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[T] = {
     search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[T]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[T](sr).head)
       case None => None
@@ -141,12 +142,12 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get Organizations
+   * Find mapped OrganizationUnit classes.
    *
    * @param connectionUser The current user id.
-   * @return OrganizationUnits.
+   * @return OrganizationUnits classes or none.
    */
-  def getOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
+  def findOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
     search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[OrganizationUnit](sr))
       case None => None
@@ -154,13 +155,13 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get Computer.
+   * Find mapped computer class.
    *
    * @param connectionUser The current user id.
    * @param dn The current user id.
-   * @return Computer.
+   * @return Computer class or none.
    */
-  def getComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
+  def findComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
     search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[Computer]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr).head)
       case None => None
@@ -168,12 +169,12 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get Computers.
+   * Find mapped computer classes.
    *
    * @param connectionUser The current user id.
-   * @return Computers.
+   * @return Computer classes or none.
    */
-  def getComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
+  def findComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
     search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[Computer]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr))
       case None => None
@@ -181,12 +182,12 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Get user information by uid.
+   * Find mapped user class.
    *
    * @param connectionUser The current user id.
-   * @param targetUid The target user's uid.
+   * @param targetUid The target uid.
    * @return T
    */
-  def getUser(connectionUser: UserId, targetUid: String): Option[T]
+  def findUser(connectionUser: UserId, targetUid: String): Option[T]
 
 }

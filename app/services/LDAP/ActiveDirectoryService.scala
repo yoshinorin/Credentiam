@@ -14,13 +14,13 @@ import utils.types.UserId
 class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
 
   /**
-   * Get user information by uid.
+   * Find mapped ActiveDirectoryUser class.
    *
    * @param connectionUser The current user id.
-   * @param targetUid The target user's uid.
-   * @return ActiveDirectoryUser
+   * @param targetUid The target uid.
+   * @return ActiveDirectoryUser class or none.
    */
-  override def getUser(connectionUser: UserId, targetUid: String): Option[app.models.ActiveDirectoryUser] = {
+  override def findUser(connectionUser: UserId, targetUid: String): Option[app.models.ActiveDirectoryUser] = {
     search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ActiveDirectoryUser]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[ActiveDirectoryUser](sr).head)
       case None => None

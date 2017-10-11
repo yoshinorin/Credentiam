@@ -27,17 +27,17 @@ class LDAPController @Inject() (
 
   def organization(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.getByDN[OrganizationUnit](request.identity.userID, dn)))))
+    Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.findByDN[OrganizationUnit](request.identity.userID, dn)))))
   }
 
   def organizations = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.organizations("view.common.organizations", request.identity, (LDAPService.server.getOrganizations(request.identity.userID)))))
+    Future.successful(Ok(views.html.organizations("view.common.organizations", request.identity, (LDAPService.server.findOrganizations(request.identity.userID)))))
   }
 
   def computers = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.computers("view.common.computers", request.identity, (LDAPService.server.getComputers(request.identity.userID)))))
+    Future.successful(Ok(views.html.computers("view.common.computers", request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
   }
 
 }

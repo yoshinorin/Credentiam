@@ -69,9 +69,9 @@ trait LDAPConnectionProvider {
   }
 
   /**
-   * Get Connection by uid.
+   * Find Connection by uid.
    */
-  def getConnectionByUser(uid: UserId): Option[UserConnection] = {
+  def findConnectionByUser(uid: UserId): Option[UserConnection] = {
     connections.get(uid)
   }
 
