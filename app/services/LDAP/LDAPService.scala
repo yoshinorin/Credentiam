@@ -70,7 +70,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @param attributes Attributes to be acquired.
    * @return SearchResultEntries
    */
-  def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Seq[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
+  protected def search(connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter, attributes: Seq[String]): Option[Seq[com.unboundid.ldap.sdk.SearchResultEntry]] = {
     getConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
@@ -99,7 +99,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @param SearchResultEntries
    * @return Specify LDAP classes.
    */
-  def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
+  protected def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
     var t = mutable.ListBuffer.empty[T]
     sr.foreach(v =>
       t += cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T]
