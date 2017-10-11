@@ -9,6 +9,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
 
+import app.models.{ ActiveDirectoryUser, Computer, LDAPAttribute, OrganizationUnit }
 import app.services.ldap.LDAPService
 import utils.auth.DefaultEnv
 
@@ -26,7 +27,7 @@ class LDAPController @Inject() (
 
   def organization(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.getOrganization(request.identity.userID, dn)))))
+    Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.getByDN[OrganizationUnit](request.identity.userID, dn)))))
   }
 
   def organizations = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
