@@ -11,10 +11,10 @@ case class LDAPAttribute(
 
 object LDAPAttribute {
   def store(name: String, value: String): LDAPAttribute = {
-    if (value == null || value.isEmpty) {
-      return new LDAPAttribute(name, "-")
+    Option(value) match {
+      case Some(v) => new LDAPAttribute(name, v)
+      case None => new LDAPAttribute(name, "-")
     }
-    new LDAPAttribute(name, value)
   }
 }
 
