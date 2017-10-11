@@ -3,6 +3,7 @@ package app.services.ldap
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.reflect._
+import scala.reflect.runtime.universe._
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
@@ -123,6 +124,19 @@ trait LDAPService[T] extends LDAPConnectionProvider {
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)
       case true => None
+    }
+  }
+
+  /**
+   * Get specific mapped LDAP object class.
+   *
+   * @param connectionUser The current user id.
+   * @return Specify LDAP object class or none.
+   */
+  def getByDN[T](connectionUser: UserId, dn: String)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[T] = {
+    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[T]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[T](sr).head)
+      case None => None
     }
   }
 
