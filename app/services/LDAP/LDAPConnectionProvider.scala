@@ -21,12 +21,9 @@ trait LDAPConnectionProvider {
   protected val uidAttributeName = configuration.getString("ldap.uidAttributeName")
 
   private val connectionOption = new LDAPConnectionOptions
-  private def getConnectionOptions: LDAPConnectionOptions = {
-    connectionOption.setConnectTimeoutMillis(configuration.getInt("ldap.connectTimeout"))
-    connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
-    connectionOption.setAbandonOnTimeout(configuration.getBoolean("ldap.abandonOnTimeOut"))
-    connectionOption
-  }
+  connectionOption.setConnectTimeoutMillis(configuration.getInt("ldap.connectTimeout"))
+  connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
+  connectionOption.setAbandonOnTimeout(configuration.getBoolean("ldap.abandonOnTimeOut"))
 
   case class UserConnection(
     dn: String,
@@ -38,7 +35,7 @@ trait LDAPConnectionProvider {
    * Create connection using by config user.
    * TODO: Support LDAPS
    */
-  protected val defaultConnection = new LDAPConnection(getConnectionOptions, host, port, bindDN, password)
+  protected val defaultConnection = new LDAPConnection(connectionOption, host, port, bindDN, password)
 
   /**
    * The connections store by user.
@@ -50,7 +47,7 @@ trait LDAPConnectionProvider {
    * TODO: Support LDAPS
    */
   def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
-    val connection = UserConnection(dn, new LDAPConnection(getConnectionOptions, host, port, dn, password))
+    val connection = UserConnection(dn, new LDAPConnection(connectionOption, host, port, dn, password))
     connections += (uid -> connection)
   }
 
