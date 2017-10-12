@@ -74,13 +74,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
     findConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
-          uc.connection.search(new SearchRequest(
-            baseDN,
-            SearchScope.SUB,
-            filter,
-            attributes: _*
-          )
-          ).getSearchEntries
+          val searchRequest = new SearchRequest(baseDN, SearchScope.SUB, filter, attributes: _*)
+          searchRequest.setSizeLimit(maxResults)
+          uc.connection.search(searchRequest).getSearchEntries
         }
         searchResult.isEmpty match {
           case false => {

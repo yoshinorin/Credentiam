@@ -17,6 +17,7 @@ trait LDAPConnectionProvider {
   private val password = configuration.getString("ldap.password")
   private val initialConnextions = configuration.getInt("ldap.initialConnextions")
   private val maxConnections = configuration.getInt("ldap.maxConnections")
+  protected val maxResults = configuration.getInt("ldap.maxResult")
   protected val baseDN = configuration.getString("ldap.baseDN")
   protected val uidAttributeName = configuration.getString("ldap.uidAttributeName")
 
