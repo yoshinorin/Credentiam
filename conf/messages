@@ -22,15 +22,15 @@ profile.title = Your Profile
 # Sign Out messages
 sign.out = Sign out
 
-# View Commons
-view.common.computer = Computer
-view.common.computers = Computers
-view.common.domain = Domain
-view.common.domains = Domains
-view.common.home = Home
-view.common.organization = Organization
-view.common.organizations = Organizations
-view.common.search = Search
+# UI Commons
+common.computer = Computer
+common.computers = Computers
+common.domain = Domain
+common.domains = Domains
+common.home = Home
+common.organization = Organization
+common.organizations = Organizations
+common.search = Search
 
 # Search relations
 search.any = Any

@@ -4,7 +4,7 @@
 
 @(user: app.models.UserIdentify, ou: Option[app.models.OrganizationUnit])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
-@main(messages("view.common.organization"), Some(user)) {
+@main(messages("common.organization"), Some(user)) {
   @ou match {
     case None => {
       <div class="centering vertical-middle">

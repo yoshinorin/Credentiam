@@ -10,7 +10,7 @@
   @user match {
     case None => {
       <div class="header-bottom-nav">
-        <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.home")</a>
+        <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("common.home")</a>
       <hr>
       </div>
     }
@@ -18,10 +18,10 @@
       <div class="header-bottom-nav">
         @request.uri match {
           case uri if uri contains "/organization/" => {
-            <a href="@app.controllers.routes.LDAPController.organizations" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.organizations")</a>
+            <a href="@app.controllers.routes.LDAPController.organizations" class="button mdl-button mdl-js-button mdl-button--primary">@messages("common.organizations")</a>
           }
           case _  => {
-            <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("view.common.home")</a>
+            <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">@messages("common.home")</a>
           }
         }
       <hr>
