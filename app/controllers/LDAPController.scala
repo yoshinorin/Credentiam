@@ -32,12 +32,12 @@ class LDAPController @Inject() (
 
   def organizations = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.organizations("view.common.organizations", request.identity, (LDAPService.server.findOrganizations(request.identity.userID)))))
+    Future.successful(Ok(views.html.organizations(request.identity, (LDAPService.server.findOrganizations(request.identity.userID)))))
   }
 
   def computers = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
-    Future.successful(Ok(views.html.computers("view.common.computers", request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
+    Future.successful(Ok(views.html.computers(request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
   }
 
 }
