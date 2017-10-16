@@ -7,7 +7,7 @@ import scala.reflect.runtime.universe._
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
-import app.models.{ ActiveDirectoryUser, Computer, LDAPAttribute, OrganizationUnit }
+import app.models.{ ActiveDirectoryUser, Computer, LDAPAttribute, LDAPObjectOverview, OrganizationUnit }
 import utils.ClassUtil
 import utils.types.UserId
 
@@ -143,9 +143,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @param connectionUser The current user id.
    * @return OrganizationUnits classes or none.
    */
-  def findOrganizations(connectionUser: UserId): Option[Seq[app.models.OrganizationUnit]] = {
-    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[OrganizationUnit]) match {
-      case Some(sr) => Some(mapSearchResultEntryToLdapClass[OrganizationUnit](sr))
+  def findOrganizations(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
+    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
       case None => None
     }
   }
@@ -170,9 +170,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @param connectionUser The current user id.
    * @return Computer classes or none.
    */
-  def findComputers(connectionUser: UserId): Option[Seq[app.models.Computer]] = {
-    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[Computer]) match {
-      case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr))
+  def findComputers(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
+    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
       case None => None
     }
   }

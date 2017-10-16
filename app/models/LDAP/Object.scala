@@ -18,6 +18,15 @@ object LDAPAttribute {
   }
 }
 
+
+class LDAPObjectOverview(sr: SearchResultEntry) {
+
+  val description: LDAPAttribute = LDAPAttribute.store("ldap.attribute.description", sr.getAttributeValue("description"))
+  val distinguishedName: LDAPAttribute = LDAPAttribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val name: LDAPAttribute = LDAPAttribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
+
+}
+
 //TODO: Clean up & Add attributeses
 class OrganizationUnit(sr: SearchResultEntry) {
 
