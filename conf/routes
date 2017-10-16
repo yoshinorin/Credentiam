@@ -10,6 +10,8 @@ GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn
 GET         /signOut                         app.controllers.AuthController.signOut
 
+GET         /domains                         app.controllers.LDAPController.domains
+
 # For Organization
 GET         /organization/:dn                app.controllers.LDAPController.organization(dn: String)
 GET         /organizations                   app.controllers.LDAPController.organizations

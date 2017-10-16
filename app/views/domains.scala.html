@@ -1,0 +1,41 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(user: app.models.UserIdentify, ldapAttributes: Option[Seq[app.models.LDAPObjectOverview]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@main(messages("view.common.domains"), Some(user)) {
+  @ldapAttributes match {
+    case None => {
+      <div class="centering vertical-middle">
+        <h5>@messages("notfound")</h5>
+      </div>
+    }
+    case Some(ldapAttributes) => {
+      <div class="centering vertical-middle">
+        <h5>@messages("view.common.domains")</h5>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+          <tr>
+            <th><h6>@messages("ldap.attribute.name")</h6></th>
+            <th><h6>@messages("ldap.attribute.description")</h6></th>
+            <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
+          </tr>
+        </thead>
+          @for(ou <- ldapAttributes) {
+            <tr>
+              <td>
+                <a href="@app.controllers.routes.LDAPController.organization(ou.distinguishedName.value)">
+                  <i class="mdl-color-text material-icons icon-small" role="presentation">domain</i>   @ou.name.value
+                </a>
+              </td>
+              <td>@ou.description.value</td>
+              <td>@ou.distinguishedName.value</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+}

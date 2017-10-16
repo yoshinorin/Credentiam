@@ -138,6 +138,20 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
+   * Find mapped Domains classes.
+   *
+   * @param connectionUser The current user id.
+   * @return Domains classes or none.
+   */
+  def findDomains(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
+    //TODO: objectCategory attributes is only for ActiveDirectory
+    search(connectionUser, Filter.create("objectCategory=domain"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
+      case None => None
+    }
+  }
+
+  /**
    * Find mapped OrganizationUnit classes.
    *
    * @param connectionUser The current user id.

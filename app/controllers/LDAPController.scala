@@ -25,6 +25,11 @@ class LDAPController @Inject() (
     Future.successful(Ok(views.html.search(request.identity)))
   }
 
+  def domains = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    //TODO: Exception handling
+    Future.successful(Ok(views.html.domains(request.identity, (LDAPService.server.findDomains(request.identity.userID)))))
+  }
+
   def organization(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
     Future.successful(Ok(views.html.organization(request.identity, (LDAPService.server.findByDN[OrganizationUnit](request.identity.userID, dn)))))
