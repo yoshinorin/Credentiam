@@ -138,10 +138,10 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find mapped Domains classes.
+   * Find Domains. (only overview)
    *
    * @param connectionUser The current user id.
-   * @return Domains classes or none.
+   * @return LDAPObjectOverview classes or none.
    */
   def findDomains(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
     search(connectionUser, Filter.createEqualityFilter("objectClass", "domain"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
@@ -151,10 +151,10 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find mapped OrganizationUnit classes.
+   * Find OrganizationUnit. (only overview)
    *
    * @param connectionUser The current user id.
-   * @return OrganizationUnits classes or none.
+   * @return LDAPObjectOverview classes or none.
    */
   def findOrganizations(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
     search(connectionUser, Filter.createEqualityFilter("objectClass", "organizationalUnit"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
@@ -164,10 +164,10 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find mapped computer classes.
+   * Find computers. (only overview)
    *
    * @param connectionUser The current user id.
-   * @return Computer classes or none.
+   * @return LDAPObjectOverview classes or none.
    */
   def findComputers(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
     //TODO: objectCategory attributes is only for ActiveDirectory
