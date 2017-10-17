@@ -165,20 +165,6 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find mapped computer class.
-   *
-   * @param connectionUser The current user id.
-   * @param dn The current user id.
-   * @return Computer class or none.
-   */
-  def findComputer(connectionUser: UserId, dn: String): Option[app.models.Computer] = {
-    search(connectionUser, Filter.createEqualityFilter("distinguishedName", dn), ClassUtil.getLDAPAttributeFields[Computer]) match {
-      case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr).head)
-      case None => None
-    }
-  }
-
-  /**
    * Find mapped computer classes.
    *
    * @param connectionUser The current user id.
