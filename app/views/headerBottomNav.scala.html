@@ -18,6 +18,9 @@
     }
     case Some(user) => {
       <div class="header-bottom-nav">
+        <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">
+          <i class="mdl-color-text material-icons" role="presentation">home</i>&nbsp;@messages("common.home")
+        </a>
         @request.uri match {
           case uri if uri contains "/organization/" => {
             <a href="@app.controllers.routes.LDAPController.organizations" class="button mdl-button mdl-js-button mdl-button--primary">
@@ -25,9 +28,7 @@
             </a>
           }
           case _  => {
-            <a href="@app.controllers.routes.ApplicationController.index" class="button mdl-button mdl-js-button mdl-button--primary">
-              <i class="mdl-color-text material-icons" role="presentation">home</i>&nbsp;@messages("common.home")
-            </a>
+            <!--do nothing -->
           }
         }
       <hr>
