@@ -125,15 +125,15 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find specific mapped LDAP object.
+   * Find specific mapped LDAP objects.
    *
    * @param connectionUser The current user id.
    * @param filter LDAP search filter.
-   * @return Specify LDAP object class or none.
+   * @return Specify LDAP object classes or none.
    */
-  def find[T](connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[T] = {
+  def find[T](connectionUser: UserId, filter: com.unboundid.ldap.sdk.Filter)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[Seq[T]] = {
     search(connectionUser, filter, ClassUtil.getLDAPAttributeFields[T]) match {
-      case Some(sr) => Some(mapSearchResultEntryToLdapClass[T](sr).head)
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[T](sr))
       case None => None
     }
   }
