@@ -30,6 +30,8 @@ common.domains = Domains
 common.home = Home
 common.organization = Organization
 common.organizations = Organizations
+common.user = User
+common.users = Users
 common.search = Search
 
 # Search relations

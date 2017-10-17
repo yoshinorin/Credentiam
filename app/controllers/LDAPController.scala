@@ -45,4 +45,9 @@ class LDAPController @Inject() (
     Future.successful(Ok(views.html.computers(request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
   }
 
+  def users = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    //TODO: Exception handling
+    Future.successful(Ok(views.html.users(request.identity, (LDAPService.server.findUsers(request.identity.userID)))))
+  }
+
 }

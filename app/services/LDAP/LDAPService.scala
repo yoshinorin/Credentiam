@@ -178,6 +178,19 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
+   * Find users. (only overview)
+   *
+   * @param connectionUser The current user id.
+   * @return LDAPObjectOverview classes or none.
+   */
+  def findUsers(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
+    search(connectionUser, Filter.createANDFilter(Filter.createEqualityFilter("objectClass", "user"), Filter.createNOTFilter(Filter.create("(objectClass=computer)"))), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
+      case None => None
+    }
+  }
+
+  /**
    * Find mapped user class.
    *
    * @param connectionUser The current user id.
