@@ -126,8 +126,11 @@ trait LDAPService[T] extends LDAPConnectionProvider {
 
   /**
    * Find specific mapped LDAP object class.
+  /**
+   * Find specific mapped LDAP object that it match distinguishedName.
    *
    * @param connectionUser The current user id.
+   * @param dn Target object's distinguishedName.
    * @return Specify LDAP object class or none.
    */
   def findByDN[T](connectionUser: UserId, dn: String)(implicit tTag: TypeTag[T], cTag: ClassTag[T]): Option[T] = {
