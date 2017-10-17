@@ -144,8 +144,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return Domains classes or none.
    */
   def findDomains(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
-    //TODO: objectCategory attributes is only for ActiveDirectory
-    search(connectionUser, Filter.create("objectCategory=domain"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+    search(connectionUser, Filter.createEqualityFilter("objectClass", "domain"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
       case None => None
     }
@@ -158,7 +157,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return OrganizationUnits classes or none.
    */
   def findOrganizations(connectionUser: UserId): Option[Seq[app.models.LDAPObjectOverview]] = {
-    search(connectionUser, Filter.create("(ou=*)"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+    search(connectionUser, Filter.createEqualityFilter("objectClass", "organizationalUnit"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
       case None => None
     }
