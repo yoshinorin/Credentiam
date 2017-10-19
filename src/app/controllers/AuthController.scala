@@ -90,7 +90,7 @@ class AuthController @Inject() (
             Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("invalid.credentials")))
           }
         } catch {
-          case e: Exception => 
+          case e: Exception =>
             logger.error(securityMaker, s"${e.getMessage}")
             Future.successful(Redirect(routes.AuthController.view()).flashing("error" -> Messages("exception")))
         }
