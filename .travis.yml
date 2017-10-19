@@ -4,5 +4,13 @@ scala:
   - 2.12.3
 jdk:
   - oraclejdk8
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot
+script:
+  - cd src
+  - find $HOME/.sbt -name "*.lock" -delete
+  - find $HOME/.ivy2 -name "ivydata-*.properties" -delete
 notifications:
   email: false
