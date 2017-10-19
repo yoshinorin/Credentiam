@@ -5,15 +5,13 @@
 This project is under construction.
 
 # Requirements
----
 
 These requierments follow with [play framework](//www.playframework.com/documentation/2.6.x/Installing).
 
 * sbt
 * Java 1.8
 
-# Instration
----
+# Install
 
 * Clone or download source code.
 * `sbt clean run`
