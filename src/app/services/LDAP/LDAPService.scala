@@ -98,8 +98,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   protected def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
     var t = mutable.ListBuffer.empty[T]
     sr.foreach(v =>
-      t += cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T]
-    )
+      t += cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T])
     t.toSeq
   }
 
@@ -114,9 +113,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
       defaultConnection.search(new SearchRequest(
         baseDN,
         SearchScope.SUB,
-        Filter.createEqualityFilter(uidAttributeName, uid.value.toString)
-      )
-      ).getSearchEntries
+        Filter.createEqualityFilter(uidAttributeName, uid.value.toString))).getSearchEntries
     }
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)

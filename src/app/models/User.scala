@@ -25,8 +25,7 @@ object UserDAOImpl {
 class UserDAOImpl extends UserDAO {
 
   def find(loginInfo: LoginInfo) = Future.successful(
-    users.find { case (_, user) => user.loginInfo == loginInfo }.map(_._2)
-  )
+    users.find { case (_, user) => user.loginInfo == loginInfo }.map(_._2))
 
   def find(userID: UserId) = Future.successful(users.get(userID))
 
@@ -50,5 +49,4 @@ trait UserDAO {
 case class UserIdentify(
   userID: UserId,
   loginInfo: LoginInfo,
-  isAdmin: Boolean
-) extends Identity
+  isAdmin: Boolean) extends Identity

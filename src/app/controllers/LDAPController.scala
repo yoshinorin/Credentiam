@@ -15,11 +15,9 @@ import utils.auth.DefaultEnv
 
 class LDAPController @Inject() (
   components: ControllerComponents,
-  silhouette: Silhouette[DefaultEnv]
-)(
+  silhouette: Silhouette[DefaultEnv])(
   implicit
-  assets: AssetsFinder
-) extends AbstractController(components) with I18nSupport {
+  assets: AssetsFinder) extends AbstractController(components) with I18nSupport {
 
   def search = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     Future.successful(Ok(views.html.search(request.identity)))

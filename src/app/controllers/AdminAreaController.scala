@@ -18,11 +18,9 @@ import utils.auth.{ DefaultEnv, WithAdmin }
 class AdminAreaController @Inject() (
   components: ControllerComponents,
   credentialsProvider: CredentialsProvider,
-  silhouette: Silhouette[DefaultEnv]
-)(
+  silhouette: Silhouette[DefaultEnv])(
   implicit
-  assets: AssetsFinder
-) extends AbstractController(components) with I18nSupport {
+  assets: AssetsFinder) extends AbstractController(components) with I18nSupport {
 
   def index = silhouette.SecuredAction(WithAdmin[DefaultEnv#A](CredentialsProvider.ID)).async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     Future.successful(Ok(views.html.admin.index(request.identity)))
