@@ -1,0 +1,7 @@
+[core]
+  autocrlf = input
+  fileMode = false
+  ignorecase = false
+  whitespace = trailing-space
+[i18n]
+  filesEncoding = utf-8
