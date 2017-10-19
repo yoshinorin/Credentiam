@@ -103,7 +103,7 @@ class AuthController @Inject() (
     authInfoRepository.remove[PasswordInfo](request.identity.loginInfo)
     val result = Redirect(app.controllers.routes.ApplicationController.index())
     silhouette.env.eventBus.publish(LogoutEvent(request.identity, request))
-    logger.info(securityMaker, s"Sign Out: ${request.identity.userID}")
+    logger.info(securityMaker, s"Sign Out: ${request.identity.userID.value.toString}")
     silhouette.env.authenticatorService.discard(request.authenticator, result)
   }
 
