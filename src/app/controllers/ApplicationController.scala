@@ -26,6 +26,10 @@ class ApplicationController @Inject() (
     Ok(views.html.about())
   }
 
+  def help = Action { implicit request =>
+    Ok(views.html.help())
+  }
+
   def profile = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
     Future.successful(Ok(views.html.user("profile.title", request.identity, (LDAPService.server.findUser(request.identity.userID, request.identity.userID.value.toString)))))
