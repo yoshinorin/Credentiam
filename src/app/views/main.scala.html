@@ -36,7 +36,9 @@
                     <i class="material-icons icon-small">settings</i><a href="@app.controllers.routes.AdminAreaController.index">&nbsp;&nbsp;@messages("admin.area")</a>
                   </li>
                 }
-                <hr>
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                  <i class="material-icons icon-small">help_outline</i><a href="@app.controllers.routes.ApplicationController.about">&nbsp;&nbsp;About</a>
+                </li>
                 <li class="mdl-menu__item mdl-js-ripple-effect">
                   <i class="material-icons icon-small">power_settings_new</i><a href="@app.controllers.routes.AuthController.signOut">&nbsp;&nbsp;@messages("sign.out")</a>
                 </li>
