@@ -125,6 +125,11 @@ i.icon-small {
   color: white;
 }
 
+.mdl-menu__item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .title {
   color: white !important;
 }
