@@ -79,20 +79,24 @@
           @content
         </main>
       </div>
-      <footer class="mdl-mini-footer">
-        <div class="footer-link">
-        <ul class="mdl-mini-footer__link-list">
-          <li>
-            <a href="@app.controllers.routes.ApplicationController.about">About</a>
-          </li>
-          <li>
-            <a href="@app.controllers.routes.ApplicationController.help">Help</a>
-          </li>
-          <li>
-            <a href="https://github.com/YoshinoriN/Credentiam" target="_blank">GitHub</a>
-          </li>
-        </ul>
-        </div>
-      </footer>
+      @user.map { u =>
+        <!-- Nothig -->
+      }.getOrElse {
+        <footer class="mdl-mini-footer">
+          <div class="footer-link">
+          <ul class="mdl-mini-footer__link-list">
+            <li>
+              <a href="@app.controllers.routes.ApplicationController.about">About</a>
+            </li>
+            <li>
+              <a href="@app.controllers.routes.ApplicationController.help">Help</a>
+            </li>
+            <li>
+              <a href="https://github.com/YoshinoriN/Credentiam" target="_blank">GitHub</a>
+            </li>
+          </ul>
+          </div>
+        </footer>
+      }
     </body>
 </html>
