@@ -14,4 +14,6 @@ These requierments follow with [play framework](//www.playframework.com/document
 # Install
 
 * Clone or download source code.
+* `playGenerateSecret`
+* `playUpdateSecret`
 * `sbt clean run`
