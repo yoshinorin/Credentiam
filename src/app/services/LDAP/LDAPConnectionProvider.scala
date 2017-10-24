@@ -4,8 +4,8 @@ import scala.collection.mutable
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
-
 import utils.types.UserId
+import app.models.ldap.UserConnection
 
 trait LDAPConnectionProvider {
 
@@ -26,11 +26,6 @@ trait LDAPConnectionProvider {
   connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
   connectionOption.setAbandonOnTimeout(configuration.getBoolean("ldap.abandonOnTimeOut"))
 
-  case class UserConnection(
-    dn: String,
-    connection: LDAPConnection
-  //TODO: Add user's role.
-  )
 
   /**
    * Create connection using by config user.
