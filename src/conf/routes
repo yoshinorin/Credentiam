@@ -29,5 +29,6 @@ GET         /search                          app.controllers.LDAPController.sear
 # For administrator page
 GET         /admin                           app.controllers.AdminAreaController.index
 
-# Map static resources from the /public folder to the /assets URL path
+# Static resources
 GET         /assets/*file                    controllers.Assets.versioned(file)
+GET         /robots.txt                      controllers.Assets.at(path="/public", file="robots.txt")
