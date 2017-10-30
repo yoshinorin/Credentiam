@@ -4,8 +4,9 @@ import scala.collection.mutable
 
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
-import utils.types.UserId
 import app.models.ldap.UserConnection
+import utils.types.UserId
+import utils.cache.PlaySyncCacheLayer
 
 trait LDAPConnectionProvider {
 
@@ -26,7 +27,6 @@ trait LDAPConnectionProvider {
   connectionOption.setResponseTimeoutMillis(configuration.getInt("ldap.responseTimeout"))
   connectionOption.setAbandonOnTimeout(configuration.getBoolean("ldap.abandonOnTimeOut"))
 
-
   /**
    * Create connection using by config user.
    * TODO: Support LDAPS
@@ -34,28 +34,22 @@ trait LDAPConnectionProvider {
   protected val defaultConnection = new LDAPConnection(connectionOption, host, port, bindDN, password)
 
   /**
-   * The connections store by user.
-   */
-  protected val connections: mutable.HashMap[UserId, UserConnection] = mutable.HashMap()
-
-  /**
    * Create connection by users and store it.
    * TODO: Support LDAPS
    */
   def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(connectionOption, host, port, dn, password))
-    connections += (uid -> connection)
+    //TODO: Set cache duration.
+    PlaySyncCacheLayer.cache.set(uid.value.toString, connection)
   }
 
   /**
    * Remove & close connection from connections store by User.
    */
   def removeConnectionByUser(uid: UserId): Unit = {
-    //TODO: Release connection certainly.
-    connections.get(uid) match {
+    PlaySyncCacheLayer.cache.get[UserConnection](uid.value.toString) match {
       case Some(uc) => {
-        uc.connection.close
-        connections -= uid
+        PlaySyncCacheLayer.cache.remove(uid.value.toString)
       }
       case None => None
     }
@@ -65,7 +59,7 @@ trait LDAPConnectionProvider {
    * Find Connection by uid.
    */
   def findConnectionByUser(uid: UserId): Option[UserConnection] = {
-    connections.get(uid)
+    PlaySyncCacheLayer.cache.get[UserConnection](uid.value.toString)
   }
 
 }
