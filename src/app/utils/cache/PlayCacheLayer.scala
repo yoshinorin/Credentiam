@@ -21,7 +21,8 @@ object PlaySyncCacheLayer {
 
 }
 
-@Singleton class PlaySyncCacheLayer @Inject() (cache: DefaultSyncCacheApi) {
+@Singleton
+class PlaySyncCacheLayer @Inject() (cache: DefaultSyncCacheApi) {
 
   def get[T](key: String)(implicit cTag: ClassTag[T]): Option[T] = {
     cache.get[T](key)
