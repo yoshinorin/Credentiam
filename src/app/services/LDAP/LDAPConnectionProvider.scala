@@ -1,7 +1,9 @@
 package app.services.ldap
 
 import scala.collection.mutable
-
+import scala.concurrent.{ Future, duration }
+import scala.concurrent.duration.Duration
+import scala.concurrent.duration._
 import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 import app.models.ldap.UserConnection
@@ -18,6 +20,7 @@ trait LDAPConnectionProvider {
   private val password = configuration.getString("ldap.password")
   private val initialConnextions = configuration.getInt("ldap.initialConnextions")
   private val maxConnections = configuration.getInt("ldap.maxConnections")
+  private val expiryDuration: Duration = Duration(configuration.getInt("ldap.expiryDuration"), "minutes")
   protected val maxResults = configuration.getInt("ldap.maxResult")
   protected val baseDN = configuration.getString("ldap.baseDN")
   protected val uidAttributeName = configuration.getString("ldap.uidAttributeName")
@@ -39,8 +42,7 @@ trait LDAPConnectionProvider {
    */
   def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(connectionOption, host, port, dn, password))
-    //TODO: Set cache duration.
-    PlaySyncCacheLayer.cache.set(uid.value.toString, connection)
+    PlaySyncCacheLayer.cache.set(uid.value.toString, connection, expiryDuration)
   }
 
   /**
