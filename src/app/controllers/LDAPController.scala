@@ -5,6 +5,9 @@ import javax.inject.Inject
 import scala.concurrent.Future
 import play.api.i18n.I18nSupport
 import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents }
+import play.api.data.Form
+import play.api.data.Forms._
+
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
@@ -12,6 +15,21 @@ import controllers.AssetsFinder
 import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, OrganizationUnit }
 import app.services.ldap.LDAPService
 import utils.auth.DefaultEnv
+
+import LDAPController._
+
+object LDAPController {
+
+  case class SearchFormData(objectType: Int, word: String)
+
+  val SearchForm = Form(
+    mapping(
+      "objectType" -> number,
+      "word" -> nonEmptyText,
+    )(SearchFormData.apply)(SearchFormData.unapply)
+  )
+
+}
 
 class LDAPController @Inject() (
   components: ControllerComponents,
