@@ -1,9 +1,38 @@
+@import play.api.data.Form
 @import play.api.i18n.Messages
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
+@import helper._
 
-@(user: app.models.UserIdentify)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
-
+@(user: app.models.UserIdentify, searchForm: Form[app.controllers.LDAPController.SearchFormData])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("common.search"), Some(user)) {
 
+<div class="centering vertical-middle">
+  <h5>@messages("common.search")</h5>
+</div>
+
+<div class="centering padding-50">
+  <fieldset>
+    @form(CSRF(app.controllers.routes.LDAPController.search)) {
+      <div class="mdl-textfield mdl-js-textfield search-form-dropdown" >
+        @select(
+          searchForm("objectType"),
+          options = Seq("Organization"->"Organization", "User"->"User", "Computer"->"Computer"),
+          'class -> "mdl-textfield__input"
+        )
+      </div>
+      <div class="mdl-textfield mdl-js-textfield">
+        @inputText(
+        searchForm("word"),
+          'class -> "mdl-textfield__input"
+        )
+        <label class="mdl-textfield__label">Search in LDAP...</label>
+      </div>
+      <button class="mdl-button mdl-js-button mdl-button--primary">
+        <i class="material-icons">search</i>
+      </button>
+    }
+  </fieldset>
+</div>
 }
