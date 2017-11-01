@@ -45,3 +45,21 @@ ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(FormatXml, false)
   .setPreference(DoubleIndentClassDeclaration, false)
   .setPreference(DanglingCloseParenthesis, Preserve)
+
+//********************************************************
+// Packaging
+//********************************************************
+
+enablePlugins(RpmPlugin, RpmDeployPlugin)
+enablePlugins(DebianPlugin, DebianDeployPlugin)
+enablePlugins(WindowsPlugin, WindowsDeployPlugin)
+
+maintainer := "YoshinoriN"
+packageSummary := "Credentiam"
+packageDescription := """Credentiam package"""
+
+// wix information
+packageSummary in Windows := "Credentiam"
+packageDescription in Windows := """Credentiam Installer"""
+wixProductId := java.util.UUID.randomUUID().toString
+wixProductUpgradeId := java.util.UUID.randomUUID().toString
