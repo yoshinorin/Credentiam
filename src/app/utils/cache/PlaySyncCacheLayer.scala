@@ -13,8 +13,8 @@ import net.sf.ehcache.CacheManager
 
 object PlaySyncCacheLayer {
 
-  val cacheName = "defaultsynccache"
-  val cacheManager = CacheManager.create
+  private val cacheName = "defaultsynccache"
+  private cacheManager = CacheManager.create
   cacheManager.addCache(cacheName)
 
   val cache: PlaySyncCacheLayer = new PlaySyncCacheLayer(new DefaultSyncCacheApi(new EhCacheApi(cacheManager.getEhcache(cacheName))))
