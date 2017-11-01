@@ -2,7 +2,7 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 
-@(user: app.models.UserIdentify, ou: Option[app.models.OrganizationUnit])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(user: app.models.UserIdentify, ou: Option[app.models.ldap.OrganizationUnit])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("common.organization"), Some(user)) {
   @ou match {

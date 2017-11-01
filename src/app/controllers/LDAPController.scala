@@ -9,7 +9,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
 
-import app.models.{ ActiveDirectoryUser, Computer, LDAPAttribute, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, OrganizationUnit }
 import app.services.ldap.LDAPService
 import utils.auth.DefaultEnv
 

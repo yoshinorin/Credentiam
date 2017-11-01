@@ -6,7 +6,7 @@ import scala.collection.mutable
 
 import com.unboundid.ldap.sdk._
 
-import app.models.{ LDAPAttribute, ActiveDirectoryUser }
+import app.models.ldap.{ Attribute, ActiveDirectoryUser }
 import utils.ClassUtil
 import utils.types.UserId
 
@@ -20,8 +20,8 @@ class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
    * @param targetUid The target uid.
    * @return ActiveDirectoryUser class or none.
    */
-  override def findUser(connectionUser: UserId, targetUid: String): Option[app.models.ActiveDirectoryUser] = {
-    search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ActiveDirectoryUser]) match {
+  override def findUser(connectionUser: UserId, targetUid: String): Option[app.models.ldap.ActiveDirectoryUser] = {
+    search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ldap.ActiveDirectoryUser]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[ActiveDirectoryUser](sr).head)
       case None => None
     }

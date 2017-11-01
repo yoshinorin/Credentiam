@@ -2,7 +2,7 @@ package utils
 
 import scala.reflect.runtime.{ universe => runtimeUniverse }
 import scala.reflect.runtime.universe._
-import app.models.LDAPAttribute
+import app.models.ldap.Attribute
 
 object ClassUtil {
 
@@ -14,7 +14,7 @@ object ClassUtil {
    */
   def getLDAPAttributeFields[T](implicit tag: TypeTag[T]): Seq[String] = {
     runtimeUniverse.typeOf[T].members.collect {
-      case member: LDAPAttribute => member.toString
+      case member: Attribute => member.toString
     }.toSeq
   }
 
