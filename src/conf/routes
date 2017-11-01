@@ -8,23 +8,19 @@ GET         /help                            app.controllers.ApplicationControll
 GET         /profile                         app.controllers.ApplicationController.profile
 GET         /search                          app.controllers.ApplicationController.search
 
+# Auth
 GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn
 GET         /signOut                         app.controllers.AuthController.signOut
 
+# LDAP
 GET         /domains                         app.controllers.LDAPController.domains
-
-# For Organization
 GET         /organization/:dn                app.controllers.LDAPController.organization(dn: String)
 GET         /organizations                   app.controllers.LDAPController.organizations
-
-# For Computer
 GET         /computers                       app.controllers.LDAPController.computers
-
-# For User
 GET         /users                           app.controllers.LDAPController.users
 
-# For administrator page
+# Administration
 GET         /admin                           app.controllers.AdminAreaController.index
 
 # Static resources
