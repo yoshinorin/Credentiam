@@ -37,6 +37,8 @@ class LDAPController @Inject() (
   implicit
   assets: AssetsFinder) extends AbstractController(components) with I18nSupport {
 
+  def search = TODO
+
   def domains = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     //TODO: Exception handling
     Future.successful(Ok(views.html.domains(request.identity, (LDAPService.server.findDomains(request.identity.userID)))))

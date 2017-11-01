@@ -36,7 +36,7 @@ class ApplicationController @Inject() (
   }
 
   def search = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
-    Future.successful(Ok(views.html.search(request.identity)))
+    Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm)))
   }
 
 }
