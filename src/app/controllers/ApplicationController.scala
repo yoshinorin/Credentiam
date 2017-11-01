@@ -35,4 +35,8 @@ class ApplicationController @Inject() (
     Future.successful(Ok(views.html.user("profile.title", request.identity, (LDAPService.server.findUser(request.identity.userID, request.identity.userID.value.toString)))))
   }
 
+  def search = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    Future.successful(Ok(views.html.search(request.identity)))
+  }
+
 }

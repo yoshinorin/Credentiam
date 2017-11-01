@@ -6,6 +6,7 @@ GET         /                                app.controllers.ApplicationControll
 GET         /about                           app.controllers.ApplicationController.about
 GET         /help                            app.controllers.ApplicationController.help
 GET         /profile                         app.controllers.ApplicationController.profile
+GET         /search                          app.controllers.ApplicationController.search
 
 GET         /signIn                          app.controllers.AuthController.view
 POST        /signIn                          app.controllers.AuthController.signIn
@@ -22,9 +23,6 @@ GET         /computers                       app.controllers.LDAPController.comp
 
 # For User
 GET         /users                           app.controllers.LDAPController.users
-
-# For Search
-GET         /search                          app.controllers.LDAPController.search
 
 # For administrator page
 GET         /admin                           app.controllers.AdminAreaController.index
