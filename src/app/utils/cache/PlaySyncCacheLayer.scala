@@ -13,7 +13,7 @@ import net.sf.ehcache.CacheManager
 
 object PlaySyncCacheLayer {
 
-  val cacheName = UUID.randomUUID.toString
+  val cacheName = "defaultsynccache"
   val cacheManager = CacheManager.create
   cacheManager.addCache(cacheName)
 
