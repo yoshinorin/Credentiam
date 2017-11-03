@@ -28,6 +28,14 @@ footer {
   background: white !important;
 }
 
+i {
+  vertical-align: middle !important;
+}
+
+i.icon-small {
+  font-size: 18px;
+}
+
 table {
   margin: auto !important;
   border: 0px !important;
@@ -44,38 +52,6 @@ td {
   vertical-align: middle !important;
   border-color: #ECEFF1 !important;
   font-size: 14px !important;
-}
-
-i {
-  vertical-align: middle !important;
-}
-
-i.icon-small {
-  font-size: 18px;
-}
-
-.padding-30 {
-  width: 30%;
-}
-
-.padding-40 {
-  width: 40%;
-}
-
-.padding-50 {
-  width: 50%;
-}
-
-.padding-60 {
-  width: 60%;
-}
-
-.padding-70 {
-  width: 70%;
-}
-
-.padding-80 {
-  width: 80%;
 }
 
 .accent-color-blue {
@@ -108,10 +84,23 @@ i.icon-small {
   background: #ef9a9a;
 }
 
+.centering {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .footer-link {
   text-align: center !important;
   margin-right: auto;
   margin-left : auto;
+}
+
+.header-bottom-nav{
+  width: 100%;
+  padding-top: 8px;
+  text-align: center;
+  background: #F5F5F5;
 }
 
 .header-messages {
@@ -120,43 +109,9 @@ i.icon-small {
   color: #BDBDBD;
 }
 
-.mdl-layout__header,
-.mdl-layout__drawer-button {
-  color: white;
-}
-
-.mdl-menu__item {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.title {
-  color: white !important;
-}
-
-.signin-form {
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.search-form-dropdown {
-  width: 120px;
+.home-button {
+  margin-left: 20px;
   margin-right: 20px;
-}
-
-.centering {
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.vertical-middle {
-  vertical-align: middle !important;
-}
-
-.table-row {
-  display: table-row;
 }
 
 .home-card {
@@ -170,14 +125,62 @@ i.icon-small {
   text-align: center;
 }
 
-.home-button {
-  margin-left: 20px;
+
+.mdl-layout__header,
+.mdl-layout__drawer-button {
+  color: white;
+}
+
+.mdl-menu__item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.padding-30 {
+  width: 30%;
+}
+
+.padding-40 {
+  width: 40%;
+}
+
+.padding-50 {
+  width: 50%;
+}
+
+.padding-60 {
+  width: 60%;
+}
+
+.padding-70 {
+  width: 70%;
+}
+
+.padding-80 {
+  width: 80%;
+}
+
+.signin-form {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.search-form-dropdown {
+  width: 120px;
   margin-right: 20px;
 }
 
-.header-bottom-nav{
-  width: 100%;
-  padding-top: 8px;
-  text-align: center;
-  background: #F5F5F5;
+.table-row {
+  display: table-row;
 }
+
+.title {
+  color: white !important;
+}
+
+.vertical-middle {
+  vertical-align: middle !important;
+}
+
+
