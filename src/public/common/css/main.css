@@ -140,6 +140,11 @@ i.icon-small {
   margin: 0 auto;
 }
 
+.search-form-dropdown {
+  width: 120px;
+  margin-right: 20px;
+}
+
 .centering {
   width: 100%;
   text-align: center;
