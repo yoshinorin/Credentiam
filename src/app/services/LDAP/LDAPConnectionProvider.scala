@@ -33,6 +33,7 @@ trait LDAPConnectionProvider {
   /**
    * Create connection using by config user.
    * TODO: Support LDAPS
+   * TODO: Need exception handling when create LDAPConnection class's instance.
    */
   protected val defaultConnection = new LDAPConnection(connectionOption, host, port, bindDN, password)
 
