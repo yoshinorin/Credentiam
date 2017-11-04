@@ -10,6 +10,7 @@ import com.unboundid.ldap.sdk._
 import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
 import utils.ClassUtil
 import utils.types.UserId
+import utils.config.LDAPConfig
 
 object LDAPService {
 
@@ -74,8 +75,8 @@ trait LDAPService[T] extends LDAPConnectionProvider {
     findConnectionByUser(connectionUser) match {
       case Some(uc) => {
         val searchResult = {
-          val searchRequest = new SearchRequest(baseDN, SearchScope.SUB, filter, attributes: _*)
-          searchRequest.setSizeLimit(maxResults)
+          val searchRequest = new SearchRequest(LDAPConfig.baseDN, SearchScope.SUB, filter, attributes: _*)
+          searchRequest.setSizeLimit(LDAPConfig.maxResults)
           uc.connection.search(searchRequest).getSearchEntries
         }
         searchResult.isEmpty match {
@@ -111,9 +112,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   def findDN(uid: UserId): Option[String] = {
     val searchResult = {
       defaultConnection.search(new SearchRequest(
-        baseDN,
+        LDAPConfig.baseDN,
         SearchScope.SUB,
-        Filter.createEqualityFilter(uidAttributeName, uid.value.toString))).getSearchEntries
+        Filter.createEqualityFilter(LDAPConfig.uidAttributeName, uid.value.toString))).getSearchEntries
     }
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)

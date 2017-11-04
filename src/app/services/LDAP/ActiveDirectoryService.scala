@@ -9,6 +9,7 @@ import com.unboundid.ldap.sdk._
 import app.models.ldap.{ Attribute, ActiveDirectoryUser }
 import utils.ClassUtil
 import utils.types.UserId
+import utils.config.LDAPConfig
 
 @Singleton
 class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
@@ -21,7 +22,7 @@ class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {
    * @return ActiveDirectoryUser class or none.
    */
   override def findUser(connectionUser: UserId, targetUid: String): Option[app.models.ldap.ActiveDirectoryUser] = {
-    search(connectionUser, Filter.createEqualityFilter(uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ldap.ActiveDirectoryUser]) match {
+    search(connectionUser, Filter.createEqualityFilter(LDAPConfig.uidAttributeName, targetUid), ClassUtil.getLDAPAttributeFields[app.models.ldap.ActiveDirectoryUser]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[ActiveDirectoryUser](sr).head)
       case None => None
     }
