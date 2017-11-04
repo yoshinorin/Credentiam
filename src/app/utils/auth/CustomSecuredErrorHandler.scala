@@ -1,4 +1,4 @@
-package utils.auth
+package app.utils.auth
 
 import javax.inject.Inject
 

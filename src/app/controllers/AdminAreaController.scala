@@ -13,7 +13,7 @@ import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
 
 import controllers.AssetsFinder
 import app.services.ldap.LDAPService
-import utils.auth.{ DefaultEnv, WithAdmin }
+import app.utils.auth.{ DefaultEnv, WithAdmin }
 
 class AdminAreaController @Inject() (
   components: ControllerComponents,

@@ -1,4 +1,4 @@
-package utils.cache
+package app.utils.cache
 
 import java.util.UUID
 import javax.inject.{ Inject, Singleton }

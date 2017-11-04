@@ -1,4 +1,4 @@
-package utils
+package app.utils
 
 import org.slf4j.{ Logger, LoggerFactory, Marker, MarkerFactory }
 

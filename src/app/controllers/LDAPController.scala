@@ -14,7 +14,7 @@ import controllers.AssetsFinder
 
 import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, OrganizationUnit }
 import app.services.ldap.LDAPService
-import utils.auth.DefaultEnv
+import app.utils.auth.DefaultEnv
 
 import LDAPController._
 

@@ -6,7 +6,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.services.IdentityService
 import app.models.{ UserDAO, UserIdentify }
-import utils.types.UserId
+import app.utils.types.UserId
 
 trait UserService extends IdentityService[UserIdentify] {
 

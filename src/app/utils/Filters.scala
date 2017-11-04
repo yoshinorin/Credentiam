@@ -1,4 +1,4 @@
-package utils
+package app.utils
 
 import javax.inject.Inject
 

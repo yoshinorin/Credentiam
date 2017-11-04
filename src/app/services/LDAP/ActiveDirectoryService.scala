@@ -7,9 +7,9 @@ import scala.collection.mutable
 import com.unboundid.ldap.sdk._
 
 import app.models.ldap.{ Attribute, ActiveDirectoryUser }
-import utils.ClassUtil
-import utils.types.UserId
-import utils.config.LDAPConfig
+import app.utils.ClassUtil
+import app.utils.types.UserId
+import app.utils.config.LDAPConfig
 
 @Singleton
 class ActiveDirectoryService extends LDAPService[ActiveDirectoryUser] {

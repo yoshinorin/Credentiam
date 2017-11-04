@@ -28,9 +28,9 @@ import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import net.codingwell.scalaguice.ScalaModule
 
-import utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv, LDAPAuth }
 import app.models.{ UserDAO, UserDAOImpl }
 import app.services.{ UserService, UserServiceImpl }
+import app.utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv, LDAPAuth }
 
 /**
  * The Guice module which wires all Silhouette dependencies.

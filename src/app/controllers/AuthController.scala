@@ -27,9 +27,9 @@ import controllers.AssetsFinder
 import app.models.UserIdentify
 import app.services.UserService
 import app.services.ldap.LDAPService
-import utils.auth.DefaultEnv
-import utils.Logger
-import utils.types.UserId
+import app.utils.auth.DefaultEnv
+import app.utils.Logger
+import app.utils.types.UserId
 
 import AuthController._
 

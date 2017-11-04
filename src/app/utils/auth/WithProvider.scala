@@ -1,4 +1,4 @@
-package utils.auth
+package app.utils.auth
 
 import com.mohiva.play.silhouette.api.{ Authenticator, Authorization }
 import app.models.UserIdentify

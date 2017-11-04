@@ -10,7 +10,7 @@ import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import controllers.AssetsFinder
 
 import app.services.ldap.LDAPService
-import utils.auth.DefaultEnv
+import app.utils.auth.DefaultEnv
 
 class ApplicationController @Inject() (
   components: ControllerComponents,

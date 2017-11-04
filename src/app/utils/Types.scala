@@ -1,4 +1,4 @@
-package utils.types
+package app.utils.types
 
 /**
  * Type for user's id.

@@ -1,4 +1,4 @@
-package utils
+package app.utils
 
 import scala.reflect.runtime.{ universe => runtimeUniverse }
 import scala.reflect.runtime.universe._

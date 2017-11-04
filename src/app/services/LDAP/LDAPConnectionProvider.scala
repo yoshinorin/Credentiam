@@ -2,9 +2,9 @@ package app.services.ldap
 
 import com.unboundid.ldap.sdk._
 import app.models.ldap.UserConnection
-import utils.types.UserId
-import utils.cache.PlaySyncCacheLayer
-import utils.config.LDAPConfig
+import app.utils.types.UserId
+import app.utils.cache.PlaySyncCacheLayer
+import app.utils.config.LDAPConfig
 
 trait LDAPConnectionProvider {
 

@@ -1,4 +1,4 @@
-package utils.config
+package app.utils.config
 
 import scala.concurrent.duration._
 import com.typesafe.config.ConfigFactory

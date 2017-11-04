@@ -6,7 +6,7 @@ import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.UserIdentify
 import app.models.UserDAOImpl._
-import utils.types.UserId
+import app.utils.types.UserId
 /**
  * The companion object.
  */

@@ -1,4 +1,4 @@
-package utils.auth
+package app.utils.auth
 
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
 
 import app.models.UserIdentify
-import utils.config.LDAPConfig
+import app.utils.config.LDAPConfig
 
 class LDAPAuth @Inject() (
   cache: AsyncCacheApi
