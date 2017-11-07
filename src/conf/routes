@@ -6,7 +6,6 @@ GET         /                                app.controllers.ApplicationControll
 GET         /about                           app.controllers.ApplicationController.about
 GET         /help                            app.controllers.ApplicationController.help
 GET         /profile                         app.controllers.ApplicationController.profile
-GET         /search                          app.controllers.ApplicationController.search
 
 # Auth
 GET         /signIn                          app.controllers.AuthController.view
