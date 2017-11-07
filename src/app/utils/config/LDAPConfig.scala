@@ -1,5 +1,6 @@
 package app.utils.config
 
+import scala.collection.JavaConverters._
 import scala.concurrent.duration._
 import com.typesafe.config.ConfigFactory
 
@@ -21,5 +22,15 @@ object LDAPConfig {
   val maxResults = configuration.getInt("ldap.maxResult")
   val baseDN = configuration.getString("ldap.baseDN")
   val uidAttributeName = configuration.getString("ldap.uidAttributeName")
+
+}
+
+object LDAPSearchableAttributes {
+
+  private val configuration = ConfigFactory.load
+
+  val organization = configuration.getStringList("ldap.searchable.organization").asScala
+  val user = configuration.getStringList("ldap.searchable.user").asScala
+  val computer = configuration.getStringList("ldap.searchable.computer").asScala
 
 }
