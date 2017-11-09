@@ -5,11 +5,10 @@ import javax.inject.{ Inject, Singleton }
 import scala.concurrent.duration.{ Duration, _ }
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.reflect.ClassTag
-import play.api.cache._
+import play.api.cache.DefaultSyncCacheApi
 import play.api.cache.ehcache.EhCacheApi
 import net.sf.ehcache.config.CacheConfiguration
-import net.sf.ehcache.Cache
-import net.sf.ehcache.CacheManager
+import net.sf.ehcache.{ Cache, CacheManager }
 
 object PlaySyncCacheLayer {
 
