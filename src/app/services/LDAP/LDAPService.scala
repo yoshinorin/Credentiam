@@ -4,8 +4,6 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.reflect._
 import scala.reflect.runtime.universe._
-
-import com.typesafe.config.ConfigFactory
 import com.unboundid.ldap.sdk._
 import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
 import app.utils.ClassUtil
@@ -14,11 +12,8 @@ import app.utils.config.LDAPConfig
 
 object LDAPService {
 
-  val configuration = ConfigFactory.load
-  val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")
-
   val server = {
-    if (isActiveDirectory) {
+    if (LDAPConfig.isActiveDirectory) {
       new ActiveDirectoryService
     } else {
       //TODO: OpenLDAP support
@@ -30,9 +25,6 @@ object LDAPService {
 
 trait LDAPService[T] extends LDAPConnectionProvider {
 
-  val configuration = ConfigFactory.load
-  val administratorDN = configuration.getString("ldap.administratorDN")
-
   /**
    * Check the user is ldap server's administrator or not.
    *
@@ -41,7 +33,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def isAdmin(uid: UserId): Boolean = {
     findDN(uid) match {
-      case Some(dn) => if (dn == administratorDN) true else false
+      case Some(dn) => if (dn == LDAPConfig.administratorDN) true else false
       case None => false
     }
   }

@@ -22,6 +22,8 @@ object LDAPConfig {
   val maxResults = configuration.getInt("ldap.maxResult")
   val baseDN = configuration.getString("ldap.baseDN")
   val uidAttributeName = configuration.getString("ldap.uidAttributeName")
+  val administratorDN = configuration.getString("ldap.administratorDN")
+  val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")
 
 }
 
