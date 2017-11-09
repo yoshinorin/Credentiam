@@ -35,6 +35,7 @@ trait LDAPConnectionProvider {
   def removeConnectionByUser(uid: UserId): Unit = {
     PlaySyncCacheLayer.cache.get[UserConnection](uid.value.toString) match {
       case Some(uc) => {
+        uc.connection.close
         PlaySyncCacheLayer.cache.remove(uid.value.toString)
       }
       case None => None
