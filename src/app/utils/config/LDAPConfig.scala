@@ -2,11 +2,8 @@ package app.utils.config
 
 import scala.collection.JavaConverters._
 import scala.concurrent.duration._
-import com.typesafe.config.ConfigFactory
 
-object LDAPConfig {
-
-  private val configuration = ConfigFactory.load
+object LDAPConfig extends ConfigProvider {
 
   val host = configuration.getString("ldap.host")
   val port = configuration.getInt("ldap.port")
@@ -27,9 +24,7 @@ object LDAPConfig {
 
 }
 
-object LDAPSearchableAttributes {
-
-  private val configuration = ConfigFactory.load
+object LDAPSearchableAttributes extends ConfigProvider {
 
   val organization = configuration.getStringList("ldap.searchable.organization").asScala
   val user = configuration.getStringList("ldap.searchable.user").asScala
