@@ -6,7 +6,7 @@ import app.utils.types.SearchRelations
 object LDAPQueryService {
 
   def relationMatcha(relation: String): SearchRelations = {
-    relation.toLowerCase match {
+    relation.toUpperCase match {
       case "ANY" => SearchRelations.ANY
       case "CONTAINS" => SearchRelations.CONTAINS
       case "EXCLUDES" => SearchRelations.EXCLUDES
