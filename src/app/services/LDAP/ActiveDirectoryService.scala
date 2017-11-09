@@ -3,9 +3,7 @@ package app.services.ldap
 import javax.inject._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-
 import com.unboundid.ldap.sdk._
-
 import app.models.ldap.{ Attribute, ActiveDirectoryUser }
 import app.utils.ClassUtil
 import app.utils.types.UserId

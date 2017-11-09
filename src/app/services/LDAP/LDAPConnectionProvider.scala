@@ -1,6 +1,6 @@
 package app.services.ldap
 
-import com.unboundid.ldap.sdk._
+import com.unboundid.ldap.sdk.{ LDAPConnection, LDAPConnectionOptions }
 import app.models.ldap.UserConnection
 import app.utils.types.UserId
 import app.utils.cache.PlaySyncCacheLayer

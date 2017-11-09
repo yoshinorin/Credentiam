@@ -5,7 +5,6 @@ import play.api.Configuration
 import play.api.libs.openid.OpenIdClient
 import play.api.libs.ws.WSClient
 import play.api.mvc.CookieHeaderEncoding
-
 import com.google.inject.name.Named
 import com.google.inject.{ AbstractModule, Provides }
 import com.mohiva.play.silhouette.api.actions.{ SecuredErrorHandler, UnsecuredErrorHandler }
@@ -27,7 +26,6 @@ import com.mohiva.play.silhouette.persistence.repositories.DelegableAuthInfoRepo
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import net.codingwell.scalaguice.ScalaModule
-
 import app.models.{ UserDAO, UserDAOImpl }
 import app.services.{ UserService, UserServiceImpl }
 import app.utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv, LDAPAuth }

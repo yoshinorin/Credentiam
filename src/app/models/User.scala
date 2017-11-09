@@ -2,11 +2,11 @@ package app.models
 
 import scala.collection.mutable
 import scala.concurrent.Future
-
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.UserIdentify
 import app.models.UserDAOImpl._
 import app.utils.types.UserId
+
 /**
  * The companion object.
  */

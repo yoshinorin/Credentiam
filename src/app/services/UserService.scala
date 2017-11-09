@@ -1,7 +1,6 @@
 package app.services
 
 import javax.inject.Inject
-
 import scala.concurrent.{ ExecutionContext, Future }
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.services.IdentityService

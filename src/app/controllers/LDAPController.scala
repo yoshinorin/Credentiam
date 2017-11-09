@@ -1,20 +1,19 @@
 package app.controllers
 
 import javax.inject.Inject
-
 import scala.concurrent.Future
-import play.api.i18n.I18nSupport
+import play.api.i18n.{ I18nSupport, Messages }
 import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents }
 import play.api.data.Form
 import play.api.data.Forms._
-
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
+import com.unboundid.ldap.sdk.Filter
 import controllers.AssetsFinder
-
-import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
 import app.services.ldap.LDAPService
 import app.utils.auth.DefaultEnv
+import app.utils.config.LDAPSearchableAttributes
 
 import LDAPController._
 
