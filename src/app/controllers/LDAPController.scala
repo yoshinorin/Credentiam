@@ -19,11 +19,12 @@ import LDAPController._
 
 object LDAPController {
 
-  case class SearchFormData(objectType: String, word: String)
+  case class SearchFormData(objectType: String, relation: String, word: String)
 
   val SearchForm = Form(
     mapping(
       "objectType" -> nonEmptyText,
+      "relation" -> nonEmptyText,
       "word" -> nonEmptyText,
     )(SearchFormData.apply)(SearchFormData.unapply)
   )
