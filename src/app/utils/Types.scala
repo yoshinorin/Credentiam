@@ -29,3 +29,21 @@ object SearchRelations {
   object NOTEQUAL extends SearchRelations("notequal")
 
 }
+
+/**
+ * LDAP object types abstract class.
+ */
+sealed abstract class LDAPObjectType(val name: String)
+
+/**
+ * LDAP object types abstract class.
+ */
+object LDAPObjectType {
+
+  object ORGANIZATION extends LDAPObjectType("Organization")
+
+  object USER extends LDAPObjectType("User")
+
+  object COMPUTER extends LDAPObjectType("Computer")
+
+}
