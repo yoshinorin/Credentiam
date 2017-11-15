@@ -26,8 +26,8 @@ object LDAPConfig extends ConfigProvider {
 
 object LDAPSearchableAttributes extends ConfigProvider {
 
-  val organization = configuration.getStringList("ldap.searchable.organization").asScala
-  val user = configuration.getStringList("ldap.searchable.user").asScala
-  val computer = configuration.getStringList("ldap.searchable.computer").asScala
+  val organization = configuration.getStringList("ldap.searchable.organization").asScala.toList
+  val user = configuration.getStringList("ldap.searchable.user").asScala.toList
+  val computer = configuration.getStringList("ldap.searchable.computer").asScala.toList
 
 }
