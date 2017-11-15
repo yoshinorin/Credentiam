@@ -23,6 +23,20 @@ object Converter {
         case _ => throw new ConvertException(s"Can not convert ${s} to SearchRelations type.")
       }
     }
+
+    /**
+     * Convert [[LDAPObjectType]] type from string.
+     *
+     * @return [[LDAPObjectType]]
+     */
+    def toLDAPObjectType: LDAPObjectType = {
+      s.toUpperCase match {
+        case "ORGANIZATION" => LDAPObjectType.ORGANIZATION
+        case "USER" => LDAPObjectType.USER
+        case "COMPUTER" => LDAPObjectType.COMPUTER
+        case _ => throw new ConvertException(s"Can not convert ${s} to LDAPObjectType type.")
+      }
+    }
   }
 
 }
