@@ -10,7 +10,6 @@ object Converter {
     /**
      * Convert [[SearchRelations]] type from string.
      *
-     * @param relation Name of relation.
      * @return [[SearchRelations]]
      */
     def toSearchRelation: SearchRelations = {
