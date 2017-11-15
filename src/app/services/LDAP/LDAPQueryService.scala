@@ -5,7 +5,13 @@ import app.utils.types.SearchRelations
 
 object LDAPQueryService {
 
-  def relationMatcha(relation: String): SearchRelations = {
+  /**
+   * Get [[SearchRelations]] type from string.
+   *
+   * @param relation Name of relation.
+   * @return [[SearchRelations]]
+   */
+  def getRelationTypeFromString(relation: String): SearchRelations = {
     relation.toUpperCase match {
       case "ANY" => SearchRelations.ANY
       case "CONTAINS" => SearchRelations.CONTAINS
