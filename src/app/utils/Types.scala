@@ -16,8 +16,6 @@ sealed abstract class SearchRelations(val name: String)
  */
 object SearchRelations {
 
-  object ANY extends SearchRelations("any")
-
   object CONTAINS extends SearchRelations("contains")
 
   object EXCLUDES extends SearchRelations("excludes")

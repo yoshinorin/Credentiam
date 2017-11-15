@@ -40,7 +40,6 @@ common.users = Users
 common.search = Search
 
 # Search relations
-search.any = Any
 search.contains = Contains
 search.excludes = Excludes
 search.startswith = StartsWith

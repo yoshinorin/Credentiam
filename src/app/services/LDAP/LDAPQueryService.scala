@@ -13,7 +13,6 @@ object LDAPQueryService {
    */
   def getRelationTypeFromString(relation: String): SearchRelations = {
     relation.toUpperCase match {
-      case "ANY" => SearchRelations.ANY
       case "CONTAINS" => SearchRelations.CONTAINS
       case "EXCLUDES" => SearchRelations.EXCLUDES
       case "STARTSWITH" => SearchRelations.STARTSWITH
