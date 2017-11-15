@@ -16,9 +16,18 @@
   <fieldset>
     @form(CSRF(app.controllers.routes.LDAPController.search)) {
       <div class="mdl-textfield mdl-js-textfield search-form-dropdown" >
+        <!-- TODO: i18n and use custom type -->
         @select(
           searchForm("objectType"),
           options = Seq("Organization"->"Organization", "User"->"User", "Computer"->"Computer"),
+          'class -> "mdl-textfield__input"
+        )
+      </div>
+      <div class="mdl-textfield mdl-js-textfield search-form-dropdown" >
+        <!-- TODO: i18n and use custom type -->
+        @select(
+          searchForm("relation"),
+          options = Seq("Contains"->"Contains", "Excludes"->"Excludes", "Startswith"->"Startswith", "Endswith"->"Endswith", "Equal"->"Equal", "Notequal"->"Notequal"),
           'class -> "mdl-textfield__input"
         )
       </div>
