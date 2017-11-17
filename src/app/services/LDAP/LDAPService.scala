@@ -89,10 +89,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return Specify LDAP classes.
    */
   protected def mapSearchResultEntryToLdapClass[T](sr: Seq[com.unboundid.ldap.sdk.SearchResultEntry])(implicit cTag: ClassTag[T]): Seq[T] = {
-    var t = mutable.ListBuffer.empty[T]
-    sr.foreach(v =>
-      t += cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T]
-    )
+    val t = for (v <- sr) yield {
+      cTag.runtimeClass.getConstructor(classOf[com.unboundid.ldap.sdk.SearchResultEntry]).newInstance(v).asInstanceOf[T]
+    }
     t.toSeq
   }
 
