@@ -177,7 +177,7 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    */
   def findComputers(connectionUser: UserId): Option[Seq[app.models.ldap.LDAPObjectOverview]] = {
     //TODO: objectCategory attributes is only for ActiveDirectory
-    search(connectionUser, Filter.create("objectCategory=computer"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
+    search(connectionUser, Filter.createEqualityFilter("objectCategory", "computer"), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
       case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
       case None => None
     }
