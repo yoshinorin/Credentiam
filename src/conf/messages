@@ -35,6 +35,7 @@ common.domains = Domains
 common.home = Home
 common.organization = Organization
 common.organizations = Organizations
+common.result = Result
 common.user = User
 common.users = Users
 common.search = Search
