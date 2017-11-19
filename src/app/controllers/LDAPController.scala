@@ -11,9 +11,11 @@ import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import com.unboundid.ldap.sdk.Filter
 import controllers.AssetsFinder
 import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
-import app.services.ldap.LDAPService
+import app.services.ldap.{ LDAPService, LDAPQueryService }
 import app.utils.auth.DefaultEnv
 import app.utils.config.LDAPSearchableAttributes
+import app.utils.types.SearchRelations
+import app.utils.Converter._
 
 import LDAPController._
 
@@ -37,7 +39,15 @@ class LDAPController @Inject() (
   implicit
   assets: AssetsFinder) extends AbstractController(components) with I18nSupport {
 
-  def search = TODO
+  def search = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    SearchForm.bindFromRequest.fold(
+      form => Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, None))),
+      data => {
+        val result = LDAPService.server.find[LDAPObjectOverview](request.identity.userID, LDAPQueryService.filterBuilder(data.objectType.toLDAPObjectType, data.relation.toSearchRelation, data.word))
+        Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result))),
+      }
+    )
+  }
 
   def domains = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     Future.successful(Ok(views.html.domains(request.identity, (LDAPService.server.findDomains(request.identity.userID)))))

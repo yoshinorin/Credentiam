@@ -4,7 +4,7 @@
 @import controllers.AssetsFinder
 @import helper._
 
-@(user: app.models.UserIdentify, searchForm: Form[app.controllers.LDAPController.SearchFormData])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(user: app.models.UserIdentify, searchForm: Form[app.controllers.LDAPController.SearchFormData], ldapAttributes: Option[Seq[app.models.ldap.LDAPObjectOverview]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 @implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("common.search"), Some(user)) {
 
@@ -43,5 +43,33 @@
       </button>
     }
   </fieldset>
+  @ldapAttributes match {
+    case None => {
+      <!-- do nothing -->
+    }
+    case Some(ldapAttributes) => {
+    <hr>
+    <div class="centering vertical-middle">
+      <h5>@messages("common.result")</h5>
+    </div>
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+      <thead>
+      <tr>
+        <th><h6>@messages("ldap.attribute.name")</h6></th>
+        <th><h6>@messages("ldap.attribute.description")</h6></th>
+        <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
+      </tr>
+      </thead>
+      @for(attr <- ldapAttributes) {
+      <tr>
+        <td>@attr.name.value</td>
+        <td>@attr.description.value</td>
+        <td>@attr.distinguishedName.value</td>
+      </tr>
+      }
+      </tbody>
+    </table>
+    }
+  }
 </div>
 }
