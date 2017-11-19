@@ -1,5 +1,6 @@
 package app.services.ldap
 
+import com.unboundid.ldap.sdk.Filter
 import app.utils.config.LDAPSearchableAttributes
 import app.utils.types.{ LDAPObjectType, SearchRelations }
 
@@ -18,6 +19,25 @@ object LDAPQueryService {
       case LDAPObjectType.USER => Filter.createEqualityFilter("objectClass", "user")
       //TODO: objectCategory attributes is only for ActiveDirectory
       case LDAPObjectType.COMPUTER => Filter.createEqualityFilter("objectCategory", "computer")
+    }
+  }
+
+  /**
+   * Create [[com.unboundid.ldap.sdk.Filter]] by LDAP attribute.
+   *
+   * @param attributeName LDAP attribute name.
+   * @param relation [[SearchRelations]]
+   * @param word Search word.
+   * @return Query filter.
+   */
+  private def createFilter(attributeName: String, relation: SearchRelations, word: String): com.unboundid.ldap.sdk.Filter = {
+    relation match {
+      case SearchRelations.CONTAINS => Filter.create(s"(${attributeName}=*${word}*)")
+      case SearchRelations.EXCLUDES => Filter.create(s"(!(${attributeName}=*${word}*))")
+      case SearchRelations.STARTSWITH => Filter.create(s"(${attributeName}=${word}*)")
+      case SearchRelations.ENDSWITH => Filter.create(s"(${attributeName}=*${word})")
+      case SearchRelations.EQUAL => Filter.createEqualityFilter(attributeName, word)
+      case SearchRelations.NOTEQUAL => Filter.create(s"(!(${attributeName}=${word}))")
     }
   }
 
