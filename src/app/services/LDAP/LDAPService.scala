@@ -1,7 +1,6 @@
 package app.services.ldap
 
 import scala.collection.JavaConverters._
-import scala.collection.mutable
 import scala.reflect._
 import scala.reflect.runtime.universe._
 import com.unboundid.ldap.sdk._
