@@ -1,11 +1,27 @@
 package app.services.ldap
 
+import scala.collection.JavaConverters._
 import com.unboundid.ldap.sdk.Filter
 import app.utils.config.LDAPSearchableAttributes
 import app.utils.types.{ LDAPObjectType, SearchRelations }
 
 object LDAPQueryService {
 
+  /**
+   * Build [[com.unboundid.ldap.sdk.Filter]] using by arguments.
+   *
+   * @param objectType [[LDAPObjectType]]
+   * @param relation [[SearchRelations]]
+   * @param word Search word.
+   * @return Built filter.
+   */
+  def filterBuilder(objectType: LDAPObjectType, relation: SearchRelations, word: String): com.unboundid.ldap.sdk.Filter = {
+    val filters = for (attr <- getSearchableAttributes(objectType)) yield {
+      createFilter(attr, relation, word)
+    }
+
+    Filter.createANDFilter(createFilterByLDAPObjectType(objectType), Filter.createORFilter(filters.asJava))
+  }
 
   /**
    * Create equality filter of [[com.unboundid.ldap.sdk.Filter]]
