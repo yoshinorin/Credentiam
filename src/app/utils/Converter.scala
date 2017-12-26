@@ -1,6 +1,5 @@
 package app.utils
 
-import app.utils.ConvertException
 import app.utils.types._
 
 object Converter {
