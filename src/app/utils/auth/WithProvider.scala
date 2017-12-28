@@ -1,9 +1,9 @@
 package app.utils.auth
 
+import scala.concurrent.Future
+import play.api.mvc.Request
 import com.mohiva.play.silhouette.api.{ Authenticator, Authorization }
 import app.models.UserIdentify
-import play.api.mvc.Request
-import scala.concurrent.Future
 
 /**
  * Grants only access if a user has authenticated with the given provider.
