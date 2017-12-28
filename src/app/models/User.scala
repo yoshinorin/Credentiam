@@ -16,6 +16,7 @@ object UserDAOImpl {
 
   /**
    * The list of users.
+   * TODO: Use EhCache
    */
   val users: mutable.HashMap[UserId, UserIdentify] = mutable.HashMap()
 
