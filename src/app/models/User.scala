@@ -4,15 +4,16 @@ import scala.collection.mutable
 import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.UserIdentify
-import app.models.UserDAOImpl._
 import app.models.ldap.UserConnection
 import app.utils.cache.PlaySyncCacheLayer
 import app.utils.types.UserId
 
+import app.models.UserDAO._
+
 /**
  * The companion object.
  */
-object UserDAOImpl {
+object UserDAO {
 
   /**
    * The list of users.
@@ -25,7 +26,7 @@ object UserDAOImpl {
 /**
  * Give access to the user object.
  */
-class UserDAOImpl extends UserDAO {
+class UserDAO extends UserDAOTrait {
 
   def find(loginInfo: LoginInfo) = {
     PlaySyncCacheLayer.cache.get[UserConnection](loginInfo.providerKey) match {
@@ -45,7 +46,7 @@ class UserDAOImpl extends UserDAO {
 
 }
 
-trait UserDAO {
+trait UserDAOTrait {
 
   def find(loginInfo: LoginInfo): Future[Option[UserIdentify]]
 

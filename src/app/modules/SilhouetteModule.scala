@@ -26,7 +26,7 @@ import com.mohiva.play.silhouette.persistence.repositories.DelegableAuthInfoRepo
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import net.codingwell.scalaguice.ScalaModule
-import app.models.{ UserDAO, UserDAOImpl }
+import app.models.{ UserDAO, UserDAOTrait }
 import app.services.{ UserService, UserServiceTrait }
 import app.utils.auth.{ CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv, LDAPAuth }
 
@@ -43,7 +43,7 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     bind[UnsecuredErrorHandler].to[CustomUnsecuredErrorHandler]
     bind[SecuredErrorHandler].to[CustomSecuredErrorHandler]
     bind[UserServiceTrait].to[UserService]
-    bind[UserDAO].to[UserDAOImpl]
+    bind[UserDAOTrait].to[UserDAO]
     bind[CacheLayer].to[PlayCacheLayer]
     bind[IDGenerator].toInstance(new SecureRandomIDGenerator())
     bind[FingerprintGenerator].toInstance(new DefaultFingerprintGenerator(false))
