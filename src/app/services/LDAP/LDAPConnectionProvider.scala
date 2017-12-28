@@ -5,8 +5,9 @@ import app.models.ldap.UserConnection
 import app.utils.types.UserId
 import app.utils.cache.PlaySyncCacheLayer
 import app.utils.config.LDAPConfig
+import app.utils.Logger
 
-trait LDAPConnectionProvider {
+trait LDAPConnectionProvider extends Logger {
 
   private val connectionOption = new LDAPConnectionOptions
   connectionOption.setConnectTimeoutMillis(LDAPConfig.connectTimeout)
@@ -27,6 +28,7 @@ trait LDAPConnectionProvider {
   def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(connectionOption, LDAPConfig.host, LDAPConfig.port, dn, password))
     PlaySyncCacheLayer.cache.set(uid.value.toString, connection, LDAPConfig.expiryDuration)
+    logger.info(securityMaker, s"Create LDAP connection: ${uid.value.toString}")
   }
 
   /**
@@ -37,6 +39,7 @@ trait LDAPConnectionProvider {
       case Some(uc) => {
         uc.connection.close
         PlaySyncCacheLayer.cache.remove(uid.value.toString)
+        logger.info(securityMaker, s"Delete LDAP connection: ${uid.value.toString}")
       }
       case None => None
     }
