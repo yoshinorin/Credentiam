@@ -7,7 +7,7 @@ import com.mohiva.play.silhouette.api.services.IdentityService
 import app.models.{ UserDAO, UserIdentify }
 import app.utils.types.UserId
 
-trait UserService extends IdentityService[UserIdentify] {
+trait UserServiceTrait extends IdentityService[UserIdentify] {
 
   def retrieve(id: UserId): Future[Option[UserIdentify]]
 
@@ -18,7 +18,7 @@ trait UserService extends IdentityService[UserIdentify] {
 /**
  * Handles actions to users.
  */
-class UserServiceImpl @Inject() (userDAO: UserDAO)(implicit ex: ExecutionContext) extends UserService {
+class UserService @Inject() (userDAO: UserDAO)(implicit ex: ExecutionContext) extends UserServiceTrait {
 
   def retrieve(id: UserId) = userDAO.find(id)
 
