@@ -1,7 +1,5 @@
-package app.ser.vice.cache
+package app.services.cache
 
-import java.util.UUID
-import javax.inject.{ Inject, Singleton }
 import scala.concurrent.duration.{ Duration, _ }
 import scala.concurrent.{ Await, Future }
 import scala.concurrent.ExecutionContext.Implicits.global
