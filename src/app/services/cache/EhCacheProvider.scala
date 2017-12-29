@@ -21,7 +21,7 @@ class EhCacheProvider(cacheName: String) {
   }
 
   def set(key: String, value: Any, dur: Duration = Duration.Inf): Unit = {
-    cache.set(key, value)
+    cache.set(key, value, dur)
   }
 
   def remove(key: String): Unit = {
