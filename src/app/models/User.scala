@@ -5,7 +5,7 @@ import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.UserIdentify
 import app.models.ldap.UserConnection
-import app.utils.cache.PlaySyncCacheLayer
+import app.services.cache.LDAPConnectionCache
 import app.utils.types.UserId
 
 import app.models.UserDAO._
@@ -29,7 +29,7 @@ object UserDAO {
 class UserDAO extends UserDAOTrait {
 
   def find(loginInfo: LoginInfo) = {
-    PlaySyncCacheLayer.cache.get[UserConnection](loginInfo.providerKey) match {
+    LDAPConnectionCache.cache.get[UserConnection](loginInfo.providerKey) match {
       case Some(uc) => {
         Future.successful(users.find { case (_, user) => user.loginInfo == loginInfo }.map(_._2))
       }

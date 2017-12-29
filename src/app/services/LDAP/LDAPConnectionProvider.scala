@@ -2,8 +2,8 @@ package app.services.ldap
 
 import com.unboundid.ldap.sdk.{ LDAPConnection, LDAPConnectionOptions }
 import app.models.ldap.UserConnection
+import app.services.cache.LDAPConnectionCache
 import app.utils.types.UserId
-import app.utils.cache.PlaySyncCacheLayer
 import app.utils.config.LDAPConfig
 import app.utils.Logger
 
@@ -27,7 +27,7 @@ trait LDAPConnectionProvider extends Logger {
    */
   def createConnectionByUser(uid: UserId, dn: String, password: String): Unit = {
     val connection = UserConnection(dn, new LDAPConnection(connectionOption, LDAPConfig.host, LDAPConfig.port, dn, password))
-    PlaySyncCacheLayer.cache.set(uid.value.toString, connection, LDAPConfig.expiryDuration)
+    LDAPConnectionCache.cache.set(uid.value.toString, connection, LDAPConfig.expiryDuration)
     logger.info(securityMaker, s"Create LDAP connection: ${uid.value.toString}")
   }
 
@@ -35,10 +35,10 @@ trait LDAPConnectionProvider extends Logger {
    * Remove & close connection from connections store by User.
    */
   def removeConnectionByUser(uid: UserId): Unit = {
-    PlaySyncCacheLayer.cache.get[UserConnection](uid.value.toString) match {
+    LDAPConnectionCache.cache.get[UserConnection](uid.value.toString) match {
       case Some(uc) => {
         uc.connection.close
-        PlaySyncCacheLayer.cache.remove(uid.value.toString)
+        LDAPConnectionCache.cache.remove(uid.value.toString)
         logger.info(securityMaker, s"Delete LDAP connection: ${uid.value.toString}")
       }
       case None => None
@@ -49,7 +49,7 @@ trait LDAPConnectionProvider extends Logger {
    * Find Connection by uid.
    */
   def findConnectionByUser(uid: UserId): Option[UserConnection] = {
-    PlaySyncCacheLayer.cache.get[UserConnection](uid.value.toString)
+    LDAPConnectionCache.cache.get[UserConnection](uid.value.toString)
   }
 
 }
