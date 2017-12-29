@@ -4,23 +4,9 @@ import scala.collection.mutable
 import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.ldap.UserConnection
-import app.services.cache.LDAPConnectionCache
+import app.services.cache.{ LDAPConnectionCache, UserAuthenticationCache }
+import app.utils.config.LDAPConfig
 import app.utils.types.UserId
-
-import app.models.UserDAO._
-
-/**
- * The companion object.
- */
-object UserDAO {
-
-  /**
-   * The list of users.
-   * TODO: Use EhCache
-   */
-  val users: mutable.HashMap[UserId, UserIdentify] = mutable.HashMap()
-
-}
 
 /**
  * Give access to the user object.
@@ -30,16 +16,19 @@ class UserDAO extends UserDAOTrait {
   def find(loginInfo: LoginInfo) = {
     LDAPConnectionCache.cache.get[UserConnection](loginInfo.providerKey) match {
       case Some(uc) => {
-        Future.successful(users.find { case (_, user) => user.loginInfo == loginInfo }.map(_._2))
+        UserAuthenticationCache.cache.get[UserIdentify](loginInfo.providerKey) match {
+          case Some(user) => Future.successful(Option(user))
+          case None => Future.successful(None)
+        }
       }
       case None => Future.successful(None)
     }
   }
 
-  def find(userID: UserId) = Future.successful(users.get(userID))
+  def find(userID: UserId) = Future.successful(UserAuthenticationCache.cache.get[UserIdentify](userID.value.toString))
 
   def save(user: UserIdentify) = {
-    users += (user.userID -> user)
+    UserAuthenticationCache.cache.set(user.userID.value.toString, user, LDAPConfig.expiryDuration)
     Future.successful(user)
   }
 
