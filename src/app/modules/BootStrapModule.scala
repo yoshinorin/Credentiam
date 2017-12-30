@@ -1,0 +1,50 @@
+package modules
+
+import javax.inject.Singleton
+import com.google.inject.AbstractModule
+import com.unboundid.ldap.sdk.{ LDAPConnection, LDAPException }
+import app.utils.Logger
+import app.utils.config.LDAPConfig
+
+@Singleton
+class BootStrapModule extends AbstractModule with Logger {
+
+  def configure() {
+
+    LDAPConnectionEstablishe
+
+  }
+
+  private def LDAPConnectionEstablishe: Boolean = {
+
+    val checkConnectionMessage = "Checking LDAP connection..."
+    println("[INFO] " + checkConnectionMessage)
+    logger.info(checkConnectionMessage)
+
+    val faildConnectionEstablishedMessage = "FAILD to connect LDAP."
+    val connectionEstablishedMessage = "LDAP connection established."
+
+    try {
+      val x = new LDAPConnection(LDAPConfig.host, LDAPConfig.port, LDAPConfig.bindDN, LDAPConfig.password)
+
+      println("[INFO] " + connectionEstablishedMessage)
+      logger.info(connectionEstablishedMessage)
+      true
+    } catch {
+      case e: LDAPException => {
+        println("[ERROR] " + faildConnectionEstablishedMessage)
+        println("[ERROR] " + e.getMessage)
+        logger.error(faildConnectionEstablishedMessage)
+        logger.error(e.getMessage)
+        false
+      }
+      case e: Exception => {
+        println("[ERROR] " + e.getMessage)
+        logger.error(e.getMessage)
+        false
+      }
+    }
+
+  }
+
+}
