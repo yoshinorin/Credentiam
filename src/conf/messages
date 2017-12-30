@@ -58,6 +58,7 @@ error = Error
 info = Info
 success = Success
 exception = Internal Server Error
+ldapConnectionFailed = Failed establishing a LDAP connection.
 notfound = Not Found
 invalid.credentials = Invalid credentials.
 valid.credentials = Authentication succeeded.
