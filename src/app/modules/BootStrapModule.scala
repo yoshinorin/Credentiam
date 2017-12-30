@@ -27,7 +27,7 @@ class BootStrapModule extends AbstractModule with Logger {
     println("[INFO] " + checkConnectionMessage)
     logger.info(checkConnectionMessage)
 
-    val faildConnectionEstablishedMessage = "FAILD to connect LDAP."
+    val failedConnectionEstablishedMessage = "FAILED to connect LDAP."
     val connectionEstablishedMessage = "LDAP connection established."
 
     try {
@@ -38,9 +38,9 @@ class BootStrapModule extends AbstractModule with Logger {
       true
     } catch {
       case e: LDAPException => {
-        println("[ERROR] " + faildConnectionEstablishedMessage)
+        println("[ERROR] " + failedConnectionEstablishedMessage)
         println("[ERROR] " + e.getMessage)
-        logger.error(faildConnectionEstablishedMessage)
+        logger.error(failedConnectionEstablishedMessage)
         logger.error(e.getMessage)
         false
       }
