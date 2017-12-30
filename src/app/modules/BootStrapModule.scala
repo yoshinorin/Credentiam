@@ -6,12 +6,18 @@ import com.unboundid.ldap.sdk.{ LDAPConnection, LDAPException }
 import app.utils.Logger
 import app.utils.config.LDAPConfig
 
+object BootStrapModule {
+
+  val instance = new BootStrapModule
+
+}
+
 @Singleton
 class BootStrapModule extends AbstractModule with Logger {
 
-  def configure() {
+  val established = LDAPConnectionEstablishe
 
-    LDAPConnectionEstablishe
+  def configure() {
 
   }
 
