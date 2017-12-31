@@ -1,0 +1,92 @@
+home.title = Credentiam - Home
+
+# About page messages
+about.description = Credentiam is a simple & graceful web application for manage ActiveDirectory. Powerd by Scala and Play Framework.
+about.copyright = © 2017 YoshinoriN
+about.title = Credentiamについて
+about.components = 使用ライブラリ・コンポーネント
+
+# Help page
+help.title = ヘルプ
+help.issue = 課題
+help.document = ドキュメント
+
+# Header messages
+application.name = Credentiam
+application.description = A simple & graceful ActiveDirectory management system.
+
+# Sign In page messages
+sign.in.title = Credentiam - サインイン
+sign.in = サインイン
+sign.in.credentials = Sign in with your credentials
+
+# Profile page messages
+profile = プロフィール
+profile.title = あなたのプロフィール
+
+# Sign Out messages
+sign.out = サインアウト
+
+# UI Commons
+common.computer = コンピュータ
+common.computers = コンピュータ
+common.domain = ドメイン
+common.domains = ドメイン
+common.home = ホーム
+common.organization = 組織
+common.organizations = 組織
+common.result = 結果
+common.user = ユーザ
+common.users = ユーザ
+common.search = 検索
+
+# Search relations
+search.contains = 含む
+search.excludes = 除く
+search.startswith = から始まる
+search.endswith = で終わる
+search.equal = 一致
+search.notequal = 一致しない
+
+# Administration area
+admin.area = 管理コンソール
+admin.system = システム
+admin.ldap = LDAP
+
+# Common messages
+error = Error
+info = Info
+success = Success
+exception = 内部エラー
+ldapConnectionFailed = LDAPサーバとの接続確立に失敗しました。
+notfound = 見つかりませんでした
+invalid.credentials = 認証エラー
+valid.credentials = 認証成功
+access.denied = アクセスできません
+property = プロパティ
+value = 値
+
+# LDAP attributes
+ldap.attribute.c = 国
+ldap.attribute.cn = 一般名
+ldap.attribute.company = 会社
+ldap.attribute.department = 部署
+ldap.attribute.description = 概要
+ldap.attribute.displayName = 表示名
+ldap.attribute.distinguishedName = 識別名
+ldap.attribute.gn = 名前
+ldap.attribute.l = 地域名
+ldap.attribute.mail = メール
+ldap.attribute.managedBy = 管理ユーザ
+ldap.attribute.name = 名
+ldap.attribute.o = 組織
+ldap.attribute.ou = 組織単位
+ldap.attribute.postalCode = 郵便番号
+ldap.attribute.sAMAccountName = SAMアカウント名
+ldap.attribute.sn = 姓
+ldap.attribute.st = 州・県
+ldap.attribute.street = 住所
+ldap.attribute.uid = ID
+ldap.attribute.userPrincipalName = 主要名
+ldap.attribute.whenChanged = 更新日
+ldap.attribute.whenCreated = 作成日
