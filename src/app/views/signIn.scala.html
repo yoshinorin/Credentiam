@@ -40,7 +40,8 @@
         }
     </fieldset>
   } else {
-    @messages("ldapConnectionFaild")
+    <!--TODO : i18n -->
+    <div>@alert.error("Failed establishing a LDAP connection. Please contact administrator.")</div>
   }
 </div>
 }
