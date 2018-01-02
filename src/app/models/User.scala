@@ -6,22 +6,29 @@ import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.ldap.UserConnection
 import app.services.cache.{ LDAPConnectionCache, UserAuthenticationCache }
 import app.utils.config.LDAPConfig
+import app.utils.Logger
 import app.utils.types.UserId
 
 /**
  * Give access to the user object.
  */
-class UserDAO extends UserDAOTrait {
+class UserDAO extends UserDAOTrait with Logger {
 
   def find(loginInfo: LoginInfo) = {
     LDAPConnectionCache.cache.get[UserConnection](loginInfo.providerKey) match {
       case Some(uc) => {
         UserAuthenticationCache.cache.get[UserIdentify](loginInfo.providerKey) match {
           case Some(user) => Future.successful(Option(user))
-          case None => Future.successful(None)
+          case None => {
+            logger.info(securityMaker, s"Can not find authenticated information : ${loginInfo.providerKey}")
+            Future.successful(None)
+          }
         }
       }
-      case None => Future.successful(None)
+      case None => {
+        logger.info(securityMaker, s"Can not find LDAP connection : ${loginInfo.providerKey}")
+        Future.successful(None)
+      }
     }
   }
 
