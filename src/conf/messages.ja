@@ -29,15 +29,15 @@ sign.out = サインアウト
 
 # UI Commons
 common.computer = コンピュータ
-common.computers = コンピュータ
+common.computers = コンピュータ一覧
 common.domain = ドメイン
-common.domains = ドメイン
+common.domains = ドメイン一覧
 common.home = ホーム
 common.organization = 組織
-common.organizations = 組織
+common.organizations = 組織一覧
 common.result = 結果
 common.user = ユーザ
-common.users = ユーザ
+common.users = ユーザ一覧
 common.search = 検索
 
 # Search relations
