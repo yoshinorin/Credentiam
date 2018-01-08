@@ -3,8 +3,13 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 @import helper._
+@import app.utils.types.LDAPObjectType
 
-@(user: app.models.UserIdentify, searchForm: Form[app.controllers.LDAPController.SearchFormData], ldapAttributes: Option[Seq[app.models.ldap.LDAPObjectOverview]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(user: app.models.UserIdentify,
+  searchForm: Form[app.controllers.LDAPController.SearchFormData],
+  ldapAttributes: Option[Seq[app.models.ldap.LDAPObjectOverview]],
+  searchedObjectType: app.utils.types.LDAPObjectType
+  )(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 @implicitField = @{ FieldConstructor(plainFieldConstructor.f) }
 @main(messages("common.search"), Some(user)) {
 
@@ -60,12 +65,47 @@
         <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
       </tr>
       </thead>
-      @for(attr <- ldapAttributes) {
-      <tr>
-        <td>@attr.name.value</td>
-        <td>@attr.description.value</td>
-        <td>@attr.distinguishedName.value</td>
-      </tr>
+      @searchedObjectType match {
+        case LDAPObjectType.ORGANIZATION => {
+          @for(attr <- ldapAttributes) {
+            <tr>
+              <td>
+                <a href="@app.controllers.routes.LDAPController.organization(attr.distinguishedName.value)">
+                  <i class="mdl-color-text material-icons icon-small" role="presentation">layers</i>&nbsp;&nbsp;@attr.name.value
+                </a>
+              </td>
+              <td>@attr.description.value</td>
+              <td>@attr.distinguishedName.value</td>
+            </tr>
+          }
+        }
+        case LDAPObjectType.USER => {
+          @for(attr <- ldapAttributes) {
+            <tr>
+              <td>
+                <a href="@app.controllers.routes.LDAPController.user(attr.distinguishedName.value)">
+                  <i class="mdl-color-text material-icons icon-small" role="presentation">account_circle</i>&nbsp;&nbsp;@attr.name.value
+                </a>
+              </td>
+              <td>@attr.description.value</td>
+              <td>@attr.distinguishedName.value</td>
+            </tr>
+          }
+        }
+        case LDAPObjectType.COMPUTER => {
+          @for(attr <- ldapAttributes) {
+            <tr>
+              <td>
+                <!--TODO-->
+              </td>
+              <td>@attr.description.value</td>
+              <td>@attr.distinguishedName.value</td>
+            </tr>
+          }
+        }
+        case _ => {
+          <!-- do nothing -->
+        }
       }
       </tbody>
     </table>

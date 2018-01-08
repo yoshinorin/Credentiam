@@ -45,10 +45,11 @@ class LDAPController @Inject() (
 
   def search = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     SearchForm.bindFromRequest.fold(
-      form => Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, None))),
+      form => Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, None, app.utils.types.LDAPObjectType.ORGANIZATION))),
       data => {
-        val result = LDAPService.server.find[LDAPObjectOverview](request.identity.userID, LDAPQueryService.filterBuilder(data.objectType.toLDAPObjectType, data.relation.toSearchRelation, data.word))
-        Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result))),
+        val ldapObjectType = data.objectType.toLDAPObjectType
+        val result = LDAPService.server.find[LDAPObjectOverview](request.identity.userID, LDAPQueryService.filterBuilder(ldapObjectType, data.relation.toSearchRelation, data.word))
+        Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result, ldapObjectType))),
       }
     )
   }
