@@ -39,11 +39,11 @@ routesGenerator := InjectedRoutesGenerator
 // Scalariform settings
 //********************************************************
 
-defaultScalariformSettings
+scalariformSettings
 
 ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(FormatXml, false)
-  .setPreference(DoubleIndentClassDeclaration, false)
+  .setPreference(doubleIndentConstructorArguments, false)
   .setPreference(DanglingCloseParenthesis, Preserve)
 
 //********************************************************
