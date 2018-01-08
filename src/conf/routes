@@ -18,6 +18,7 @@ GET         /domains                         app.controllers.LDAPController.doma
 GET         /organization/:dn                app.controllers.LDAPController.organization(dn: String)
 GET         /organizations                   app.controllers.LDAPController.organizations
 GET         /computers                       app.controllers.LDAPController.computers
+GET         /user/:dn                        app.controllers.LDAPController.user(dn: String)
 GET         /users                           app.controllers.LDAPController.users
 
 # Administration
