@@ -25,7 +25,3 @@ These requierments follow with [play framework](//www.playframework.com/document
 ## Universal
 
 run `sbt universal:packageBin` in `src` directory.
-## Windows
-
-* Install [WiX](//github.com/wixtoolset/wix3)
-* run `sbt windows:packageBin` in `src` directory.
