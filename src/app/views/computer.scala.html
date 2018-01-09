@@ -1,0 +1,58 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(user: app.models.UserIdentify, ldapAttributes: Option[app.models.ldap.Computer])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@main(messages("common.computer"), Some(user)) {
+  @ldapAttributes match {
+    case None => {
+      <div class="centering vertical-middle">
+        <h5>@messages("notfound")</h5>
+      </div>
+    }
+    case Some(ldapAttributes) => {
+      <div class="centering vertical-middle">
+        <h5><i class="mdl-color-text material-icons" role="presentation">desktop_windows</i>&nbsp;&nbsp;@messages(ldapAttributes.cn.name)</h5>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+          <tr>
+            <th><h6>@messages("property")</h6></th>
+            <th><h6>@messages("value")</h6></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@messages(ldapAttributes.cn.name)</td>
+            <td>@ldapAttributes.cn.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.description.name)</td>
+            <td>@ldapAttributes.description.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.distinguishedName.name)</td>
+            <td>@ldapAttributes.distinguishedName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.managedBy.name)</td>
+            <td>@ldapAttributes.managedBy.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.name.name)</td>
+            <td>@ldapAttributes.name.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.whenCreated.name)</td>
+            <td>@ldapAttributes.whenCreated.value</td>
+          </tr>
+          <tr>
+            <td>@messages(ldapAttributes.whenChanged.name)</td>
+            <td>@ldapAttributes.whenChanged.value</td>
+          </tr>
+        </tbody>
+      </table>
+    }
+  }
+}
