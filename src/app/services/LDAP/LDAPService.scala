@@ -168,7 +168,21 @@ trait LDAPService[T] extends LDAPConnectionProvider {
   }
 
   /**
-   * Find computers. (only overview)
+   * Find mapped Computer class.
+   *
+   * @param connectionUser The current user id.
+   * @param targetUid The target uid.
+   * @return Computer class or none.
+   */
+  def findComputer(connectionUser: UserId): Option[Seq[app.models.ldap.Computer]] = {
+    search(connectionUser, Filter.createEqualityFilter("objectCategory", "computer"), ClassUtil.getLDAPAttributeFields[Computer]) match {
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[Computer](sr))
+      case None => None
+    }
+  }
+
+  /**
+   * Find computers
    *
    * @param connectionUser The current user id.
    * @return LDAPObjectOverview classes or none.

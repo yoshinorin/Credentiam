@@ -66,6 +66,10 @@ class LDAPController @Inject() (
     Future.successful(Ok(views.html.organizations(request.identity, (LDAPService.server.findOrganizations(request.identity.userID)))))
   }
 
+  def computer(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    Future.successful(Ok(views.html.computer(request.identity, (LDAPService.server.findByDN[Computer](request.identity.userID, dn)))))
+  }
+
   def computers = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
     Future.successful(Ok(views.html.computers(request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
   }
