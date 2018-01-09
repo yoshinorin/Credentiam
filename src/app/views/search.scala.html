@@ -96,7 +96,9 @@
           @for(attr <- ldapAttributes) {
             <tr>
               <td>
-                <!--TODO-->
+                <a href="@app.controllers.routes.LDAPController.computer(attr.distinguishedName.value)">
+                  <i class="mdl-color-text material-icons icon-small" role="presentation">desktop_windows</i>&nbsp;&nbsp;@attr.name.value
+                </a>
               </td>
               <td>@attr.description.value</td>
               <td>@attr.distinguishedName.value</td>
