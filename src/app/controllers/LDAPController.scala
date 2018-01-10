@@ -10,7 +10,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import com.unboundid.ldap.sdk.Filter
 import controllers.AssetsFinder
-import app.models.ldap.{ ActiveDirectoryUser, Computer, Domain, Attribute, LDAPObjectOverview, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, Attribute, Computer, Domain, LDAPObjectOverview, OrganizationUnit }
 import app.services.ldap.{ LDAPService, LDAPQueryService }
 import app.utils.auth.DefaultEnv
 import app.utils.config.LDAPSearchableAttributes
