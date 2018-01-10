@@ -4,7 +4,7 @@
 
 @(user: app.models.UserIdentify, domain: Option[app.models.ldap.Domain])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
-@main(messages("common.organization"), Some(user)) {
+@main(messages("common.domain"), Some(user)) {
   @domain match {
     case None => {
       <div class="centering vertical-middle">
