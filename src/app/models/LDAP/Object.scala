@@ -25,6 +25,16 @@ class LDAPObjectOverview(sr: SearchResultEntry) {
 
 }
 
+class Domain(sr: SearchResultEntry) {
+
+  val dc: Attribute = Attribute.store("ldap.attribute.dc", sr.getAttributeValue("dc"))
+  val distinguishedName: Attribute = Attribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val name: Attribute = Attribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
+  val whenChanged: Attribute = Attribute.store("ldap.attribute.whenChanged", sr.getAttributeValue("whenChanged"))
+  val whenCreated: Attribute = Attribute.store("ldap.attribute.whenCreated", sr.getAttributeValue("whenCreated"))
+
+}
+
 //TODO: Clean up & Add attributeses
 class OrganizationUnit(sr: SearchResultEntry) {
 
