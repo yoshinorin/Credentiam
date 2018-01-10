@@ -1,0 +1,46 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+
+@(user: app.models.UserIdentify, domain: Option[app.models.ldap.Domain])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+@main(messages("common.organization"), Some(user)) {
+  @domain match {
+    case None => {
+      <div class="centering vertical-middle">
+        <h5>@messages("notfound")</h5>
+      </div>
+    }
+    case Some(domain) => {
+      <div class="centering vertical-middle">
+        <h5><i class="mdl-color-text material-icons" role="presentation">domain</i>&nbsp;&nbsp;@domain.name.value</h5>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
+        <thead>
+        <tr>
+          <th><h6>@messages("property")</h6></th>
+          <th><h6>@messages("value")</h6></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@messages(domain.name.name)</td>
+            <td>@domain.name.value</td>
+          </tr>
+          <tr>
+            <td>@messages(domain.distinguishedName.name)</td>
+            <td>@domain.distinguishedName.value</td>
+          </tr>
+          <tr>
+            <td>@messages(domain.whenCreated.name)</td>
+            <td>@domain.whenCreated.value</td>
+          </tr>
+          <tr>
+            <td>@messages(domain.whenChanged.name)</td>
+            <td>@domain.whenChanged.value</td>
+          </tr>
+        </tbody>
+      </table>
+    }
+  }
+}
