@@ -10,7 +10,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import com.unboundid.ldap.sdk.Filter
 import controllers.AssetsFinder
-import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, Computer, Domain, Attribute, LDAPObjectOverview, OrganizationUnit }
 import app.services.ldap.{ LDAPService, LDAPQueryService }
 import app.utils.auth.DefaultEnv
 import app.utils.config.LDAPSearchableAttributes
@@ -52,6 +52,10 @@ class LDAPController @Inject() (
         Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result, ldapObjectType))),
       }
     )
+  }
+
+  def domain(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    Future.successful(Ok(views.html.domain(request.identity, (LDAPService.server.findByDN[Domain](request.identity.userID, dn)))))
   }
 
   def domains = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>

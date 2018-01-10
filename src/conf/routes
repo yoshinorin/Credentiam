@@ -14,6 +14,7 @@ GET         /signOut                         app.controllers.AuthController.sign
 # LDAP
 GET         /profile                         app.controllers.LDAPController.profile
 GET         /search                          app.controllers.LDAPController.search
+GET         /domain/:dn                      app.controllers.LDAPController.domain(dn: String)
 GET         /domains                         app.controllers.LDAPController.domains
 GET         /organization/:dn                app.controllers.LDAPController.organization(dn: String)
 GET         /organizations                   app.controllers.LDAPController.organizations
