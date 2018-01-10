@@ -70,6 +70,7 @@ value = Value
 ldap.attribute.c = Country
 ldap.attribute.cn = Common Name
 ldap.attribute.company = Company
+ldap.attribute.dc = Domain Components
 ldap.attribute.department = Department
 ldap.attribute.description = Description
 ldap.attribute.displayName = Display Name

@@ -70,6 +70,7 @@ value = 値
 ldap.attribute.c = 国
 ldap.attribute.cn = 一般名
 ldap.attribute.company = 会社
+ldap.attribute.dc = ドメインコンポーネント
 ldap.attribute.department = 部署
 ldap.attribute.description = 概要
 ldap.attribute.displayName = 表示名
