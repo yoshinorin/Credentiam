@@ -94,11 +94,11 @@ td {
   margin-left : auto;
 }
 
-.header-bottom-nav{
+.header-bottom-nav {
   width: 100%;
-  padding-top: 8px;
   text-align: center;
   background: #F5F5F5;
+  border-bottom: 1px solid #dee5e8;
 }
 
 .header-messages {
