@@ -5,26 +5,22 @@
 @(user: app.models.UserIdentify)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("home.title"), Some(user)) {
-<div class="home-content">
-  <h4>Welcom</h4>
-  <div class="mdl-grid">
-    <div class="mdl-grid">
-      <h4>
-        <a href="@app.controllers.routes.LDAPController.search" class="mdl-button mdl-js-button mdl-button--primary home-button">
-          <i class="mdl-color-text material-icons" role="presentation">search</i>&nbsp;@messages("common.search")
-        </a>
-      </h4>
-      <h4>
-        <a href="@app.controllers.routes.LDAPController.domains" class="mdl-button mdl-js-button mdl-button--primary home-button">
-          <i class="mdl-color-text material-icons" role="presentation">domains</i>&nbsp;@messages("common.domains")
-        </a>
-      </h4>
-      <h4>
-        <a href="@app.controllers.routes.LDAPController.organizations" class="mdl-button mdl-js-button mdl-button--primary home-button">
-          <i class="mdl-color-text material-icons" role="presentation">layers</i>&nbsp;@messages("common.organizations")
-        </a>
-      </h4>
-    </div>
-  </div>
+<h4 class="home-message">Welcom</h4>
+<div class="body-centralized">
+  <h4>
+    <a href="@app.controllers.routes.LDAPController.search" class="mdl-button mdl-js-button mdl-button--primary home-button">
+      <i class="mdl-color-text material-icons" role="presentation">search</i>&nbsp;@messages("common.search")
+    </a>
+  </h4>
+  <h4>
+    <a href="@app.controllers.routes.LDAPController.domains" class="mdl-button mdl-js-button mdl-button--primary home-button">
+      <i class="mdl-color-text material-icons" role="presentation">domains</i>&nbsp;@messages("common.domains")
+    </a>
+  </h4>
+  <h4>
+    <a href="@app.controllers.routes.LDAPController.organizations" class="mdl-button mdl-js-button mdl-button--primary home-button">
+      <i class="mdl-color-text material-icons" role="presentation">layers</i>&nbsp;@messages("common.organizations")
+    </a>
+  </h4>
 </div>
 }
