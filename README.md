@@ -6,6 +6,14 @@
 
 ActiveDirectory search application. Powerd by Scala & Play Framework.
 
+# Features
+
+TODO
+
+# Images
+
+TODO
+
 # Requirements
 
 These requierments follow with [play framework](//www.playframework.com/documentation/2.6.x/Installing).
@@ -13,12 +21,21 @@ These requierments follow with [play framework](//www.playframework.com/document
 * sbt
 * Java 1.8
 
-# Install
+# Installation
 
 * Clone or download source code.
 * `playGenerateSecret`
 * `playUpdateSecret`
 * `sbt clean run`
+
+# Settings
+
+TODO
+
+# Supported Language
+
+* English
+* Japanese
 
 # Packaging
 
