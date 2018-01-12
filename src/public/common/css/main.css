@@ -88,6 +88,13 @@ td {
   margin: 0 auto;
 }
 
+
+.body-centralized {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .footer-link {
   text-align: center;
   margin-right: auto;
