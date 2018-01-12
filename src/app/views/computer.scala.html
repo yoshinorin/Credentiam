@@ -13,7 +13,7 @@
     }
     case Some(ldapAttributes) => {
       <div class="centering vertical-middle">
-        <h5><i class="mdl-color-text material-icons" role="presentation">desktop_windows</i>&nbsp;&nbsp;@messages(ldapAttributes.cn.name)</h5>
+        <h5><i class="mdl-color-text material-icons" role="presentation">desktop_windows</i>&nbsp;&nbsp;@ldapAttributes.name.value</h5>
       </div>
       <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
         <thead>
