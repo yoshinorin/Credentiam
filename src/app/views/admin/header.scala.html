@@ -5,7 +5,7 @@
 @(user: app.models.UserIdentify)(content: Html)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("admin.area"), Some(user)) {
-  <div class="padding-50 centering">
+  <div class="flex-center">
     <!--TODO: Create each page -->
     <button class="mdl-button mdl-js-button mdl-button--primary">
       @messages("admin.system")

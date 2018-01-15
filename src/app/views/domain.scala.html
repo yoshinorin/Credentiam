@@ -7,12 +7,12 @@
 @main(messages("common.domain"), Some(user)) {
   @domain match {
     case None => {
-      <div class="centering vertical-middle">
+      <div class="flex-center vertical-middle">
         <h5>@messages("notfound")</h5>
       </div>
     }
     case Some(domain) => {
-      <div class="centering vertical-middle">
+      <div class="flex-center vertical-middle">
         <h5><i class="mdl-color-text material-icons" role="presentation">domain</i>&nbsp;&nbsp;@domain.name.value</h5>
       </div>
       <table class="mdl-data-table mdl-js-data-table mdl-data-table__header--sorted-descending mdl-shadow--1dp padding-40">
