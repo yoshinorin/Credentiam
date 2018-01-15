@@ -127,9 +127,11 @@ td {
 
 .home-content {
   padding-top: 20px;
-  text-align: center;
 }
 
+.home-message {
+  text-align: center;
+}
 
 .mdl-layout__header,
 .mdl-layout__drawer-button {
