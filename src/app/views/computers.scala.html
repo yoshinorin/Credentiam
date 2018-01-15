@@ -26,7 +26,7 @@
       @for(ou <- ldapAttributes) {
       <tr>
         <td>
-          <a href="@app.controllers.routes.LDAPController.organization(ou.distinguishedName.value)">
+          <a href="@app.controllers.routes.LDAPController.computer(ou.distinguishedName.value)">
             <i class="mdl-color-text material-icons icon-small" role="presentation">desktop_windows</i>&nbsp;&nbsp;@ou.name.value
           </a>
         </td>
