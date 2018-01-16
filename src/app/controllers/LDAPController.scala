@@ -49,7 +49,7 @@ class LDAPController @Inject() (
       data => {
         val ldapObjectType = data.objectType.toLDAPObjectType
         val result = LDAPService.server.find[LDAPObjectOverview](request.identity.userID, LDAPQueryService.filterBuilder(ldapObjectType, data.relation.toSearchRelation, data.word))
-        Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result, ldapObjectType))),
+        Future.successful(Ok(views.html.search(request.identity, LDAPController.SearchForm, result, ldapObjectType)))
       }
     )
   }
