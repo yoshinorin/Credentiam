@@ -88,10 +88,16 @@ td {
   margin: 0 auto;
 }
 
-
 .flex-center {
   display: flex;
   justify-content: center;
+  text-align: center;
+}
+
+.flex-center-vertical-items {
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
   text-align: center;
 }
 
