@@ -2,7 +2,6 @@ package modules
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.Configuration
-import play.api.libs.openid.OpenIdClient
 import play.api.libs.ws.WSClient
 import play.api.mvc.CookieHeaderEncoding
 import com.google.inject.name.Named
@@ -16,7 +15,6 @@ import com.mohiva.play.silhouette.api.{ Environment, EventBus, Silhouette, Silho
 import com.mohiva.play.silhouette.crypto.{ JcaCrypter, JcaCrypterSettings, JcaSigner, JcaSignerSettings }
 import com.mohiva.play.silhouette.impl.authenticators._
 import com.mohiva.play.silhouette.impl.providers._
-import com.mohiva.play.silhouette.impl.providers.openid.services.PlayOpenIDService
 import com.mohiva.play.silhouette.impl.providers.state.{ CsrfStateItemHandler, CsrfStateSettings }
 import com.mohiva.play.silhouette.impl.services._
 import com.mohiva.play.silhouette.impl.util._

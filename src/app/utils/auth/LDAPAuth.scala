@@ -5,11 +5,9 @@ import javax.inject.Inject
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.cache._
-import play.api.mvc._
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
-import app.models.UserIdentify
 import app.utils.config.LDAPConfig
 
 class LDAPAuth @Inject() (

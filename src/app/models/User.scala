@@ -1,6 +1,5 @@
 package app.models
 
-import scala.collection.mutable
 import scala.concurrent.Future
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 import app.models.ldap.UserConnection

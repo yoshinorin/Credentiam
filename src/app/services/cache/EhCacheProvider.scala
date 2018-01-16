@@ -5,7 +5,6 @@ import scala.concurrent.{ Await, Future }
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.reflect.ClassTag
 import play.api.cache.ehcache.EhCacheApi
-import net.sf.ehcache.config.CacheConfiguration
 import net.sf.ehcache.{ Cache, CacheManager }
 
 class EhCacheProvider(cacheName: String) {

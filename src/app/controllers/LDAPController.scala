@@ -7,14 +7,11 @@ import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents }
 import play.api.data.Form
 import play.api.data.Forms._
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
-import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
-import com.unboundid.ldap.sdk.Filter
+import com.mohiva.play.silhouette.api.Silhouette
 import controllers.AssetsFinder
-import app.models.ldap.{ ActiveDirectoryUser, Attribute, Computer, Domain, LDAPObjectOverview, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, Computer, Domain, LDAPObjectOverview, OrganizationUnit }
 import app.services.ldap.{ LDAPService, LDAPQueryService }
 import app.utils.auth.DefaultEnv
-import app.utils.config.LDAPSearchableAttributes
-import app.utils.types.SearchRelations
 import app.utils.Converter._
 
 import LDAPController._

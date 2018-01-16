@@ -5,9 +5,8 @@ import scala.concurrent.Future
 import play.api.i18n.I18nSupport
 import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents }
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
-import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
+import com.mohiva.play.silhouette.api.Silhouette
 import controllers.AssetsFinder
-import app.services.ldap.LDAPService
 import app.utils.auth.DefaultEnv
 
 class ApplicationController @Inject() (

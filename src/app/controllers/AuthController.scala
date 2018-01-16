@@ -1,21 +1,16 @@
 package app.controllers
 
 import javax.inject.Inject
-import scala.concurrent.duration._
 import scala.concurrent.{ ExecutionContext, Future }
 import play.api.i18n.{ I18nSupport, Messages }
 import play.api.mvc.{ AbstractController, AnyContent, ControllerComponents, Request }
 import play.api.data.Form
 import play.api.data.Forms._
-import com.mohiva.play.silhouette.api.Authenticator.Implicits._
 import com.mohiva.play.silhouette.api._
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
-import com.mohiva.play.silhouette.api.exceptions.ProviderException
-import com.mohiva.play.silhouette.api.util.{ Credentials, PasswordHasherRegistry }
-import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
+import com.mohiva.play.silhouette.api.util.{ PasswordHasherRegistry, PasswordInfo }
 import com.mohiva.play.silhouette.impl.providers._
 import com.mohiva.play.silhouette.api.actions.SecuredRequest
-import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.unboundid.ldap.sdk.ResultCode
 import controllers.AssetsFinder
 import app.models.UserIdentify
