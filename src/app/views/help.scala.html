@@ -4,12 +4,20 @@
 @()(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("help.title")) {
-<div class="centering">
-  <h4>@messages("help.title")</h4>
-  <hr>
-  <h5>@messages("help.issue")</h5>
-  <a href="https://github.com/YoshinoriN/Credentiam/issues/" target="_blank" rel="noopener">Please see issue tracker on GitHub.</a>
-  <h5>@messages("help.document")</h5>
-  <p>Coming soon...</p>
+<div class="flex-center">
+  <h4 class="home-message">@messages("help.title")</h4>
+</div>
+<div class="flex-center">
+  <br>
+  <h4>
+    <a href="https://github.com/YoshinoriN/Credentiam/issues/" target="_blank" rel="noopener" class="mdl-button mdl-js-button mdl-button--primary">
+      <i class="mdl-color-text material-icons" role="presentation">info</i>&nbsp;@messages("help.issue")
+    </a>
+  </h4>
+  <h4>
+    <a class="mdl-button mdl-js-button mdl-button--primary" disabled>
+      <i class="mdl-color-text material-icons" role="presentation">library_books</i>&nbsp;@messages("help.document")
+    </a>
+  </h4>
 </div>
 }
