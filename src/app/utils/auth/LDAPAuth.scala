@@ -11,8 +11,8 @@ import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
 import app.utils.config.LDAPConfig
 
 /**
-  * This class is unused. Only mock for use Silhouette.
-  */
+ * This class is unused. Only mock for use Silhouette.
+ */
 class LDAPAuth @Inject() (
   cache: AsyncCacheApi
 ) extends DelegableAuthInfoDAO[PasswordInfo] {
