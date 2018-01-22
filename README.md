@@ -23,10 +23,7 @@ These requierments follow with [play framework](//www.playframework.com/document
 
 # Installation
 
-* Clone or download source code.
-* `playGenerateSecret`
-* `playUpdateSecret`
-* `sbt clean run`
+TODO
 
 # Settings
 
