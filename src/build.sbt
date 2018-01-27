@@ -22,7 +22,6 @@ libraryDependencies ++= Seq(
   "com.mohiva" %% "play-silhouette-crypto-jca" % "5.0.3",
   "com.mohiva" %% "play-silhouette-testkit" % "5.0.3" % "test",
   "com.unboundid" % "unboundid-ldapsdk" % "4.0.4",
-  "org.ehcache" % "ehcache" % "3.4.0",
   specs2 % Test,
   ehcache,
   guice,
