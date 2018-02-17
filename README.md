@@ -45,7 +45,10 @@ Configuration files are stored in `conf` directory.
 ## LDAP Settings
 
 LDAP config file is `ldap.conf`.
+
 Basically you have to change connection settings to your ldap server.
+
+Each value's explanation are write in `ldap.conf`.
 
 ## Play Settings
 
