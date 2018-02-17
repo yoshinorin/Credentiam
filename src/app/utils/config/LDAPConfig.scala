@@ -18,6 +18,8 @@ object LDAPConfig extends ConfigProvider {
   val expiryDuration: Duration = Duration(configuration.getInt("ldap.expiryDuration"), "minutes")
   val maxResults = configuration.getInt("ldap.maxResult")
   val baseDN = configuration.getString("ldap.baseDN")
+  val allowAccessToUsers = configuration.getBoolean("ldap.allowAccessToUsers")
+  val allowAccessToComputers = configuration.getBoolean("ldap.allowAccessToComputers")
   val uidAttributeName = configuration.getString("ldap.uidAttributeName")
   val administratorDN = configuration.getString("ldap.administratorDN")
   val isActiveDirectory = configuration.getBoolean("ldap.isActiveDirectory")

@@ -1,6 +1,7 @@
 @import play.api.i18n.Messages
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
+@import app.utils.config.LDAPConfig
 
 @(user: app.models.UserIdentify)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
@@ -22,5 +23,20 @@
       <i class="mdl-color-text material-icons" role="presentation">layers</i>&nbsp;@messages("common.organizations")
     </a>
   </h4>
+  <br>
+  @if(LDAPConfig.allowAccessToUsers) {
+    <h4>
+      <a href="@app.controllers.routes.LDAPController.users" class="mdl-button mdl-js-button mdl-button--primary home-button">
+        <i class="mdl-color-text material-icons" role="presentation">account_circle</i>&nbsp;@messages("common.users")
+      </a>
+    </h4>
+  }
+  @if(LDAPConfig.allowAccessToComputers) {
+  <h4>
+    <a href="@app.controllers.routes.LDAPController.computers" class="mdl-button mdl-js-button mdl-button--primary home-button">
+      <i class="mdl-color-text material-icons" role="presentation">computer</i>&nbsp;@messages("common.computers")
+    </a>
+  </h4>
+  }
 </div>
 }
