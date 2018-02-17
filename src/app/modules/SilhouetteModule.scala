@@ -16,7 +16,6 @@ import com.mohiva.play.silhouette.crypto.{ JcaCrypter, JcaCrypterSettings, JcaSi
 import com.mohiva.play.silhouette.impl.authenticators._
 import com.mohiva.play.silhouette.impl.providers._
 import com.mohiva.play.silhouette.impl.providers.state.{ CsrfStateItemHandler, CsrfStateSettings }
-import com.mohiva.play.silhouette.impl.services._
 import com.mohiva.play.silhouette.impl.util._
 import com.mohiva.play.silhouette.password.{ BCryptPasswordHasher, BCryptSha256PasswordHasher }
 import com.mohiva.play.silhouette.persistence.daos.{ DelegableAuthInfoDAO }
