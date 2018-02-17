@@ -4,7 +4,7 @@ import scala.collection.JavaConverters._
 import scala.reflect._
 import scala.reflect.runtime.universe._
 import com.unboundid.ldap.sdk._
-import app.models.ldap.{ ActiveDirectoryUser, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
+import app.models.ldap.{ ActiveDirectoryUser, ActiveDirectoryUserOverView, Computer, Attribute, LDAPObjectOverview, OrganizationUnit }
 import app.utils.ClassUtil
 import app.utils.types.UserId
 import app.utils.config.LDAPConfig
@@ -201,9 +201,9 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @param connectionUser The current user id.
    * @return LDAPObjectOverview classes or none.
    */
-  def findUsers(connectionUser: UserId): Option[Seq[app.models.ldap.LDAPObjectOverview]] = {
+  def findUsers(connectionUser: UserId): Option[Seq[app.models.ldap.ActiveDirectoryUserOverView]] = {
     search(connectionUser, Filter.createANDFilter(Filter.createEqualityFilter("objectClass", "user"), Filter.createNOTFilter(Filter.create("(objectClass=computer)"))), ClassUtil.getLDAPAttributeFields[LDAPObjectOverview]) match {
-      case Some(sr) => Some(mapSearchResultEntryToLdapClass[LDAPObjectOverview](sr))
+      case Some(sr) => Some(mapSearchResultEntryToLdapClass[ActiveDirectoryUserOverView](sr))
       case None => None
     }
   }

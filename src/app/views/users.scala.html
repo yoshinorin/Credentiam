@@ -2,7 +2,7 @@
 @import play.api.mvc.RequestHeader
 @import controllers.AssetsFinder
 
-@(user: app.models.UserIdentify, ldapAttributes: Option[Seq[app.models.ldap.LDAPObjectOverview]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+@(user: app.models.UserIdentify, ldapAttributes: Option[Seq[app.models.ldap.ActiveDirectoryUserOverView]])(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
 @main(messages("common.users"), Some(user)) {
   @ldapAttributes match {
@@ -20,6 +20,7 @@
       <tr>
         <th><h6>@messages("ldap.attribute.name")</h6></th>
         <th><h6>@messages("ldap.attribute.description")</h6></th>
+        <th><h6>@messages("ldap.attribute.mail")</h6></th>
         <th><h6>@messages("ldap.attribute.distinguishedName")</h6></th>
       </tr>
       </thead>
@@ -31,6 +32,7 @@
           </a>
         </td>
         <td>@ou.description.value</td>
+        <td>@ou.mail.value</td>
         <td>@ou.distinguishedName.value</td>
       </tr>
       }

@@ -51,6 +51,10 @@ class OrganizationUnit(sr: SearchResultEntry) {
 
 }
 
+class ActiveDirectoryUserOverView(sr: SearchResultEntry) extends LDAPObjectOverview(sr: SearchResultEntry) {
+  val mail: Attribute = Attribute.store("ldap.attribute.mail", sr.getAttributeValue("mail"))
+}
+
 //TODO: Clean up & Add attributeses
 class ActiveDirectoryUser(sr: SearchResultEntry) {
 
@@ -60,6 +64,7 @@ class ActiveDirectoryUser(sr: SearchResultEntry) {
   val description: Attribute = Attribute.store("ldap.attribute.description", sr.getAttributeValue("description"))
   val displayName: Attribute = Attribute.store("ldap.attribute.displayName", sr.getAttributeValue("displayName"))
   val distinguishedName: Attribute = Attribute.store("ldap.attribute.distinguishedName", sr.getAttributeValue("distinguishedName"))
+  val mail: Attribute = Attribute.store("ldap.attribute.mail", sr.getAttributeValue("mail"))
   val name: Attribute = Attribute.store("ldap.attribute.name", sr.getAttributeValue("name"))
   val sAMAccountName: Attribute = Attribute.store("ldap.attribute.sAMAccountName", sr.getAttributeValue("sAMAccountName"))
   val sn: Attribute = Attribute.store("ldap.attribute.sn", sr.getAttributeValue("sn"))
