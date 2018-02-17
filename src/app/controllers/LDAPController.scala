@@ -13,6 +13,7 @@ import app.models.ldap.{ ActiveDirectoryUser, Computer, Domain, LDAPObjectOvervi
 import app.services.ldap.{ LDAPService, LDAPQueryService }
 import app.utils.auth.DefaultEnv
 import app.utils.Converter._
+import app.utils.config.LDAPConfig
 
 import LDAPController._
 
@@ -72,7 +73,11 @@ class LDAPController @Inject() (
   }
 
   def computers = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
-    Future.successful(Ok(views.html.computers(request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
+    if (LDAPConfig.allowAccessToComputers) {
+      Future.successful(Ok(views.html.computers(request.identity, (LDAPService.server.findComputers(request.identity.userID)))))
+    } else {
+      Future.successful(Redirect(routes.ApplicationController.index()))
+    }
   }
 
   def user(dn: String) = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
@@ -80,7 +85,11 @@ class LDAPController @Inject() (
   }
 
   def users = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
-    Future.successful(Ok(views.html.users(request.identity, (LDAPService.server.findUsers(request.identity.userID)))))
+    if (LDAPConfig.allowAccessToUsers) {
+      Future.successful(Ok(views.html.users(request.identity, (LDAPService.server.findUsers(request.identity.userID)))))
+    } else {
+      Future.successful(Redirect(routes.ApplicationController.index()))
+    }
   }
 
 }
