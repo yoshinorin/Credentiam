@@ -44,7 +44,7 @@ sh ./bin/credentiam -Dconfig.file=./conf/application.conf
 
 # Settings
 
-Configuration files are stored in `conf` directory.
+Please change settings below document. Configuration files are stored in `conf` directory. 
 
 ## LDAP Settings
 
@@ -64,8 +64,10 @@ Please change `play.http.secret.key` in `application.conf` to any value you like
 Currently production mode is supported only work on linux.
 But, on Windows work when developer mode. So, I'm wanna production mode on Windows.
 
-# Packaging
+# For developer
 
-## Universal
+## Packaging
+
+### Universal
 
 run `sbt universal:packageBin` in `src` directory.
