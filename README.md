@@ -61,7 +61,8 @@ Please change `play.http.secret.key` in `application.conf` to any value you like
 
 # Supported OS
 
-TODO
+Currently production mode is supported only work on linux.
+But, on Windows work when developer mode. So, I'm wanna production mode on Windows.
 
 # Packaging
 
