@@ -13,6 +13,7 @@ ActiveDirectory search application. Powerd by Scala & Play Framework.
 * View LDAP users and each user information.
 * View LDAP computers and each computer information.
 * Search object (user, computer, organization)
+* Easy to change search target attributes of LDAP of each objects (Organization, user, computer)
 
 Maybe can use by OpenLDAP but some contents aren't display.
 
