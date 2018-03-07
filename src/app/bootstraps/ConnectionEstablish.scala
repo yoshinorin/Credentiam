@@ -1,25 +1,23 @@
-package modules
+package app.bootstraps
 
 import javax.inject.Singleton
-import com.google.inject.AbstractModule
 import com.unboundid.ldap.sdk.{ LDAPConnection, LDAPException }
 import app.utils.Logger
 import app.utils.config.LDAPConfig
 
-object BootStrapModule {
+/**
+ * Companion object.
+ */
+object ConnectionEstablish {
 
-  val instance = new BootStrapModule
+  val instance = new ConnectionEstablish
 
 }
 
 @Singleton
-class BootStrapModule extends AbstractModule with Logger {
+class ConnectionEstablish extends Logger {
 
   val established = LDAPConnectionEstablishe
-
-  def configure() {
-
-  }
 
   private def LDAPConnectionEstablishe: Boolean = {
 
