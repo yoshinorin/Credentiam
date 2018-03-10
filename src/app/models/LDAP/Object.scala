@@ -6,7 +6,8 @@ case class Attribute(
   name: String,
   //TODO: Should another type. ex) byte
   //TODO: value have to change array or list.
-  value: String = "-")
+  value: String = "-"
+)
 
 object Attribute {
   def store(name: String, value: String): Attribute = {

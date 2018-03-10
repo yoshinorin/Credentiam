@@ -105,7 +105,8 @@ trait LDAPService[T] extends LDAPConnectionProvider {
       defaultConnection.search(new SearchRequest(
         LDAPConfig.baseDN,
         SearchScope.SUB,
-        Filter.createEqualityFilter(LDAPConfig.uidAttributeName, uid.value.toString))).getSearchEntries
+        Filter.createEqualityFilter(LDAPConfig.uidAttributeName, uid.value.toString)
+      )).getSearchEntries
     }
     searchResult.isEmpty match {
       case false => Some(searchResult.get(0).getDN)

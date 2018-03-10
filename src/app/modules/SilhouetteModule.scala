@@ -72,13 +72,15 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
   def provideEnvironment(
     userService: UserService,
     authenticatorService: AuthenticatorService[CookieAuthenticator],
-    eventBus: EventBus): Environment[DefaultEnv] = {
+    eventBus: EventBus
+  ): Environment[DefaultEnv] = {
 
     Environment[DefaultEnv](
       userService,
       authenticatorService,
       Seq(),
-      eventBus)
+      eventBus
+    )
   }
 
   /**
@@ -128,7 +130,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
    */
   @Provides
   def provideAuthInfoRepository(
-    passwordInfoDAO: DelegableAuthInfoDAO[PasswordInfo]): AuthInfoRepository = {
+    passwordInfoDAO: DelegableAuthInfoDAO[PasswordInfo]
+  ): AuthInfoRepository = {
     new DelegableAuthInfoRepository(passwordInfoDAO)
   }
 
@@ -152,7 +155,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     fingerprintGenerator: FingerprintGenerator,
     idGenerator: IDGenerator,
     configuration: Configuration,
-    clock: Clock): AuthenticatorService[CookieAuthenticator] = {
+    clock: Clock
+  ): AuthenticatorService[CookieAuthenticator] = {
 
     val config = configuration.underlying.as[CookieAuthenticatorSettings]("silhouette.authenticator")
     val authenticatorEncoder = new CrypterAuthenticatorEncoder(crypter)
@@ -172,7 +176,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
   def provideCsrfStateItemHandler(
     idGenerator: IDGenerator,
     @Named("csrf-state-item-signer") signer: Signer,
-    configuration: Configuration): CsrfStateItemHandler = {
+    configuration: Configuration
+  ): CsrfStateItemHandler = {
     val settings = configuration.underlying.as[CsrfStateSettings]("silhouette.csrfStateItemHandler")
     new CsrfStateItemHandler(settings, idGenerator, signer)
   }
@@ -197,7 +202,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
   @Provides
   def provideCredentialsProvider(
     authInfoRepository: AuthInfoRepository,
-    passwordHasherRegistry: PasswordHasherRegistry): CredentialsProvider = {
+    passwordHasherRegistry: PasswordHasherRegistry
+  ): CredentialsProvider = {
 
     new CredentialsProvider(authInfoRepository, passwordHasherRegistry)
   }
