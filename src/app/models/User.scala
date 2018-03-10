@@ -17,7 +17,15 @@ class UserDAO extends UserDAOTrait with Logger {
     LDAPConnectionCache.cache.get[UserConnection](loginInfo.providerKey) match {
       case Some(uc) => {
         UserAuthenticationCache.cache.get[UserIdentify](loginInfo.providerKey) match {
-          case Some(user) => Future.successful(Option(user))
+          case Some(user) => {
+            LDAPConnectionCache.cache.get[UserConnection](loginInfo.providerKey) match {
+              case Some(conn) => Future.successful(Option(user))
+              case None => {
+                logger.info(securityMaker, s"Can not find authenticated users LDAP connection cache : ${loginInfo.providerKey}")
+                Future.successful(None)
+              }
+            }
+          }
           case None => {
             logger.info(securityMaker, s"Can not find authenticated information : ${loginInfo.providerKey}")
             Future.successful(None)
