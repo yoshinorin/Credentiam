@@ -61,4 +61,5 @@ trait UserDAOTrait {
 case class UserIdentify(
   userID: UserId,
   loginInfo: LoginInfo,
-  isAdmin: Boolean) extends Identity
+  isAdmin: Boolean
+) extends Identity
