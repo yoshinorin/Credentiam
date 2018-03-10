@@ -1,4 +1,3 @@
-import com.typesafe.sbt.SbtScalariform._
 import scalariform.formatter.preferences._
 
 name := "credentiam"
@@ -31,17 +30,6 @@ libraryDependencies ++= Seq(
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 routesGenerator := InjectedRoutesGenerator
-
-//********************************************************
-// Scalariform settings
-//********************************************************
-
-defaultScalariformSettings
-
-ScalariformKeys.preferences := ScalariformKeys.preferences.value
-  .setPreference(FormatXml, false)
-  .setPreference(DoubleIndentClassDeclaration, false)
-  .setPreference(DanglingCloseParenthesis, Preserve)
 
 //********************************************************
 // Packaging
