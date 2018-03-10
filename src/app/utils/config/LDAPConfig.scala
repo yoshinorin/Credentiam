@@ -7,7 +7,7 @@ object LDAPConfig extends ConfigProvider {
 
   val host = configuration.getString("ldap.host")
   val port = configuration.getInt("ldap.port")
-  val ldaps = configuration.getBoolean("ldap.ldaps")
+  //val ldaps = configuration.getBoolean("ldap.ldaps")
   val bindDN = configuration.getString("ldap.bindDN")
   val password = configuration.getString("ldap.password")
   //val initialConnextions = configuration.getInt("ldap.initialConnextions")
