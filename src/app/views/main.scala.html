@@ -2,6 +2,7 @@
 @import play.api.mvc.RequestHeader
 @import play.twirl.api.Html
 @import controllers.AssetsFinder
+@import app.utils.config.LDAPConfig
 
 @(title: String, user: Option[app.models.UserIdentify] = None)(content: Html)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
 
@@ -67,6 +68,16 @@
                 <a class="mdl-navigation__link" href="@app.controllers.routes.LDAPController.organizations">
                   <i class="mdl-color-text material-icons" role="presentation">layers</i>&nbsp;&nbsp;@messages("common.organizations")
                 </a>
+                @if(LDAPConfig.allowAccessToUsers) {
+                  <a class="mdl-navigation__link" href="@app.controllers.routes.LDAPController.users">
+                    <i class="mdl-color-text material-icons" role="presentation">account_circle</i>&nbsp;@messages("common.users")
+                  </a>
+                }
+                @if(LDAPConfig.allowAccessToComputers) {
+                  <a class="mdl-navigation__link" href="@app.controllers.routes.LDAPController.computers">
+                    <i class="mdl-color-text material-icons" role="presentation">computer</i>&nbsp;@messages("common.computers")
+                  </a>
+                }
               </nav>
             </div>
           }
