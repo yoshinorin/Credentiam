@@ -45,6 +45,8 @@ These requierments follow with [play framework](//www.playframework.com/document
 sh ./bin/credentiam -Dconfig.file=./conf/application.conf
 ```
 
+On Windows please execute `./bin/credentiam.bat` file.
+
 # Settings
 
 Please change settings below document. Configuration files are stored in `conf` directory. 
@@ -64,8 +66,8 @@ Please change `play.http.secret.key` in `application.conf` to any value you like
 
 # Supported OS
 
-Currently production mode is supported only work on linux.
-But, on Windows work when developer mode. So, I'm wanna production mode on Windows.
+* Linux
+* Windows
 
 # For developer
 
