@@ -2,7 +2,7 @@ import scalariform.formatter.preferences._
 
 name := "credentiam"
 version := "0.0.1"
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.5"
 
 resolvers += Resolver.jcenterRepo
 
