@@ -19,7 +19,9 @@ trait LDAPConnectionProvider extends Logger {
    * TODO: Support LDAPS
    * TODO: Need exception handling when create LDAPConnection class's instance.
    */
-  protected val defaultConnection = new LDAPConnection(connectionOption, LDAPConfig.host, LDAPConfig.port, LDAPConfig.bindDN, LDAPConfig.password)
+  def defaultConnection: LDAPConnection = {
+    new LDAPConnection(connectionOption, LDAPConfig.host, LDAPConfig.port, LDAPConfig.bindDN, LDAPConfig.password)
+  }
 
   /**
    * Create connection by users and store it.

@@ -101,15 +101,15 @@ trait LDAPService[T] extends LDAPConnectionProvider {
    * @return dn or none.
    */
   def findDN(uid: UserId): Option[String] = {
-    val searchResult = {
-      defaultConnection.search(new SearchRequest(
-        LDAPConfig.baseDN,
-        SearchScope.SUB,
-        Filter.createEqualityFilter(LDAPConfig.uidAttributeName, uid.value.toString)
-      )).getSearchEntries
-    }
-    searchResult.isEmpty match {
-      case false => Some(searchResult.get(0).getDN)
+    val connection = defaultConnection;
+    val dn = connection.search(new SearchRequest(
+      LDAPConfig.baseDN,
+      SearchScope.SUB,
+      Filter.createEqualityFilter(LDAPConfig.uidAttributeName, uid.value.toString)
+    )).getSearchEntries
+    connection.close
+    dn.isEmpty match {
+      case false => Some(dn.get(0).getDN)
       case true => None
     }
   }
