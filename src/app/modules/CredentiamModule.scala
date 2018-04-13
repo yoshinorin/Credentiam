@@ -5,7 +5,7 @@ import app.bootstraps.ConnectionEstablish
 
 class BootStrapModule extends AbstractModule {
 
-  def configure() {
+  override def configure() {
     bind(classOf[ConnectionEstablish]).asEagerSingleton()
   }
 
